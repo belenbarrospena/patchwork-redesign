@@ -3,14 +3,17 @@
   margin-bottom: 0;
 }
 
-.breadcrumb {
-  border-radius: 0;
-  margin-bottom: 0;
-  padding: 15px;
+.core-info {
+  margin-bottom: 20px;
 }
 
-.breadcrumb-container {
-  background-color: #f5f5f5;
+#navbar-collapse2 .nav{
+  margin-left: -30px;
+}
+
+pre.content {
+  background-color: transparent;
+  border: none;
 }
 
 #footer {

@@ -44,7 +44,7 @@ $(function () {
   <nav class="navbar navbar-inverse" role="navigation">
    <div class="container-fluid">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse1">
         <span class="sr-only">Toggle navigation</span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -52,7 +52,7 @@ $(function () {
       </button>
       <a class="navbar-brand" href="/">Patchwork project_name</a>
     </div>
-    <div class="collapse navbar-collapse" id="navbar-collapse">
+    <div class="collapse navbar-collapse" id="navbar-collapse1">
       <ul class="nav navbar-nav">
         <li>
           <a href="all-series.html">
@@ -108,69 +108,85 @@ $(function () {
     </div>
    </div>
   </nav>
-
-<div class="container-fluid">
-  <div class="row breadcrumb-container">
-    <ul class="col-md-8 breadcrumb">
-      <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-            Revision
-            <strong>1</strong>
-            <span class="caret"></span>
-        </a>
-        <ul class="dropdown-menu">
-          <li class="active"><a href="#">Revision 2</a></li>
-          <li><a href="series-r2.html">Revision 2</a></li>
-          <li><a href="#">Revision 3</a></li>
-          <li><a href="#">Revision 4</a></li>
-        </ul>
-      </li>
-    </ul>
-    <ul class="col-md-4 nav navbar-nav">
-      <li class="pull-right">
-        <a href="#">
-          Next series
-          <span class="glyphicon glyphicon-chevron-right"></span>
-        </a>
-      </li>
-      <li class="pull-right">
-        <a href="#">
-          <span class="glyphicon glyphicon-chevron-left"></span>
-          Previous series
-        </a>
-      </li>
-    </ul>
-  </div>
-</div>
-
-  <div id="content" class="container-fluid">
+  <div class="container-fluid">
     <h1>Unify slow/combinatorial test handling</h1>
     <div class="core-info">
       <span>Submitted by <a href="/project/gfx/patches/?submitter=1">David Weinehall</a> on Oct. 23, 2015, 11:42 a.m.</span>
+      <p>
+        Reviewer:
+        <strong>
+          Nobody
+          <span class="glyphicon glyphicon-pencil"></span>
+        </strong>
+      </p>
     </div>
-    <h2>Details</h2>
-    <table class="patchmeta">
-      <tbody>
-        <tr>
-          <th>Reviewer</th>
-          <td><em class="text-muted">None</em></td>
-        </tr>
-        <tr>
-          <th>Submitted</th>
-          <td>Oct. 23, 2015, 11:42 a.m.</td>
-        </tr>
-        <tr>
-          <th>Last Updated</th>
-          <td>Oct. 29, 2015, 1:13 p.m.</td>
-        </tr>
-        <tr>
-          <th>Revision</th>
-          <td>1</td>
-        </tr>
-      </tbody>
-    </table>
-    <h2>Cover Letter</h2>
-    <pre class="content">Until now we've had no unified way to handle slow/combinatorial tests.
+  </div>
+  <nav class="navbar navbar-default" role="navigation">
+   <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse2">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <div class="collapse navbar-collapse" id="navbar-collapse2">
+      <ul class="nav navbar-nav">
+        <li class="dropdown">
+          <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+            Revision
+            <strong>4</strong>
+            <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Revision 1</a></li>
+            <li><a href="series-r2.html">Revision 2</a></li>
+            <li><a href="#">Revision 3</a></li>
+            <li class="active"><a href="#">Revision 4</a></li>
+          </ul>
+        </li>
+        <li class="active"><a href="#">Cover letter</a></li>
+        <li class="dropdown">
+          <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+            View patch
+            <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu">
+            <li><a href="patch.html">Patch 1</a></li>
+            <li><a href="#">Patch 2</a></li>
+            <li><a href="#">Patch 3</a></li>
+            <li><a href="#">Patch 4</a></li>
+          </ul>
+        </li>
+      </ul>
+      <!--ul class="nav navbar-nav navbar-right">
+        <li><a href="/user/login/">Login</a></li>
+        <li><a href="/register/">Register</a></li>
+        <li><a href="/mail/">Mail settings</a></li>
+      </ul-->
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+          <a href="#">
+            <span class="glyphicon glyphicon-chevron-left"></span>
+            Previous series
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            Next series
+            <span class="glyphicon glyphicon-chevron-right"></span>
+          </a>
+        </li>
+      </ul>
+    </div>
+   </div>
+  </nav>
+
+  <div id="content" class="container-fluid">
+        <h2>Cover Letter</h2>
+        <pre class="content">
+Until now we've had no unified way to handle slow/combinatorial tests.
 Most of the time we don't want to run slow/combinatorial tests, so this
 should remain the default, but when we do want to run such tests,
 it has been handled differently in different tests.
@@ -188,51 +204,42 @@ David Weinehall (3):
   Unify handling of slow/combinatorial tests
   Remove gem_concurrent_all, since it is now superfluous
 
- lib/igt_core.c                   |   19 +
- lib/igt_core.h                   |    1 +
- tests/Makefile.sources           |    1 -
- tests/gem_concurrent_all.c       | 1108 -------------------------------------
- tests/gem_concurrent_blit.c      | 1132 +++++++++++++++++++++++++++++++++++++-
- tests/kms_frontbuffer_tracking.c |  135 +++--
- 6 files changed, 1238 insertions(+), 1158 deletions(-)
- delete mode 100644 tests/gem_concurrent_all.c
+  lib/igt_core.c                   |   19 +
+  lib/igt_core.h                   |    1 +
+  tests/Makefile.sources           |    1 -
+  tests/gem_concurrent_all.c       | 1108 -------------------------------------
+  tests/gem_concurrent_blit.c      | 1132 +++++++++++++++++++++++++++++++++++++-
+  tests/kms_frontbuffer_tracking.c |  135 +++--
+  6 files changed, 1238 insertions(+), 1158 deletions(-)
+  delete mode 100644 tests/gem_concurrent_all.c
   </pre>
-<h2>Patches</h2>
-<table id="series-patchlist" class="table table-hover table-condensed pw-list">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Name</th>
-            <th>Submitter</th>
-            <th>State</th>
-          </tr>
-        </thead>
-        <tbody>
-
-          <tr>
-            <td>1</td>
-            <td><a href="patch.html">[Intel-gfx,i-g-t] Copy gem_concurrent_all to gem_concurrent_blit</a></td>
-            <td><a href="/project/gfx/patches/?submitter=1">David Weinehall</a></td>
-            <td>New</td>
-          </tr><tr>
-
-          </tr><tr>
-            <td>2</td>
-            <td><a href="/patch/2/">[Intel-gfx,i-g-t] Unify handling of slow/combinatorial tests</a></td>
-            <td><a href="/project/gfx/patches/?submitter=1">David Weinehall</a></td>
-            <td>New</td>
-          </tr><tr>
-
-          </tr><tr>
-            <td>3</td>
-            <td><a href="/patch/3/">[Intel-gfx,i-g-t] Remove superfluous gem_concurrent_all.c</a></td>
-            <td><a href="/project/gfx/patches/?submitter=1">David Weinehall</a></td>
-            <td>New</td>
-          </tr><tr>
-
-        </tr></tbody>
-      </table>
-
+    <h2>Patches</h2>
+    <table id="series-patchlist" class="table table-hover table-condensed pw-list">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Name</th>
+          <th>State</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td><a href="patch.html">[Intel-gfx,i-g-t] Copy gem_concurrent_all to gem_concurrent_blit</a></td>
+          <td>New</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td><a href="/patch/2/">[Intel-gfx,i-g-t] Unify handling of slow/combinatorial tests</a></td>
+          <td>New</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td><a href="/patch/3/">[Intel-gfx,i-g-t] Remove superfluous gem_concurrent_all.c</a></td>
+          <td>New</td>
+        </tr>
+      </tbody>
+  </table>
 
   </div>
   <div id="footer">
