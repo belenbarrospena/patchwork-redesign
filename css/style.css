@@ -1,0 +1,23 @@
+.navbar {
+  border-radius: 0;
+  margin-bottom: 0;
+}
+
+.breadcrumb {
+  padding: 15px;
+}
+
+#footer {
+	padding: 1em;
+	font-size: small;
+	text-align: center;
+	color: #909090;
+}
+
+#footer a {
+	color: #909090;
+}
+
+#username {
+  margin-left: 5px;
+}
