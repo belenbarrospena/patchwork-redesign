@@ -109,21 +109,39 @@ $(function () {
    </div>
   </nav>
 
-  <ul class="breadcrumb">
-    <li class="dropdown">
-      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-          Revision
-          <strong>1</strong>
-          <span class="caret"></span>
-      </a>
-      <ul class="dropdown-menu">
-        <li class="active"><a href="#">Revision 2</a></li>
-        <li><a href="series-r2.html">Revision 2</a></li>
-        <li><a href="#">Revision 3</a></li>
-        <li><a href="#">Revision 4</a></li>
-      </ul>
-    </li>
-  </ul>
+<div class="container-fluid">
+  <div class="row breadcrumb-container">
+    <ul class="col-md-8 breadcrumb">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+            Revision
+            <strong>1</strong>
+            <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+          <li class="active"><a href="#">Revision 2</a></li>
+          <li><a href="series-r2.html">Revision 2</a></li>
+          <li><a href="#">Revision 3</a></li>
+          <li><a href="#">Revision 4</a></li>
+        </ul>
+      </li>
+    </ul>
+    <ul class="col-md-4 nav navbar-nav">
+      <li class="pull-right">
+        <a href="#">
+          Next series
+          <span class="glyphicon glyphicon-chevron-right"></span>
+        </a>
+      </li>
+      <li class="pull-right">
+        <a href="#">
+          <span class="glyphicon glyphicon-chevron-left"></span>
+          Previous series
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
 
   <div id="content" class="container-fluid">
     <h1>Unify slow/combinatorial test handling</h1>

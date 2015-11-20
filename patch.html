@@ -109,23 +109,40 @@ $(function () {
    </div>
   </nav>
 
-  <ul class="breadcrumb">
-    <li class="dropdown">
-      <a href="series-r1.html">
-          Revision
-          <strong>1</strong>
-      </a>
-    </li>
-    <li class="active">[Intel-gfx,i-g-t,3/3] Remove superfluous gem_concurrent_all.c</li>
-  </ul>
-
+  <div class="container-fluid">
+    <div class="row breadcrumb-container">
+      <ul class="col-md-8 breadcrumb">
+        <li class="dropdown">
+          <a href="series-r1.html">
+              Revision
+              <strong>1</strong>
+          </a>
+        </li>
+        <li class="active">[Intel-gfx,i-g-t] Copy gem_concurrent_all to gem_concurrent_blit</li>
+      </ul>
+      <ul class="col-md-4 nav navbar-nav">
+        <li class="pull-right">
+          <a href="#">
+            Next patch
+            <span class="glyphicon glyphicon-chevron-right"></span>
+          </a>
+        </li>
+        <li class="pull-right">
+          <a href="#">
+            <span class="glyphicon glyphicon-chevron-left"></span>
+            Previous patch
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
 
   <div id="content" class="container-fluid">
-    <h1>[Intel-gfx,i-g-t,1/3] Copy gem_concurrent_all to gem_concurrent_blit</h1>
+    <h1>[Intel-gfx,i-g-t] Copy gem_concurrent_all to gem_concurrent_blit</h1>
 
 
   </div>
-  <div id="footer">
+  <div id="footer" style="margin-top:300px;">
    <a href="http://jk.ozlabs.org/projects/patchwork/">patchwork patch tracking system</a>
     |
    <a href="/help/about/">about patchwork</a>
