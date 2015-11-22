@@ -44,7 +44,7 @@ $(function () {
   <nav class="navbar navbar-inverse" role="navigation" id="topbar">
    <div class="container-fluid">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse1">
         <span class="sr-only">Toggle navigation</span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -52,7 +52,7 @@ $(function () {
       </button>
       <a class="navbar-brand" href="/">Patchwork project_name</a>
     </div>
-    <div class="collapse navbar-collapse" id="navbar-collapse">
+    <div class="collapse navbar-collapse" id="navbar-collapse1">
       <ul class="nav navbar-nav">
         <li>
           <a href="all-series.html">
@@ -67,12 +67,12 @@ $(function () {
           </a>
         </li>
         <li>
-          <a href="about-this-project.html">
+          <a href="#">
             <span class="glyphicon glyphicon-info-sign"></span>
             About this project
           </a>
         </li>
-        <li class="active">
+        <li>
           <a href="#">
             <span class="glyphicon glyphicon-home"></span>
             All projects
@@ -108,9 +108,51 @@ $(function () {
     </div>
    </div>
   </nav>
+  <div class="container-fluid">
+    <h1>drm/i915: Disable primary plane if we fail to reconstruct BIOS fb</h1>
+    <div class="core-info">
+      <span>Submitted by <a href="#">Matt Roper </a> on Nov. 23, 2015, 4:48 p.m..</span>
+      <p>
+        Reviewer:
+        <strong>
+          Nobody
+          <span class="glyphicon glyphicon-pencil"></span>
+        </strong>
+      </p>
+    </div>
+  </div>
+  <nav class="navbar navbar-default" role="navigation">
+   <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse2">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <div class="collapse navbar-collapse" id="navbar-collapse2">
+      <ul class="nav navbar-nav">
+        <li>
+          <a href="#">
+            Tests
+            <span class="glyphicon glyphicon-exclamation-sign danger"></span>
+          </a>
+        </li>        
+        <li class="active">
+          <a href="#">
+            Patches (1)
+          </a>
+        </li>
+      </ul>
+      <button class="btn btn-default navbar-btn">Download patch</button>
+    </div>
+   </div>
+  </nav>
 
   <div id="content" class="container-fluid">
-    <h1>All projects</h1>
+    <h2>drm/i915: Disable primary plane if we fail to reconstruct BIOS fb</h2>
+
 
   </div>
   <div id="footer">

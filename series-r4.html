@@ -41,10 +41,10 @@ $(function () {
 
  </head>
  <body>
-  <nav class="navbar navbar-inverse" role="navigation">
+  <nav class="navbar navbar-inverse" role="navigation" id="topbar">
    <div class="container-fluid">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse1">
         <span class="sr-only">Toggle navigation</span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -52,7 +52,7 @@ $(function () {
       </button>
       <a class="navbar-brand" href="/">Patchwork project_name</a>
     </div>
-    <div class="collapse navbar-collapse" id="navbar-collapse">
+    <div class="collapse navbar-collapse" id="navbar-collapse1">
       <ul class="nav navbar-nav">
         <li>
           <a href="all-series.html">
@@ -108,49 +108,107 @@ $(function () {
     </div>
    </div>
   </nav>
-
   <div class="container-fluid">
-    <div class="row">
-      <div class="col-md-12">
-        <h1>Unify slow/combinatorial test handling</h1>
-        <div class="core-info">
-          <span>Submitted by <a href="/project/gfx/patches/?submitter=1">David Weinehall</a> on Oct. 23, 2015, 11:42 a.m.</span>
-        </div>
-      </div>
-    </div>
-    <div class="row breadcrumb-container">
-      <ul class="col-md-8 breadcrumb">
-        <li class="dropdown">
-          <a href="series-r1.html">
-              Revision
-              <strong>1</strong>
-          </a>
-        </li>
-        <li class="active">Patch 1</li>
-      </ul>
-      <ul class="col-md-4 nav navbar-nav">
-        <li class="pull-right">
-          <a href="#">
-            Next patch
-            <span class="glyphicon glyphicon-chevron-right"></span>
-          </a>
-        </li>
-        <li class="pull-right">
-          <a href="#">
-            <span class="glyphicon glyphicon-chevron-left"></span>
-            Previous patch
-          </a>
-        </li>
-      </ul>
+    <h1>Unify slow/combinatorial test handling</h1>
+    <div class="core-info">
+      <span>Submitted by <a href="/project/gfx/patches/?submitter=1">David Weinehall</a> on Oct. 23, 2015, 11:42 a.m.</span>
+      <p>
+        Reviewer:
+        <strong>
+          Nobody
+          <span class="glyphicon glyphicon-pencil"></span>
+        </strong>
+      </p>
     </div>
   </div>
+  <nav class="navbar navbar-default" role="navigation">
+   <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse2">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <div class="collapse navbar-collapse" id="navbar-collapse2">
+      <ul class="nav navbar-nav">
+        <li class="dropdown">
+          <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+            Revision
+            <strong>4</strong>
+            <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Revision 1</a></li>
+            <li><a href="series-r2.html">Revision 2</a></li>
+            <li><a href="#">Revision 3</a></li>
+            <li class="active"><a href="#">Revision 4</a></li>
+          </ul>
+        </li>
+        <li class="active"><a href="#">Cover letter</a></li>
+        <li>
+          <a href="#">
+            Tests
+            <span class="glyphicon glyphicon-exclamation-sign danger"></span>
+          </a>
+        </li>
+        <li>
+          <a href="patches.html">
+            Patches (3)
+          </a>
+        </li>        
+        <li class="dropdown">
+          <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+            View patch
+            <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu">
+            <li><a href="patch1.html">Patch 1</a></li>
+            <li><a href="patch2.html">Patch 2</a></li>
+            <li><a href="#">Patch 3</a></li>
+            <li><a href="#">Patch 4</a></li>
+          </ul>
+        </li>
+      </ul>
+      <button class="btn btn-default navbar-btn">Download series</button>
+    </div>
+   </div>
+  </nav>
 
   <div id="content" class="container-fluid">
-    <h2>[Intel-gfx,i-g-t] Copy gem_concurrent_all to gem_concurrent_blit</h2>
+    <h2>Cover letter</h2>
+        <pre class="content">
+Until now we've had no unified way to handle slow/combinatorial tests.
+Most of the time we don't want to run slow/combinatorial tests, so this
+should remain the default, but when we do want to run such tests,
+it has been handled differently in different tests.
 
+This patch adds a --with-slow-combinatorial command line option to
+igt_core, changes gem_concurrent_blit and kms_frontbuffer_tracking
+to use this instead of their own methods, and removes gem_concurrent_all
+in the process, since it's now unnecessary.
+
+The diffstat looks a bit scary, but that is due to the rename
+of gem_concurrent_all to gem_concurrent_blit.
+
+David Weinehall (3):
+  Rename gem_concurren_all over gem_concurrent_blit
+  Unify handling of slow/combinatorial tests
+  Remove gem_concurrent_all, since it is now superfluous
+
+  lib/igt_core.c                   |   19 +
+  lib/igt_core.h                   |    1 +
+  tests/Makefile.sources           |    1 -
+  tests/gem_concurrent_all.c       | 1108 -------------------------------------
+  tests/gem_concurrent_blit.c      | 1132 +++++++++++++++++++++++++++++++++++++-
+  tests/kms_frontbuffer_tracking.c |  135 +++--
+  6 files changed, 1238 insertions(+), 1158 deletions(-)
+  delete mode 100644 tests/gem_concurrent_all.c
+      </pre>
 
   </div>
-  <div id="footer" style="margin-top:300px;">
+  <div id="footer">
    <a href="http://jk.ozlabs.org/projects/patchwork/">patchwork patch tracking system</a>
     |
    <a href="/help/about/">about patchwork</a>

@@ -41,7 +41,7 @@ $(function () {
 
  </head>
  <body>
-  <nav class="navbar navbar-inverse" role="navigation">
+  <nav class="navbar navbar-inverse" role="navigation" id="topbar">
    <div class="container-fluid">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse1">
@@ -146,73 +146,37 @@ $(function () {
             <li class="active"><a href="#">Revision 4</a></li>
           </ul>
         </li>
-        <li class="active"><a href="#">Cover letter</a></li>
+        <li><a href="series-r4.html">Cover letter</a></li>
+        <li>
+          <a href="#">
+            Tests
+            <span class="glyphicon glyphicon-exclamation-sign danger"></span>
+          </a>
+        </li>        
+        <li class="active">
+          <a href="patches.html">
+            Patches (3)
+          </a>
+        </li>
         <li class="dropdown">
           <a data-toggle="dropdown" class="dropdown-toggle" href="#">
             View patch
             <span class="caret"></span>
           </a>
           <ul class="dropdown-menu">
-            <li><a href="patch.html">Patch 1</a></li>
-            <li><a href="#">Patch 2</a></li>
+            <li><a href="patch1.html">Patch 1</a></li>
+            <li><a href="patch2.html">Patch 2</a></li>
             <li><a href="#">Patch 3</a></li>
             <li><a href="#">Patch 4</a></li>
           </ul>
         </li>
       </ul>
-      <!--ul class="nav navbar-nav navbar-right">
-        <li><a href="/user/login/">Login</a></li>
-        <li><a href="/register/">Register</a></li>
-        <li><a href="/mail/">Mail settings</a></li>
-      </ul-->
-      <ul class="nav navbar-nav navbar-right">
-        <li>
-          <a href="#">
-            <span class="glyphicon glyphicon-chevron-left"></span>
-            Previous series
-          </a>
-        </li>
-        <li>
-          <a href="#">
-            Next series
-            <span class="glyphicon glyphicon-chevron-right"></span>
-          </a>
-        </li>
-      </ul>
+      <button class="btn btn-default navbar-btn">Download series</button>
     </div>
    </div>
   </nav>
 
   <div id="content" class="container-fluid">
-        <h2>Cover Letter</h2>
-        <pre class="content">
-Until now we've had no unified way to handle slow/combinatorial tests.
-Most of the time we don't want to run slow/combinatorial tests, so this
-should remain the default, but when we do want to run such tests,
-it has been handled differently in different tests.
-
-This patch adds a --with-slow-combinatorial command line option to
-igt_core, changes gem_concurrent_blit and kms_frontbuffer_tracking
-to use this instead of their own methods, and removes gem_concurrent_all
-in the process, since it's now unnecessary.
-
-The diffstat looks a bit scary, but that is due to the rename
-of gem_concurrent_all to gem_concurrent_blit.
-
-David Weinehall (3):
-  Rename gem_concurren_all over gem_concurrent_blit
-  Unify handling of slow/combinatorial tests
-  Remove gem_concurrent_all, since it is now superfluous
-
-  lib/igt_core.c                   |   19 +
-  lib/igt_core.h                   |    1 +
-  tests/Makefile.sources           |    1 -
-  tests/gem_concurrent_all.c       | 1108 -------------------------------------
-  tests/gem_concurrent_blit.c      | 1132 +++++++++++++++++++++++++++++++++++++-
-  tests/kms_frontbuffer_tracking.c |  135 +++--
-  6 files changed, 1238 insertions(+), 1158 deletions(-)
-  delete mode 100644 tests/gem_concurrent_all.c
-  </pre>
     <h2>Patches</h2>
     <table id="series-patchlist" class="table table-hover table-condensed pw-list">
       <thead>
@@ -225,21 +189,21 @@ David Weinehall (3):
       <tbody>
         <tr>
           <td>1</td>
-          <td><a href="patch.html">[Intel-gfx,i-g-t] Copy gem_concurrent_all to gem_concurrent_blit</a></td>
+          <td><a href="patch1.html">[Intel-gfx,i-g-t] Copy gem_concurrent_all to gem_concurrent_blit</a></td>
           <td>New</td>
         </tr>
         <tr>
           <td>2</td>
-          <td><a href="/patch/2/">[Intel-gfx,i-g-t] Unify handling of slow/combinatorial tests</a></td>
+          <td><a href="patch2.html">[Intel-gfx,i-g-t] Unify handling of slow/combinatorial tests</a></td>
           <td>New</td>
         </tr>
         <tr>
           <td>3</td>
-          <td><a href="/patch/3/">[Intel-gfx,i-g-t] Remove superfluous gem_concurrent_all.c</a></td>
+          <td><a href="#">[Intel-gfx,i-g-t] Remove superfluous gem_concurrent_all.c</a></td>
           <td>New</td>
         </tr>
       </tbody>
-  </table>
+    </table>
 
   </div>
   <div id="footer">
