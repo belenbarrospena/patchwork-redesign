@@ -21,23 +21,8 @@
   <![endif]-->
   <script type="text/javascript" src="js/bootstrap.min.js"></script>
   <script type="text/javascript" src="js/selectize.min.js"></script>
-  <script type="text/javascript" src="js/jquery.dynatable.js"></script>
+  <!--script type="text/javascript" src="js/jquery.dynatable.js"></script-->
   <script type="text/javascript" src="js/patchwork.js"></script>
-  <script type="text/javascript">
-    $(function () {
-        pw.init({
-
-          project: 'intel-gfx'
-
-        });
-    });
-  </script>
-
-<script language="JavaScript" type="text/javascript">
-$(function () {
-    pw.setup_series_list('#serieslist');
-});
-</script>
 
  </head>
  <body>
@@ -111,270 +96,177 @@ $(function () {
 
   <div id="content" class="container-fluid">
 
-<h1>Series</h1>
+    <h1>Series</h1>
 
-
-
-<nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <ul class="nav navbar-nav navbar-right">
-     <li>
-      <div class="navbar-form pull-right">
-        <label>Show:&nbsp;</label>
-        <select id="dynatable-per-page-serieslist" class="form-control">
-        </select>
-      </div>
-     </li>
-    </ul>
-  </div>
-</nav>
-
-<ul class="dynatable-pagination-links-serieslist dynatable-pagination-links">
-  <li><span></span></li>
-  <li class="dynatable-disabled-page">
-    <a class="dynatable-page-link dynatable-page-prev dynatable-disabled-page" data-dynatable-page="0">« Previous</a>
-  </li>
-  <li class="dynatable-active-page">
-    <a class="dynatable-page-link dynatable-active-page" data-dynatable-page="1">1</a>
-  </li>
-  <li>
-    <a class="dynatable-page-link" data-dynatable-page="2">2</a>
-  </li>
-  <li>
-    <a class="dynatable-page-link" data-dynatable-page="3">3</a>
-  </li>
-  <li>
-    <a class="dynatable-page-link dynatable-page-next" data-dynatable-page="2">Next »</a>
-  </li>
-</ul>
-
-<table id="serieslist" class="table table-hover table-condensed pw-list dynatable-loaded" style="padding: 0px;">
-  <thead class="tableFloatingHeaderOriginal" style="position: static; margin-top: 0px; left: 14px; z-index: 3; width: 1269px; top: 0px;">
-    <tr>
-      <th data-dynatable-column="name" class="dynatable-head" style="min-width: 0px; max-width: none;"><a class="dynatable-sort-header" href="#">Series</a></th>
-      <th data-dynatable-column="n_patches" class="dynatable-head" style="min-width: 0px; max-width: none;"><a class="dynatable-sort-header" href="#">Patches</a></th>
-      <th data-dynatable-column="reviewer_name" class="dynatable-head" style="min-width: 0px; max-width: none;"><a class="dynatable-sort-header" href="#">Reviewer</a></th>
-      <th data-dynatable-column="submitter_name" class="dynatable-head" style="min-width: 0px; max-width: none;"><a class="dynatable-sort-header" href="#">Submitter</a></th>
-      <th data-dynatable-column="submitted" class="dynatable-head" style="min-width: 0px; max-width: none;"><a class="dynatable-sort-header" href="#">Submitted</a></th>
-      <th data-dynatable-column="last_updated" class="dynatable-head" style="min-width: 0px; max-width: none;"><a class="dynatable-sort-header" href="#">Updated</a></th>
-    </tr>
-  </thead>
-<tbody>
-  <tr>
-    <td style="text-align: left;">
-      <a href="series-r4.html">Series without cover letter</a>
-    </td>
-    <td style="text-align: left;">3</td>
-    <td style="text-align: left;"><em class="text-muted">None</em></td>
-    <td style="text-align: left;">undefined</td>
-    <td style="text-align: left;">2015-10-27</td>
-    <td style="text-align: left;">2015-10-27</td>
-  </tr>
-  <tr>
-    <td style="text-align: left;">
-      <a href="series-r2.html">Series without cover letter</a>
-    </td>
-    <td style="text-align: left;">7</td>
-    <td style="text-align: left;"><em class="text-muted">None</em></td>
-    <td style="text-align: left;">undefined</td>
-    <td style="text-align: left;">2015-10-27</td>
-    <td style="text-align: left;">2015-10-27</td>
-  </tr>
-  <tr>
-    <td style="text-align: left;">
-      <a href="/series/203/">Series without cover letter</a>
-    </td>
-    <td style="text-align: left;">1</td>
-    <td style="text-align: left;"><em class="text-muted">None</em></td>
-    <td style="text-align: left;">undefined</td>
-    <td style="text-align: left;">2015-10-27</td>
-    <td style="text-align: left;">2015-10-27</td>
-  </tr>
-  <tr>
-    <td style="text-align: left;">
-      <a href="/series/204/">drm/i915/bxt: Update Uninit sequence for DDI PHYs</a>
-    </td>
-    <td style="text-align: left;">1</td>
-    <td style="text-align: left;"><em class="text-muted">None</em></td>
-    <td style="text-align: left;">undefined</td>
-    <td style="text-align: left;">2015-10-27</td>
-    <td style="text-align: left;">2015-10-27</td>
-  </tr>
-  <tr>
-    <td style="text-align: left;"><a href="/series/199/">drm/i915/bxt: Added identifier for MIPI transcoder</a></td>
-    <td style="text-align: left;">1</td>
-    <td style="text-align: left;"><em class="text-muted">None</em></td>
-    <td style="text-align: left;">undefined</td>
-    <td style="text-align: left;">2015-10-27</td>
-    <td style="text-align: left;">2015-10-27</td>
-  </tr>
-  <tr>
-    <td style="text-align: left;">
-      <a href="/series/198/">drm/i915/bxt: Allow/disallow DC5 based on DC9 entry/exit</a>
-    </td>
-    <td style="text-align: left;">1</td>
-    <td style="text-align: left;"><em class="text-muted">None</em></td>
-    <td style="text-align: left;">undefined</td>
-    <td style="text-align: left;">2015-10-27</td>
-    <td style="text-align: left;">2015-10-27</td>
-  </tr>
-  <tr>
-    <td style="text-align: left;">
-      <a href="/series/193/">drm/i915: Skip fence installation for objects with rotated views (v2)</a>
-    </td>
-    <td style="text-align: left;">1</td>
-    <td style="text-align: left;"><em class="text-muted">None</em></td>
-    <td style="text-align: left;">undefined</td>
-    <td style="text-align: left;">2015-10-27</td>
-    <td style="text-align: left;">2015-10-27</td>
-  </tr>
-  <tr>
-    <td style="text-align: left;">
-      <a href="/series/185/">drm/i915/skl: Remove duplicated mem calls for PLANE_CURSOR.</a>
-    </td>
-    <td style="text-align: left;">1</td>
-    <td style="text-align: left;"><em class="text-muted">None</em></td>
-    <td style="text-align: left;">undefined</td><td style="text-align: left;">2015-10-26</td>
-    <td style="text-align: left;">2015-10-26</td>
-  </tr>
-  <tr>
-    <td style="text-align: left;">
-      <a href="/series/184/">drm/i915: Ensure associated VMAs are inactive when contexts are destroyed</a>
-    </td>
-    <td style="text-align: left;">1</td>
-    <td style="text-align: left;"><em class="text-muted">None</em></td>
-    <td style="text-align: left;">undefined</td>
-    <td style="text-align: left;">2015-10-26</td>
-    <td style="text-align: left;">2015-10-26</td>
-  </tr>
-  <tr>
-    <td style="text-align: left;"><a href="/series/183/">drm/i915: make A0 wa's applied to A1</a></td>
-    <td style="text-align: left;">1</td>
-    <td style="text-align: left;"><em class="text-muted">None</em></td>
-    <td style="text-align: left;">undefined</td>
-    <td style="text-align: left;">2015-10-26</td>
-    <td style="text-align: left;">2015-10-26</td>
-  </tr>
-  <tr>
-    <td style="text-align: left;">
-      <a href="/series/145/">Series without cover letter</a>
-    </td>
-    <td style="text-align: left;">2</td>
-    <td style="text-align: left;"><em class="text-muted">None</em></td>
-    <td style="text-align: left;">undefined</td>
-    <td style="text-align: left;">2015-10-23</td>
-    <td style="text-align: left;">2015-10-23</td>
-  </tr>
-  <tr>
-    <td style="text-align: left;">
-      <a href="/series/142/">drm/i915/skl: Correct other-pipe watermark update condition check (v2)</a>
-    </td>
-    <td style="text-align: left;">1</td>
-    <td style="text-align: left;"><em class="text-muted">None</em></td>
-    <td style="text-align: left;">undefined</td>
-    <td style="text-align: left;">2015-10-23</td>
-    <td style="text-align: left;">2015-10-23</td>
-  </tr>
-  <tr>
-    <td style="text-align: left;">
-      <a href="/series/139/">drm/i915: Add extra plane information in debugfs.</a>
-    </td>
-    <td style="text-align: left;">1</td>
-    <td style="text-align: left;"><em class="text-muted">None</em></td>
-    <td style="text-align: left;">undefined</td>
-    <td style="text-align: left;">2015-10-23</td>
-    <td style="text-align: left;">2015-10-23</td>
-  </tr>
-  <tr>
-    <td style="text-align: left;">
-      <a href="/series/136/">drm/i915: Fix maxfifo watermark calc on vlv cursor planes</a>
-    </td>
-    <td style="text-align: left;">1</td>
-    <td style="text-align: left;"><em class="text-muted">None</em></td>
-    <td style="text-align: left;">undefined</td>
-    <td style="text-align: left;">2015-10-23</td>
-    <td style="text-align: left;">2015-10-23</td>
-  </tr>
-  <tr>
-    <td style="text-align: left;">
-      <a href="/series/133/">Series without cover letter</a>
-    </td>
-    <td style="text-align: left;">8</td>
-    <td style="text-align: left;"><em class="text-muted">None</em></td>
-    <td style="text-align: left;">undefined</td>
-    <td style="text-align: left;">2015-10-23</td>
-    <td style="text-align: left;">2015-10-23</td>
-  </tr>
-  <tr>
-    <td style="text-align: left;">
-      <a href="/series/127/">Unify slow/combinatorial test handling</a>
-    </td>
-    <td style="text-align: left;">3</td>
-    <td style="text-align: left;"><em class="text-muted">None</em></td>
-    <td style="text-align: left;">undefined</td>
-    <td style="text-align: left;">2015-10-23</td>
-    <td style="text-align: left;">2015-10-23</td>
-  </tr>
-  <tr>
-    <td style="text-align: left;">
-      <a href="/series/122/">DP refactoring v2</a>
-    </td>
-    <td style="text-align: left;">22</td>
-    <td style="text-align: left;"><em class="text-muted">None</em></td>
-    <td style="text-align: left;">undefined</td>
-    <td style="text-align: left;">2015-10-23</td>
-    <td style="text-align: left;">2015-10-23</td>
-  </tr>
-  <tr>
-    <td style="text-align: left;">
-      <a href="/series/119/">Series without cover letter</a>
-    </td>
-    <td style="text-align: left;">1</td>
-    <td style="text-align: left;"><em class="text-muted">None</em></td>
-    <td style="text-align: left;">undefined</td>
-    <td style="text-align: left;">2015-10-23</td>
-    <td style="text-align: left;">2015-10-23</td>
-  </tr>
-  <tr>
-    <td style="text-align: left;">
-      <a href="/series/118/">drm/i915: Shut up GuC errors when it's disabled</a>
-    </td>
-    <td style="text-align: left;">1</td>
-    <td style="text-align: left;"><em class="text-muted">None</em></td>
-    <td style="text-align: left;">undefined</td>
-    <td style="text-align: left;">2015-10-23</td>
-    <td style="text-align: left;">2015-10-23</td>
-  </tr>
-  <tr>
-    <td style="text-align: left;">
-      <a href="/series/105/">TDR/watchdog support for gen8</a></td>
-      <td style="text-align: left;">20</td>
-      <td style="text-align: left;"><em class="text-muted">None</em></td>
-      <td style="text-align: left;">undefined</td>
-      <td style="text-align: left;">2015-10-23</td>
-      <td style="text-align: left;">2015-10-23</td>
-    </tr>
-  </tbody>
-</table>
-
-<ul class="dynatable-pagination-links-serieslist dynatable-pagination-links">
-  <li><span></span></li>
-  <li class="dynatable-disabled-page">
-    <a class="dynatable-page-link dynatable-page-prev dynatable-disabled-page" data-dynatable-page="0">« Previous</a>
-  </li>
-  <li class="dynatable-active-page">
-    <a class="dynatable-page-link dynatable-active-page" data-dynatable-page="1">1</a>
-  </li>
-  <li>
-    <a class="dynatable-page-link" data-dynatable-page="2">2</a>
-  </li>
-  <li>
-    <a class="dynatable-page-link" data-dynatable-page="3">3</a>
-  </li>
-  <li>
-    <a class="dynatable-page-link dynatable-page-next" data-dynatable-page="2">Next »</a>
-  </li>
-</ul>
+    <table id="serieslist" class="table table-hover">
+      <thead>
+        <tr>
+          <th>
+            <input type="checkbox">
+          </th>
+          <th>ID</th>
+          <th>Series</th>
+          <th>Status</th>
+          <th>Patches</th>
+          <th>
+            <a href="#">Reviewer</a>
+          </th>
+          <th>
+            <a href="#">Submitter</a>
+          </th>
+          <th>
+            <a href="#" class="dropup sorted">
+              Updated on
+              <span class="caret"></span>
+            </a>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><input type="checkbox"> </td>
+          <td>1140</td>
+          <td>
+            <a href="series-r4.html">3-patch series submitted by David Weinehall</a>
+          </td>
+          <td>
+            <!--span class="glyphicon glyphicon-thumbs-up accepted"></span>
+            <span class="glyphicon glyphicon-thumbs-down danger"></span-->
+            <span class="text-success">Merged</span>
+          </td>
+          <td>3</td>
+          <td class="text-muted">None</td>
+          <td>David Weinehall </td>
+          <td>2015-10-27</td>
+        </tr>
+        <tr>
+          <td><input type="checkbox"> </td>
+          <td>606</td>
+          <td>
+            <a href="#">7-patch series submitted by Matt Roper</a>
+          </td>
+          <td>
+            <a tabindex="0" role="button" class="glyphicon glyphicon-info-sign status-info" title="Series status" data-content="<ul class='list-unstyled'><li>5 patches <span class='text-success'>merged</span></li><li>2 patches need work</li></ul><a href='patches.html'>View patches</a>"></a>
+          </td>
+          <td>7</td>
+          <td class="text-muted">None</td>
+          <td>Matt Roper</td>
+          <td>2015-10-27</td>
+        </tr>
+        <tr>
+          <td><input type="checkbox"> </td>
+          <td>1112</td>
+          <td>
+            <a href="one-patch-series.html">drm/i915/bxt: Update Uninit sequence for DDI PHYs</a>
+          </td>
+          <td>
+            <span class="text-danger">Rejected</span>
+          </td>
+          <td>1</td>
+          <td class="text-muted">None</td>
+          <td>Matt Roper</td>
+          <td>2015-10-27</td>
+        </tr>
+        <tr>
+          <td><input type="checkbox"> </td>
+          <td>1126</td>
+          <td><a href="/series/199/">drm/i915/bxt: Added identifier for MIPI transcoder</a></td>
+          <td>Under review</td>
+          <td>1</td>
+          <td class="text-muted">None</td>
+          <td>Animesh Manna</td>
+          <td>2015-10-27</td>
+        </tr>
+        <tr>
+          <td><input type="checkbox"> </td>
+          <td>1115</td>
+          <td>
+            <a href="/series/198/">drm/i915/bxt: Allow/disallow DC5 based on DC9 entry/exit</a>
+          </td>
+          <td>New</td>
+          <td>1</td>
+          <td class="text-muted">None</td>
+          <td>Animesh Manna</td>
+          <td>2015-10-27</td>
+        </tr>
+        <tr>
+          <td><input type="checkbox"> </td>
+          <td>921</td>
+          <td>
+            <a href="/series/193/">drm/i915: Skip fence installation for objects with rotated views (v2)</a>
+          </td>
+          <td>New</td>
+          <td>1</td>
+          <td class="text-muted">None</td>
+          <td>Vivek Kasireddy</td>
+          <td>2015-10-27</td>
+        </tr>
+        <tr>
+          <td><input type="checkbox"> </td>
+          <td>972</td>
+          <td>
+            <a href="/series/184/">drm/i915: Ensure associated VMAs are inactive when contexts are destroyed</a>
+          </td>
+          <td>
+            <a tabindex="0" role="button" class="glyphicon glyphicon-info-sign status-info" title="Series status" data-content="<ul class='list-unstyled'><li>1 patch <span class='text-success'>merged</span></li><li>1 patch <span class='text-danger'>rejected</span></li></ul><a href='patches.html'>View patches</a>"></a>
+          </td>
+          <td>2</td>
+          <td class="text-muted">None</td>
+          <td>Tvrtko Ursulin </td>
+          <td>2015-10-26</td>
+        </tr>
+        <tr>
+          <td><input type="checkbox"> </td>
+          <td>1084</td>
+          <td><a href="/series/183/">drm/i915: make A0 wa's applied to A1</a></td>
+          <td>Reviewed</td>
+          <td>1</td>
+          <td class="text-muted">None</td>
+          <td>tim.gore@intel.com</td>
+          <td>2015-10-26</td>
+        </tr>
+        <tr>
+          <td><input type="checkbox"> </td>
+          <td>1080</td>
+          <td>
+            <a href="/series/142/">drm/i915/skl: Correct other-pipe watermark update condition check (v2)</a>
+          </td>
+          <td>Needs work</td>
+          <td>1</td>
+          <td class="text-muted">None</td>
+          <td>Matt Roper</td>
+          <td>2015-10-23</td>
+        </tr>
+        <tr>
+          <td><input type="checkbox"> </td>
+          <td>1070</td>
+          <td>
+            <a href="/series/139/">drm/i915: Add extra plane information in debugfs.</a>
+          </td>
+          <td>
+            <span class="text-success">Merged</span>
+          </td>
+          <td>1</td>
+          <td class="text-muted">None</td>
+          <td>Robert Fekete</td>
+          <td>2015-10-23</td>
+        </tr>
+        <tr>
+          <td><input type="checkbox"> </td>
+          <td>1068</td>
+          <td>
+            <a href="/series/136/">drm/i915: Fix maxfifo watermark calc on vlv cursor planes</a>
+          </td>
+          <td>
+            <span class="text-success">Merged</span>
+          </td>
+          <td>1</td>
+          <td class="text-muted">None</td>
+          <td>Thomas Daniel</td>
+          <td>2015-10-23</td>
+        </tr>
+      </tbody>
+    </table>
 
 <div style="clear: both;"/>
 
@@ -386,5 +278,11 @@ $(function () {
     |
    <a href="/help/about/">about patchwork</a>
   </div>
+
+  <script>
+    $(document).ready(function() {
+      $('.status-info').popover( { trigger:"focus", html: 'true' });
+    });
+  </script>
  </body>
 </html>
