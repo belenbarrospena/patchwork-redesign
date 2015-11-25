@@ -50,11 +50,17 @@ th > a {
   font-weight: bold;
 }
 
+.status-info {
+  color: #333;
+}
+
 .status-info:hover {
   text-decoration: none;
   cursor: pointer;
+  color: #777;
 }
 
 .status-info:focus {
   text-decoration: none;
+  color: #777;
 }
