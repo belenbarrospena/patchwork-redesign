@@ -5,6 +5,9 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <title>intel-gfx - Patchwork</title>
   <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
+  <link rel="stylesheet" type="text/css" href="css/jquery-ui.min.css">
+  <link rel="stylesheet" type="text/css" href="css/jquery-ui.structure.min.css">
+  <link rel="stylesheet" type="text/css" href="css/jquery-ui.theme.min.css">
   <link rel="stylesheet" type="text/css" href="css/selectize.bootstrap3.css"/>
   <link rel="stylesheet" type="text/css" href="css/jquery.dynatable.css"/>
   <link rel="stylesheet" type="text/css" href="css/style.css"/>
@@ -20,6 +23,7 @@
     <script src="http://cdnjs.cloudflare.com/ajax/libs/es5-shim/2.0.8/es5-shim.min.js"></script>
   <![endif]-->
   <script type="text/javascript" src="js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="js/jquery-ui.min.js"></script>
   <script type="text/javascript" src="js/selectize.min.js"></script>
   <!--script type="text/javascript" src="js/jquery.dynatable.js"></script-->
   <script type="text/javascript" src="js/patchwork.js"></script>
@@ -97,6 +101,214 @@
   <div id="content" class="container-fluid">
 
     <h1>Series</h1>
+
+    <nav class="navbar navbar-default toolbar" role="navigation">
+     <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#series-toolbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
+      <div class="collapse navbar-collapse" id="series-toolbar">
+        <ul class="nav navbar-nav">
+          <li class="dropdown">
+            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+              Status
+              <span class="caret"></span>
+            </a>
+            <ul role="menu" class="dropdown-menu" id="status-filter">
+              <li class="dropdown-header">Series in progress</li>
+              <li>
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" value="" checked="checked">
+                    New (234)
+                  </label>
+                </div>
+              </li>
+              <li>
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" value="" checked="checked">
+                    Under review (34)
+                  </label>
+                </div>
+              </li>
+              <li>
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" value="" checked="checked">
+                    Reviewed (20)
+                  </label>
+                </div>
+              </li>
+              <li>
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" value="" checked="checked">
+                    Needs work (5)
+                  </label>
+                </div>
+              </li>
+              <li role="separator" class="divider"></li>
+              <li class="dropdown-header">Series done</li>
+              <li>
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" value="">
+                    Merged
+                  </label>
+                </div>
+              </li>
+              <li>
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" value="">
+                    Rejected
+                  </label>
+                </div>
+              </li>
+              <li role="separator" class="divider"></li>
+              <li>
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" value="">
+                    Include archived series
+                  </label>
+                </div>
+              </li>
+              <li role="separator" class="divider"></li>
+              <li>
+                <button type="submit" class="btn btn-default">Apply</button>
+              </li>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+              Date
+              <span class="caret"></span>
+            </a>
+            <ul role="menu" class="dropdown-menu" id="date-filter">
+              <li>
+                <form>
+                  <div class="form-group">
+                    <label for="date-from">Updated from</label>
+                    <input type="date" class="form-control" id="date-from">
+                  </div>
+                  <div class="form-group">
+                    <label for="date-to">To</label>
+                    <input type="date" class="form-control" id="date-to">
+                  </div>
+                  <button type="submit" class="btn btn-default">Apply</button>
+                </form>
+              </li>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+              Submitter
+              <span class="caret"></span>
+            </a>
+            <ul role="menu" class="dropdown-menu" id="submitter-filter">
+              <li>
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" value="">
+                    Submitted by me (35)
+                  </label>
+                </div>
+              </li>
+              <li role="separator" class="divider"></li>
+              <li>
+                <form>
+                  <div class="form-group">
+                    <input type="email" class="form-control" id="submitter-search" placeholder="Find submitter">
+                  </div>
+                  <button type="submit" class="btn btn-default">Apply</button>
+                </form>
+              </li>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+              Reviewer
+              <span class="caret"></span>
+            </a>
+            <ul role="menu" class="dropdown-menu" id="reviewer-filter">
+              <li>
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" value="">
+                    Assigned to me for review (35)
+                  </label>
+                </div>
+              </li>
+              <li role="separator" class="divider"></li>
+              <li>
+                <form>
+                  <div class="form-group">
+                    <input type="email" class="form-control" id="reviewer-search" placeholder="Find reviewer">
+                  </div>
+                  <button type="submit" class="btn btn-default">Apply</button>
+                </form>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <form class="navbar-form navbar-left" role="search">
+              <div class="input-group" style="width:20em;">
+                <input type="text" class="form-control" placeholder="Search series">
+                <a class="input-group-addon btn btn-default">Search</a>
+              </div>
+            </form>
+          </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li class="dropdown">
+            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+              Show rows: 25
+              <span class="caret"></span>
+            </a>
+            <ul role="menu" class="dropdown-menu">
+              <li><a href="#">50</a></li>
+              <li><a href="#">100</a></li>
+              <li><a href="#">150</a></li>
+              <li><a href="#">All series</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+     </div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="alert alert-info table-info col-xs-9">
+          Showing 66 series with status new, under review, reviewed, needs work <!--; updated between 2015-10-27 and 2015-10-01; submitted by Belen Barros Pena; reviewed by Damien; containing "drm"-->
+          <a class="show-all" href="#">Show all series</a>
+        </div>
+        <ul class="pagination navbar-right">
+          <li class="disabled">
+            <a href="#" aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
+            </a>
+          </li>
+          <li class="active"><a href="#">1</a></li>
+          <li><a href="#">2</a></li>
+          <li class="disabled"><a href="#">...</a></li>
+          <li><a href="#">9</a></li>
+          <li><a href="#">10</a></li>
+          <li>
+            <a href="#" aria-label="Next">
+              <span aria-hidden="true">&raquo;</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
 
     <table id="serieslist" class="table table-hover">
       <thead>
@@ -268,6 +480,24 @@
       </tbody>
     </table>
 
+    <ul class="pagination navbar-right pagination-bottom">
+      <li class="disabled">
+        <a href="#" aria-label="Previous">
+          <span aria-hidden="true">&laquo;</span>
+        </a>
+      </li>
+      <li class="active"><a href="#">1</a></li>
+      <li><a href="#">2</a></li>
+      <li class="disabled"><a href="#">...</a></li>
+      <li><a href="#">9</a></li>
+      <li><a href="#">10</a></li>
+      <li>
+        <a href="#" aria-label="Next">
+          <span aria-hidden="true">&raquo;</span>
+        </a>
+      </li>
+    </ul>
+
 <div style="clear: both;"/>
 
 
@@ -281,7 +511,19 @@
 
   <script>
     $(document).ready(function() {
+
+      //initialise series status information popovers
       $('.status-info').popover( { trigger:"focus", html: 'true' });
+
+      //stop propagation in the filters		//turn edit columns dropdown into a multi-select menu
+  		$('.filter').click(function(e) {
+  			e.stopPropagation();
+  		});
+
+      //initialise jQueryUI datepicker
+      $("#date-from").datepicker( { dateFormat: "yy-mm-dd", maxDate: "0" } );
+      $("#date-to").datepicker( { dateFormat: "yy-mm-dd", maxDate: "0" } );
+
     });
   </script>
  </body>
