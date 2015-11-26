@@ -574,7 +574,7 @@
       //initialise series status information popovers
       $('.status-info').popover( { trigger:"focus", html: 'true' });
 
-      //stop propagation in the filters		//turn edit columns dropdown into a multi-select menu
+      //stop propagation in the filters	
   		$('.filter').click(function(e) {
   			e.stopPropagation();
   		});
@@ -633,7 +633,7 @@
               no_checked ++;
             }
           });
-          if ( no_checked == 0 ) {       
+          if ( no_checked == 0 ) {
             hide_bulk_actions();
           }
         }
