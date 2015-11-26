@@ -1,0 +1,205 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+ <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <title>intel-gfx - Patchwork</title>
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
+  <link rel="stylesheet" type="text/css" href="css/selectize.bootstrap3.css"/>
+  <link rel="stylesheet" type="text/css" href="css/jquery.dynatable.css"/>
+  <link rel="stylesheet" type="text/css" href="css/style.css"/>
+  <script type="text/javascript" src="js/common.js"></script>
+  <script type="text/javascript" src="js/jquery-1.10.1.min.js"></script>
+  <script type="text/javascript" src="js/jquery.stickytableheaders.min.js"></script>
+  <!-- IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js">
+    </script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/es5-shim/2.0.8/es5-shim.min.js"></script>
+  <![endif]-->
+  <script type="text/javascript" src="js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="js/selectize.min.js"></script>
+  <script type="text/javascript" src="js/jquery.dynatable.js"></script>
+  <script type="text/javascript" src="js/patchwork.js"></script>
+  <script type="text/javascript">
+    $(function () {
+        pw.init({
+
+          project: 'intel-gfx'
+
+        });
+    });
+  </script>
+
+<script language="JavaScript" type="text/javascript">
+$(function () {
+    pw.setup_series_list('#serieslist');
+});
+</script>
+
+ </head>
+ <body>
+  <nav class="navbar navbar-inverse" role="navigation" id="topbar">
+   <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">Patchwork project_name</a>
+    </div>
+    <div class="collapse navbar-collapse" id="navbar-collapse1">
+      <ul class="nav navbar-nav">
+        <li>
+          <a href="all-series.html">
+            <span class="glyphicon glyphicon-list"></span>
+            Series
+          </a>
+        </li>
+        <li>
+          <a href="all-patches.html">
+            <span class="glyphicon glyphicon-file"></span>
+            Patches
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <span class="glyphicon glyphicon-info-sign"></span>
+            About this project
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <span class="glyphicon glyphicon-home"></span>
+            All projects
+          </a>
+        </li>
+      </ul>
+      <!--ul class="nav navbar-nav navbar-right">
+        <li><a href="/user/login/">Login</a></li>
+        <li><a href="/register/">Register</a></li>
+        <li><a href="/mail/">Mail settings</a></li>
+      </ul-->
+      <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+          <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+            <span class="badge">25</span>
+            <strong id="username">belenbarrospena</strong>&nbsp;<span class="caret"></span>
+          </a>
+          <ul role="menu" class="dropdown-menu">
+            <li>
+              <a href="#">
+                To do
+                <span class="badge">25</span>
+              </a>
+            </li>
+            <li><a href="#">Bundles</a></li>
+            <li><a href="#">Administration</a></li>
+            <li><a href="profile.html">Your profile</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="/user/logout/">Logout</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+   </div>
+  </nav>
+  <div class="container-fluid">
+    <h1>Unify slow/combinatorial test handling</h1>
+    <div class="core-info">
+      <span>Submitted by <a href="/project/gfx/patches/?submitter=1">David Weinehall</a> on Oct. 23, 2015, 11:42 a.m.</span>
+      <p>
+        Reviewer:
+        <strong>
+          Nobody
+          <span class="glyphicon glyphicon-pencil"></span>
+        </strong>
+      </p>
+    </div>
+  </div>
+  <nav class="navbar navbar-default" role="navigation">
+   <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse2">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <div class="collapse navbar-collapse" id="navbar-collapse2">
+      <ul class="nav navbar-nav">
+        <li class="dropdown">
+          <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+            Revision
+            <strong>4</strong>
+            <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Revision 1</a></li>
+            <li><a href="series-r2.html">Revision 2</a></li>
+            <li><a href="#">Revision 3</a></li>
+            <li class="active"><a href="#">Revision 4</a></li>
+          </ul>
+        </li>
+        <li><a href="series-r4.html">Cover letter</a></li>
+        <li>
+          <a href="#">
+            Tests
+            <span class="glyphicon glyphicon-exclamation-sign danger"></span>
+          </a>
+        </li>
+        <li>
+          <a href="patches.html">
+            Patches (3)
+          </a>
+        </li>        
+        <li class="dropdown active">
+          <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+            Patch
+            <strong>2</strong>
+            <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu">
+            <li><a href="patch1.html">Patch 1</a></li>
+            <li class="active"><a href="patch2.html">Patch 2</a></li>
+            <li><a href="#">Patch 3</a></li>
+            <li><a href="#">Patch 4</a></li>
+          </ul>
+        </li>
+      </ul>
+      <button class="btn btn-default navbar-btn">Download patch</button>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+          <a href="#" class="disabled">
+            <span class="glyphicon glyphicon-chevron-left"></span>
+            Previous patch
+          </a>
+        </li>
+        <li>
+          <a href="patch2.html">
+            Next patch
+            <span class="glyphicon glyphicon-chevron-right"></span>
+          </a>
+        </li>
+      </ul>
+    </div>
+   </div>
+  </nav>
+
+  <div id="content" class="container-fluid">
+        <h2>[Intel-gfx,i-g-t,2/3] Unify handling of slow/combinatorial tests</h2>
+
+
+  </div>
+  <div id="footer">
+   <a href="http://jk.ozlabs.org/projects/patchwork/">patchwork patch tracking system</a>
+    |
+   <a href="/help/about/">about patchwork</a>
+  </div>
+ </body>
+</html>

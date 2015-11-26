@@ -1,0 +1,653 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+ <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <title>Patchwork redesign - All series</title>
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
+  <link rel="stylesheet" type="text/css" href="css/jquery-ui.min.css">
+  <link rel="stylesheet" type="text/css" href="css/jquery-ui.structure.min.css">
+  <link rel="stylesheet" type="text/css" href="css/jquery-ui.theme.min.css">
+  <link rel="stylesheet" type="text/css" href="css/selectize.bootstrap3.css"/>
+  <link rel="stylesheet" type="text/css" href="css/jquery.dynatable.css"/>
+  <link rel="stylesheet" type="text/css" href="css/style.css"/>
+  <script type="text/javascript" src="js/common.js"></script>
+  <script type="text/javascript" src="js/jquery-1.10.1.min.js"></script>
+  <!--script type="text/javascript" src="js/jquery.stickytableheaders.min.js"></script-->
+  <!-- IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js">
+    </script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/es5-shim/2.0.8/es5-shim.min.js"></script>
+  <![endif]-->
+  <script type="text/javascript" src="js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="js/jquery-ui.min.js"></script>
+  <script type="text/javascript" src="js/selectize.min.js"></script>
+  <!--script type="text/javascript" src="js/jquery.dynatable.js"></script-->
+  <!--script type="text/javascript" src="js/patchwork.js"></script-->
+
+ </head>
+ <body>
+  <nav class="navbar navbar-inverse" role="navigation" id="topbar">
+   <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">Patchwork project_name</a>
+    </div>
+    <div class="collapse navbar-collapse" id="navbar-collapse">
+      <ul class="nav navbar-nav">
+        <li class="active">
+          <a href="#">
+            <span class="glyphicon glyphicon-list"></span>
+            Series
+          </a>
+        </li>
+        <li>
+          <a href="all-patches.html">
+            <span class="glyphicon glyphicon-file"></span>
+            Patches
+          </a>
+        </li>
+        <li>
+          <a href="about-this-project.html">
+            <span class="glyphicon glyphicon-info-sign"></span>
+            About this project
+          </a>
+        </li>
+        <li>
+          <a href="all-projects.html">
+            <span class="glyphicon glyphicon-home"></span>
+            All projects
+          </a>
+        </li>
+      </ul>
+      <!--ul class="nav navbar-nav navbar-right">
+        <li><a href="/user/login/">Login</a></li>
+        <li><a href="/register/">Register</a></li>
+        <li><a href="/mail/">Mail settings</a></li>
+      </ul-->
+      <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+          <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+            <span class="badge">25</span>
+            <strong id="username">belenbarrospena</strong>&nbsp;<span class="caret"></span>
+          </a>
+          <ul role="menu" class="dropdown-menu">
+            <li>
+              <a href="#">
+                To do
+                <span class="badge">25</span>
+              </a>
+            </li>
+            <li><a href="#">Bundles</a></li>
+            <li><a href="#">Administration</a></li>
+            <li><a href="profile.html">Your profile</a></li>
+            <li role="separator" class=""></li>
+            <li><a href="/user/logout/">Logout</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+   </div>
+  </nav>
+
+  <div id="content" class="container-fluid">
+
+    <h1>Series</h1>
+
+    <nav class="navbar navbar-default toolbar" role="navigation">
+     <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#series-toolbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
+      <div class="collapse navbar-collapse" id="series-toolbar">
+        <ul class="nav navbar-nav" id="filters">
+          <li class="dropdown">
+            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+              Status
+              <span class="caret"></span>
+            </a>
+            <ul role="menu" class="dropdown-menu" id="status-filter">
+              <li class="dropdown-header">Series in progress</li>
+              <li>
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" value="" checked="checked">
+                    New (234)
+                  </label>
+                </div>
+              </li>
+              <li>
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" value="" checked="checked">
+                    Under review (34)
+                  </label>
+                </div>
+              </li>
+              <li>
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" value="" checked="checked">
+                    Reviewed (20)
+                  </label>
+                </div>
+              </li>
+              <li>
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" value="" checked="checked">
+                    Needs work (5)
+                  </label>
+                </div>
+              </li>
+              <li role="separator" class="divider"></li>
+              <li class="dropdown-header">Series done</li>
+              <li>
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" value="">
+                    Merged
+                  </label>
+                </div>
+              </li>
+              <li>
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" value="">
+                    Rejected
+                  </label>
+                </div>
+              </li>
+              <li role="separator" class="divider"></li>
+              <li>
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" value="">
+                    Include archived series
+                  </label>
+                </div>
+              </li>
+              <li role="separator" class="divider"></li>
+              <li>
+                <button type="submit" class="btn btn-default">Apply</button>
+              </li>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+              Date
+              <span class="caret"></span>
+            </a>
+            <ul role="menu" class="dropdown-menu" id="date-filter">
+              <li>
+                <form>
+                  <div class="form-group">
+                    <label for="date-from">Updated from</label>
+                    <input type="date" class="form-control" id="date-from">
+                  </div>
+                  <div class="form-group">
+                    <label for="date-to">To</label>
+                    <input type="date" class="form-control" id="date-to">
+                  </div>
+                  <button type="submit" class="btn btn-default">Apply</button>
+                </form>
+              </li>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+              Submitter
+              <span class="caret"></span>
+            </a>
+            <ul role="menu" class="dropdown-menu" id="submitter-filter">
+              <li>
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" value="">
+                    Submitted by me (35)
+                  </label>
+                </div>
+              </li>
+              <li role="separator" class="divider"></li>
+              <li>
+                <form>
+                  <div class="form-group">
+                    <input type="email" class="form-control" id="submitter-search" placeholder="Find submitter">
+                  </div>
+                  <button type="submit" class="btn btn-default">Apply</button>
+                </form>
+              </li>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+              Reviewer
+              <span class="caret"></span>
+            </a>
+            <ul role="menu" class="dropdown-menu" id="reviewer-filter">
+              <li>
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" value="">
+                    Assigned to me for review (35)
+                  </label>
+                </div>
+              </li>
+              <li role="separator" class="divider"></li>
+              <li>
+                <form>
+                  <div class="form-group">
+                    <input type="email" class="form-control" id="reviewer-search" placeholder="Find reviewer">
+                  </div>
+                  <button type="submit" class="btn btn-default">Apply</button>
+                </form>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <form class="navbar-form navbar-left" role="search">
+              <div class="input-group" style="width:20em;">
+                <input type="text" class="form-control" placeholder="Search series">
+                <a class="input-group-addon btn btn-default">Search</a>
+              </div>
+            </form>
+          </li>
+        </ul>
+        <ul class="nav navbar-nav" id="actions" style="display:none;">
+          <li class="dropdown">
+            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+              Set status
+              <span class="caret"></span>
+            </a>
+            <ul role="menu" class="dropdown-menu" id="status-action">
+              <li>
+                <a href="#">New</a>
+              </li>
+              <li>
+                <a href="#">Under review</a>
+              </li>
+              <li>
+                <a href="#">Reviewed</a>
+              </li>
+              <li>
+                <a href="#">Needs work</a>
+              </li>
+              <li>
+                <a href="#">Merged</a>
+              </li>
+              <li>
+                <a href="#">Rejected</a>
+              </li>
+              <li>
+                <a href="#">Superseded</a>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+              Set reviewer
+              <span class="caret"></span>
+            </a>
+            <ul role="menu" class="dropdown-menu" id="reviewer-action">
+              <li>
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" value="">
+                    Assign to myself for review
+                  </label>
+                </div>
+              </li>
+              <li role="separator" class="divider"></li>
+              <li>
+                <form>
+                  <div class="form-group">
+                    <input type="email" class="form-control" id="reviewer-search" placeholder="Find reviewer">
+                  </div>
+                  <button type="submit" class="btn btn-default">Apply</button>
+                </form>
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <button class="btn btn-default navbar-btn" id="archive-action" style="display:none;">Archive</button>
+        <ul class="nav navbar-nav navbar-right" id="show-rows">
+          <li class="dropdown">
+            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+              Show rows: 25
+              <span class="caret"></span>
+            </a>
+            <ul role="menu" class="dropdown-menu">
+              <li><a href="#">50</a></li>
+              <li><a href="#">100</a></li>
+              <li><a href="#">150</a></li>
+              <li><a href="#">All series</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+     </div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="alert alert-info table-info col-xs-9">
+          <span id="showing-series">Showing 66 series with status new, under review, reviewed, needs work <!--; updated between 2015-10-27 and 2015-10-01; submitted by Belen Barros Pena; reviewed by Damien; containing "drm"-->
+            <a class="show-all" href="#">Show all series</a>
+          </span>
+          <span id="selected-series" style="display:none;"></span>
+        </div>
+        <ul class="pagination navbar-right">
+          <li class="disabled">
+            <a href="#" aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
+            </a>
+          </li>
+          <li class="active"><a href="#">1</a></li>
+          <li><a href="#">2</a></li>
+          <li class="disabled"><a href="#">...</a></li>
+          <li><a href="#">9</a></li>
+          <li><a href="#">10</a></li>
+          <li>
+            <a href="#" aria-label="Next">
+              <span aria-hidden="true">&raquo;</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <table id="serieslist" class="table table-hover">
+      <thead>
+        <tr>
+          <th>
+            <input type="checkbox" id="select-all">
+          </th>
+          <th>ID</th>
+          <th>Series</th>
+          <th>Status</th>
+          <th>Patches</th>
+          <th>
+            <a href="#">Reviewer</a>
+          </th>
+          <th>
+            <a href="#">Submitter</a>
+          </th>
+          <th>
+            <a href="#" class="dropup sorted">
+              Updated on
+              <span class="caret"></span>
+            </a>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><input type="checkbox"> </td>
+          <td>1140</td>
+          <td>
+            <a href="series-r4.html">Series starting with: [Intel-gfx,i-g-t] Copy gem_concurrent_all to gem_concurrent_blit</a>
+          </td>
+          <td>
+            <!--span class="glyphicon glyphicon-thumbs-up accepted"></span>
+            <span class="glyphicon glyphicon-thumbs-down danger"></span-->
+            <span class="text-success">Merged</span>
+          </td>
+          <td>3</td>
+          <td class="text-muted">None</td>
+          <td>David Weinehall </td>
+          <td>2015-10-27</td>
+        </tr>
+        <tr>
+          <td><input type="checkbox"> </td>
+          <td>606</td>
+          <td>
+            <a href="#">Series starting with: drm/i915: Disable primary plane if we fail to reconstruct BIOS fb</a>
+          </td>
+          <td>
+            <a tabindex="0" role="button" class="glyphicon glyphicon-info-sign status-info" title="Series status" data-content="<ul class='list-unstyled'><li>5 patches <span class='text-success'>merged</span></li><li>2 patches need work</li></ul><a href='patches.html'>View patches</a>"></a>
+          </td>
+          <td>7</td>
+          <td class="text-muted">None</td>
+          <td>Matt Roper</td>
+          <td>2015-10-27</td>
+        </tr>
+        <tr>
+          <td><input type="checkbox"> </td>
+          <td>1112</td>
+          <td>
+            <a href="one-patch-series.html">drm/i915/bxt: Update Uninit sequence for DDI PHYs</a>
+          </td>
+          <td>
+            <span class="text-danger">Rejected</span>
+          </td>
+          <td>1</td>
+          <td class="text-muted">None</td>
+          <td>Matt Roper</td>
+          <td>2015-10-27</td>
+        </tr>
+        <tr>
+          <td><input type="checkbox"> </td>
+          <td>1126</td>
+          <td><a href="/series/199/">drm/i915/bxt: Added identifier for MIPI transcoder</a></td>
+          <td>Under review</td>
+          <td>1</td>
+          <td class="text-muted">None</td>
+          <td>Animesh Manna</td>
+          <td>2015-10-27</td>
+        </tr>
+        <tr>
+          <td><input type="checkbox"> </td>
+          <td>1115</td>
+          <td>
+            <a href="/series/198/">drm/i915/bxt: Allow/disallow DC5 based on DC9 entry/exit</a>
+          </td>
+          <td>New</td>
+          <td>1</td>
+          <td class="text-muted">None</td>
+          <td>Animesh Manna</td>
+          <td>2015-10-27</td>
+        </tr>
+        <tr>
+          <td><input type="checkbox"> </td>
+          <td>921</td>
+          <td>
+            <a href="/series/193/">drm/i915: Skip fence installation for objects with rotated views (v2)</a>
+          </td>
+          <td>New</td>
+          <td>1</td>
+          <td class="text-muted">None</td>
+          <td>Vivek Kasireddy</td>
+          <td>2015-10-27</td>
+        </tr>
+        <tr>
+          <td><input type="checkbox"> </td>
+          <td>972</td>
+          <td>
+            <a href="/series/184/">drm/i915: Ensure associated VMAs are inactive when contexts are destroyed</a>
+          </td>
+          <td>
+            <a tabindex="0" role="button" class="glyphicon glyphicon-info-sign status-info" title="Series status" data-content="<ul class='list-unstyled'><li>1 patch <span class='text-success'>merged</span></li><li>1 patch <span class='text-danger'>rejected</span></li></ul><a href='patches.html'>View patches</a>"></a>
+          </td>
+          <td>2</td>
+          <td class="text-muted">None</td>
+          <td>Tvrtko Ursulin </td>
+          <td>2015-10-26</td>
+        </tr>
+        <tr>
+          <td><input type="checkbox"> </td>
+          <td>1084</td>
+          <td><a href="/series/183/">drm/i915: make A0 wa's applied to A1</a></td>
+          <td>Reviewed</td>
+          <td>1</td>
+          <td class="text-muted">None</td>
+          <td>tim.gore@intel.com</td>
+          <td>2015-10-26</td>
+        </tr>
+        <tr>
+          <td><input type="checkbox"> </td>
+          <td>1080</td>
+          <td>
+            <a href="/series/142/">drm/i915/skl: Correct other-pipe watermark update condition check (v2)</a>
+          </td>
+          <td>Needs work</td>
+          <td>1</td>
+          <td class="text-muted">None</td>
+          <td>Matt Roper</td>
+          <td>2015-10-23</td>
+        </tr>
+        <tr>
+          <td><input type="checkbox"> </td>
+          <td>1070</td>
+          <td>
+            <a href="/series/139/">drm/i915: Add extra plane information in debugfs.</a>
+          </td>
+          <td>
+            <span class="text-success">Merged</span>
+          </td>
+          <td>1</td>
+          <td class="text-muted">None</td>
+          <td>Robert Fekete</td>
+          <td>2015-10-23</td>
+        </tr>
+        <tr>
+          <td><input type="checkbox"> </td>
+          <td>1068</td>
+          <td>
+            <a href="/series/136/">drm/i915: Fix maxfifo watermark calc on vlv cursor planes</a>
+          </td>
+          <td>
+            <span class="text-success">Merged</span>
+          </td>
+          <td>1</td>
+          <td class="text-muted">None</td>
+          <td>Thomas Daniel</td>
+          <td>2015-10-23</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <ul class="pagination navbar-right pagination-bottom">
+      <li class="disabled">
+        <a href="#" aria-label="Previous">
+          <span aria-hidden="true">&laquo;</span>
+        </a>
+      </li>
+      <li class="active"><a href="#">1</a></li>
+      <li><a href="#">2</a></li>
+      <li class="disabled"><a href="#">...</a></li>
+      <li><a href="#">9</a></li>
+      <li><a href="#">10</a></li>
+      <li>
+        <a href="#" aria-label="Next">
+          <span aria-hidden="true">&raquo;</span>
+        </a>
+      </li>
+    </ul>
+
+<div style="clear: both;"/>
+
+
+
+  </div>
+  <div id="footer">
+   <a href="http://jk.ozlabs.org/projects/patchwork/">patchwork patch tracking system</a>
+    |
+   <a href="/help/about/">about patchwork</a>
+  </div>
+
+  <script>
+    $(document).ready(function() {
+
+      //initialise series status information popovers
+      $('.status-info').popover( { trigger:"focus", html: 'true' });
+
+      //stop propagation in the filters
+  		$('.filter').click(function(e) {
+  			e.stopPropagation();
+  		});
+
+      //initialise jQueryUI datepicker
+      $("#date-from").datepicker( { dateFormat: "yy-mm-dd", maxDate: "0" } );
+      $("#date-to").datepicker( { dateFormat: "yy-mm-dd", maxDate: "0" } );
+
+      //bulk actions mode
+      function show_bulk_actions() {
+        $('#filters, #showing-series, #show-rows').hide();
+        $('#actions, #archive-action').fadeIn();
+        var no_checked = 0;
+        $('table input:checkbox').each(function() {
+          if ( $(this).is(":checked") ) {
+            no_checked ++;
+          }
+        });
+        $('#selected-series').html(no_checked + " series selected <a class='show-all' href=''>Deselect</a>").fadeIn();
+      }
+
+      function hide_bulk_actions() {
+        $('#actions, #archive-action, #selected-series').hide();
+        $('#filters, #showing-series, #show-rows').fadeIn();
+      }
+
+      //select all series
+      $('#select-all').click( function(){
+        if ( $(this).is(":checked") ){
+          $('table input:checkbox').each(function(){
+            $(this).prop("checked", true);
+            $(this).parent('td').parent('tr').css("background-color","#f5f5f5");
+            show_bulk_actions();
+          });
+        }
+        else {
+          $('table input:checkbox').each(function(){
+            $(this).prop("checked", false);
+            $(this).parent('td').parent('tr').css("background-color","transparent");
+            hide_bulk_actions();
+          });
+        }
+      });
+
+      //select one series
+      $('table input:checkbox').click( function(){
+        if( $(this).is(":checked") ){
+          $(this).parent('td').parent('tr').css("background-color","#f5f5f5");
+          show_bulk_actions();
+        }
+        else {
+          $(this).parent('td').parent('tr').css("background-color","transparent");
+          var no_checked = 0;
+          $('table input:checkbox').each(function() {
+            if ( $(this).is(":checked") ) {
+              no_checked ++;
+            }
+          });
+          if ( no_checked == 0 ) {
+            hide_bulk_actions();
+          }
+        }
+      });
+
+      //use the 'deselect' link
+      $('#selected-series a').on('click', function() {
+        $('table input:checkbox').each(function() {
+          $(this).prop("checked", false);
+        });
+        hide_bulk_actions();
+      });
+
+    });
+  </script>
+ </body>
+</html>
