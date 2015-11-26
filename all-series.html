@@ -13,7 +13,7 @@
   <link rel="stylesheet" type="text/css" href="css/style.css"/>
   <script type="text/javascript" src="js/common.js"></script>
   <script type="text/javascript" src="js/jquery-1.10.1.min.js"></script>
-  <script type="text/javascript" src="js/jquery.stickytableheaders.min.js"></script>
+  <!--script type="text/javascript" src="js/jquery.stickytableheaders.min.js"></script-->
   <!-- IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
@@ -26,7 +26,7 @@
   <script type="text/javascript" src="js/jquery-ui.min.js"></script>
   <script type="text/javascript" src="js/selectize.min.js"></script>
   <!--script type="text/javascript" src="js/jquery.dynatable.js"></script-->
-  <script type="text/javascript" src="js/patchwork.js"></script>
+  <!--script type="text/javascript" src="js/patchwork.js"></script-->
 
  </head>
  <body>
@@ -89,7 +89,7 @@
             <li><a href="#">Bundles</a></li>
             <li><a href="#">Administration</a></li>
             <li><a href="profile.html">Your profile</a></li>
-            <li role="separator" class="divider"></li>
+            <li role="separator" class=""></li>
             <li><a href="/user/logout/">Logout</a></li>
           </ul>
         </li>
@@ -113,7 +113,7 @@
         </button>
       </div>
       <div class="collapse navbar-collapse" id="series-toolbar">
-        <ul class="nav navbar-nav">
+        <ul class="nav navbar-nav" id="filters">
           <li class="dropdown">
             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
               Status
@@ -266,7 +266,64 @@
             </form>
           </li>
         </ul>
-        <ul class="nav navbar-nav navbar-right">
+        <ul class="nav navbar-nav" id="actions" style="display:none;">
+          <li class="dropdown">
+            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+              Set status
+              <span class="caret"></span>
+            </a>
+            <ul role="menu" class="dropdown-menu" id="status-action">
+              <li>
+                <a href="#">New</a>
+              </li>
+              <li>
+                <a href="#">Under review</a>
+              </li>
+              <li>
+                <a href="#">Reviewed</a>
+              </li>
+              <li>
+                <a href="#">Needs work</a>
+              </li>
+              <li>
+                <a href="#">Merged</a>
+              </li>
+              <li>
+                <a href="#">Rejected</a>
+              </li>
+              <li>
+                <a href="#">Superseded</a>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+              Set reviewer
+              <span class="caret"></span>
+            </a>
+            <ul role="menu" class="dropdown-menu" id="reviewer-action">
+              <li>
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" value="">
+                    Assign to myself for review
+                  </label>
+                </div>
+              </li>
+              <li role="separator" class="divider"></li>
+              <li>
+                <form>
+                  <div class="form-group">
+                    <input type="email" class="form-control" id="reviewer-search" placeholder="Find reviewer">
+                  </div>
+                  <button type="submit" class="btn btn-default">Apply</button>
+                </form>
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <button class="btn btn-default navbar-btn" id="archive-action" style="display:none;">Archive</button>
+        <ul class="nav navbar-nav navbar-right" id="show-rows">
           <li class="dropdown">
             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
               Show rows: 25
@@ -287,8 +344,10 @@
     <div class="container-fluid">
       <div class="row">
         <div class="alert alert-info table-info col-xs-9">
-          Showing 66 series with status new, under review, reviewed, needs work <!--; updated between 2015-10-27 and 2015-10-01; submitted by Belen Barros Pena; reviewed by Damien; containing "drm"-->
-          <a class="show-all" href="#">Show all series</a>
+          <span id="showing-series">Showing 66 series with status new, under review, reviewed, needs work <!--; updated between 2015-10-27 and 2015-10-01; submitted by Belen Barros Pena; reviewed by Damien; containing "drm"-->
+            <a class="show-all" href="#">Show all series</a>
+          </span>
+          <span id="selected-series" style="display:none;"></span>
         </div>
         <ul class="pagination navbar-right">
           <li class="disabled">
@@ -314,7 +373,7 @@
       <thead>
         <tr>
           <th>
-            <input type="checkbox">
+            <input type="checkbox" id="select-all">
           </th>
           <th>ID</th>
           <th>Series</th>
@@ -523,6 +582,70 @@
       //initialise jQueryUI datepicker
       $("#date-from").datepicker( { dateFormat: "yy-mm-dd", maxDate: "0" } );
       $("#date-to").datepicker( { dateFormat: "yy-mm-dd", maxDate: "0" } );
+
+      //bulk actions mode
+      function show_bulk_actions() {
+        $('#filters, #showing-series, #show-rows').hide();
+        $('#actions, #archive-action').fadeIn();
+        var no_checked = 0;
+        $('table input:checkbox').each(function() {
+          if ( $(this).is(":checked") ) {
+            no_checked ++;
+          }
+        });
+        $('#selected-series').html(no_checked + " series selected <a class='show-all' href=''>Deselect</a>").fadeIn();
+      }
+
+      function hide_bulk_actions() {
+        $('#actions, #archive-action, #selected-series').hide();
+        $('#filters, #showing-series, #show-rows').fadeIn();
+      }
+
+      //select all series
+      $('#select-all').click( function(){
+        if ( $(this).is(":checked") ){
+          $('table input:checkbox').each(function(){
+            $(this).prop("checked", true);
+            $(this).parent('td').parent('tr').css("background-color","#f5f5f5");
+            show_bulk_actions();
+          });
+        }
+        else {
+          $('table input:checkbox').each(function(){
+            $(this).prop("checked", false);
+            $(this).parent('td').parent('tr').css("background-color","transparent");
+            hide_bulk_actions();
+          });
+        }
+      });
+
+      //select one series
+      $('table input:checkbox').click( function(){
+        if( $(this).is(":checked") ){
+          $(this).parent('td').parent('tr').css("background-color","#f5f5f5");
+          show_bulk_actions();
+        }
+        else {
+          $(this).parent('td').parent('tr').css("background-color","transparent");
+          var no_checked = 0;
+          $('table input:checkbox').each(function() {
+            if ( $(this).is(":checked") ) {
+              no_checked ++;
+            }
+          });
+          if ( no_checked == 0 ) {       
+            hide_bulk_actions();
+          }
+        }
+      });
+
+      //use the 'deselect' link
+      $('#selected-series a').on('click', function() {
+        $('table input:checkbox').each(function() {
+          $(this).prop("checked", false);
+        });
+        hide_bulk_actions();
+      });
 
     });
   </script>

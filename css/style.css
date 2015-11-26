@@ -136,7 +136,11 @@ th > a {
   margin-top: 10px;
 }
 
-.dropdown-menu {
+#status-filter,
+#date-filter,
+#submitter-filter,
+#reviewer-filter,
+#reviewer-action {
   padding: 15px;
 }
 
@@ -145,7 +149,8 @@ th > a {
 }
 
 #submitter-filter,
-#reviewer-filter {
+#reviewer-filter,
+#reviewer-action {
   min-width: 300px;
 }
 
