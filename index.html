@@ -600,7 +600,7 @@
         $('#filters, #showing-series, #show-rows').hide();
         $('#actions, #archive-action').fadeIn();
         var no_checked = 0;
-        $('table input:checkbox').each(function() {
+        $('td input:checkbox').each(function() {
           if ( $(this).is(":checked") ) {
             no_checked ++;
           }
@@ -616,14 +616,14 @@
       //select all series
       $('#select-all').click( function(){
         if ( $(this).is(":checked") ){
-          $('table input:checkbox').each(function(){
+          $('td input:checkbox').each(function(){
             $(this).prop("checked", true);
             $(this).parent('td').parent('tr').css("background-color","#f5f5f5");
             show_bulk_actions();
           });
         }
         else {
-          $('table input:checkbox').each(function(){
+          $('td input:checkbox').each(function(){
             $(this).prop("checked", false);
             $(this).parent('td').parent('tr').css("background-color","transparent");
             hide_bulk_actions();
@@ -632,7 +632,7 @@
       });
 
       //select one series
-      $('table input:checkbox').click( function(){
+      $('td input:checkbox').click( function(){
         if( $(this).is(":checked") ){
           $(this).parent('td').parent('tr').css("background-color","#f5f5f5");
           show_bulk_actions();
@@ -640,7 +640,7 @@
         else {
           $(this).parent('td').parent('tr').css("background-color","transparent");
           var no_checked = 0;
-          $('table input:checkbox').each(function() {
+          $('td input:checkbox').each(function() {
             if ( $(this).is(":checked") ) {
               no_checked ++;
             }
