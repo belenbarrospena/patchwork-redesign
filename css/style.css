@@ -50,7 +50,7 @@ th > a {
   font-weight: bold;
 }
 
-.status-info {
+.status-info{
   color: #333;
 }
 
@@ -65,6 +65,22 @@ th > a {
   color: #777;
 }
 
+a.badge {
+  background-color: #333;
+}
+
+a.badge:hover {
+  background-color: #777;
+}
+
+a.badge:focus {
+  outline: none;
+}
+
+.popover li {
+  padding-bottom: 6px;
+}
+
 .toolbar {
   margin-top: 20px;
   margin-bottom: 20px;
@@ -74,40 +90,6 @@ th > a {
 .pagination {
   margin: 8px 0 20px;
 }
-
-/*.pagination > li > a,
-.pagination > li > span,
-.pagination > li:last-child > a,
-.pagination > li:last-child > span {
-  border-radius: 0;
-}
-
-.pagination > li > a {
-  background-color: transparent;
-  border: none;
-}
-
-.pagination > li > a:hover {
-  background-color: #ddd;
-}
-
-.pagination > .active > a,
-.pagination > .active > a:hover {
-  background-color: #428bca;
-  border-radius: 0px;
-}
-
-.pagination > .disabled > a,
-.pagination > .disabled > a:hover,
-.pagination > .disabled > a:focus {
-  background-color: transparent;
-  border: none;
-  color: #777;
-}
-
-.pagination-bottom {
-  padding-right: 15px;
-}*/
 
 @media screen and (min-width: 768px) {
   .toolbar > .container-fluid > .navbar-collapse {
@@ -127,10 +109,6 @@ th > a {
 .navbar-form .input-group .form-control {
   width:inherit;
 }
-
-/*.dropdown-menu label {
-  margin-left: 10px;
-}*/
 
 .dropdown-menu .btn {
   margin-top: 10px;
@@ -154,12 +132,6 @@ th > a {
   min-width: 300px;
 }
 
-/*#submitter-filter,
-#reviewer-filter,
-#date-filter {
-  padding: 15px 10px;
-}*/
-
 .table-info{
   margin: 8px 0 20px;
   padding: 6px 12px;
@@ -167,4 +139,34 @@ th > a {
 
 .show-all {
   margin-left: 15px;
+}
+
+.acked,
+.reviewed-by,
+.tested-by {
+  border-left: solid 1px #ddd;
+  text-align: center;
+}
+
+th.acked,
+th.reviewed-by,
+th.tested-by {
+  border-top: solid 1px #ddd !important;
+}
+
+th.acked:hover,
+th.reviewed-by:hover,
+th.tested-by:hover {
+  cursor: pointer;
+  background-color: #f5f5f5;
+}
+
+.tested-by {
+  border-right: solid 1px #ddd;
+}
+
+tr:last-child > td.acked,
+tr:last-child > td.reviewed-by,
+tr:last-child > td.tested-by {
+  border-bottom: solid 1px #ddd;
 }

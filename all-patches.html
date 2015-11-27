@@ -3,14 +3,17 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
  <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-  <title>intel-gfx - Patchwork</title>
+  <title>Patchwork redesign - All patches</title>
   <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
+  <link rel="stylesheet" type="text/css" href="css/jquery-ui.min.css">
+  <link rel="stylesheet" type="text/css" href="css/jquery-ui.structure.min.css">
+  <link rel="stylesheet" type="text/css" href="css/jquery-ui.theme.min.css">
   <link rel="stylesheet" type="text/css" href="css/selectize.bootstrap3.css"/>
   <link rel="stylesheet" type="text/css" href="css/jquery.dynatable.css"/>
   <link rel="stylesheet" type="text/css" href="css/style.css"/>
   <script type="text/javascript" src="js/common.js"></script>
   <script type="text/javascript" src="js/jquery-1.10.1.min.js"></script>
-  <script type="text/javascript" src="js/jquery.stickytableheaders.min.js"></script>
+  <!--script type="text/javascript" src="js/jquery.stickytableheaders.min.js"></script-->
   <!-- IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
@@ -20,24 +23,10 @@
     <script src="http://cdnjs.cloudflare.com/ajax/libs/es5-shim/2.0.8/es5-shim.min.js"></script>
   <![endif]-->
   <script type="text/javascript" src="js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="js/jquery-ui.min.js"></script>
   <script type="text/javascript" src="js/selectize.min.js"></script>
-  <script type="text/javascript" src="js/jquery.dynatable.js"></script>
-  <script type="text/javascript" src="js/patchwork.js"></script>
-  <script type="text/javascript">
-    $(function () {
-        pw.init({
-
-          project: 'intel-gfx'
-
-        });
-    });
-  </script>
-
-<script language="JavaScript" type="text/javascript">
-$(function () {
-    pw.setup_series_list('#serieslist');
-});
-</script>
+  <!--script type="text/javascript" src="js/jquery.dynatable.js"></script-->
+  <!--script type="text/javascript" src="js/patchwork.js"></script-->
 
  </head>
  <body>
@@ -87,19 +76,19 @@ $(function () {
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
           <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-            <span class="badge">25</span>
+            <span class="badge" href="#">25</span>
             <strong id="username">belenbarrospena</strong>&nbsp;<span class="caret"></span>
           </a>
           <ul role="menu" class="dropdown-menu">
             <li>
               <a href="#">
                 Reviews pending
-                <span class="badge">25</span>
+                <a class="badge" href="#">25</span>
               </a>
             </li>
             <li><a href="#">Administration</a></li>
             <li><a href="profile.html">Your profile</a></li>
-            <li role="separator" class="divider"></li>
+            <li role="separator" class=""></li>
             <li><a href="/user/logout/">Logout</a></li>
           </ul>
         </li>
@@ -109,7 +98,505 @@ $(function () {
   </nav>
 
   <div id="content" class="container-fluid">
+
     <h1>Patches</h1>
+
+    <nav class="navbar navbar-default toolbar" role="navigation">
+     <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#series-toolbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
+      <div class="collapse navbar-collapse" id="series-toolbar">
+        <ul class="nav navbar-nav" id="filters">
+          <li class="dropdown">
+            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+              Status
+              <span class="caret"></span>
+            </a>
+            <ul role="menu" class="dropdown-menu" id="status-filter">
+              <li class="dropdown-header">Series in progress</li>
+              <li>
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" value="" checked="checked">
+                    New (234)
+                  </label>
+                </div>
+              </li>
+              <li>
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" value="" checked="checked">
+                    Under review (34)
+                  </label>
+                </div>
+              </li>
+              <li>
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" value="" checked="checked">
+                    Reviewed (20)
+                  </label>
+                </div>
+              </li>
+              <li>
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" value="" checked="checked">
+                    Needs work (5)
+                  </label>
+                </div>
+              </li>
+              <li role="separator" class="divider"></li>
+              <li class="dropdown-header">Series done</li>
+              <li>
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" value="">
+                    Merged
+                  </label>
+                </div>
+              </li>
+              <li>
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" value="">
+                    Rejected
+                  </label>
+                </div>
+              </li>
+              <li role="separator" class="divider"></li>
+              <li>
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" value="">
+                    Include archived series
+                  </label>
+                </div>
+              </li>
+              <li role="separator" class="divider"></li>
+              <li>
+                <button type="submit" class="btn btn-default">Apply</button>
+              </li>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+              Date
+              <span class="caret"></span>
+            </a>
+            <ul role="menu" class="dropdown-menu" id="date-filter">
+              <li>
+                <form>
+                  <div class="form-group">
+                    <label for="date-from">Updated from</label>
+                    <input type="date" class="form-control" id="date-from">
+                  </div>
+                  <div class="form-group">
+                    <label for="date-to">To</label>
+                    <input type="date" class="form-control" id="date-to">
+                  </div>
+                  <button type="submit" class="btn btn-default">Apply</button>
+                </form>
+              </li>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+              Submitter
+              <span class="caret"></span>
+            </a>
+            <ul role="menu" class="dropdown-menu" id="submitter-filter">
+              <li>
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" value="">
+                    Submitted by me (35)
+                  </label>
+                </div>
+              </li>
+              <li role="separator" class="divider"></li>
+              <li>
+                <form>
+                  <div class="form-group">
+                    <input type="email" class="form-control" id="submitter-search" placeholder="Find submitter">
+                  </div>
+                  <button type="submit" class="btn btn-default">Apply</button>
+                </form>
+              </li>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+              Reviewer
+              <span class="caret"></span>
+            </a>
+            <ul role="menu" class="dropdown-menu" id="reviewer-filter">
+              <li>
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" value="">
+                    Assigned to me for review (35)
+                  </label>
+                </div>
+              </li>
+              <li role="separator" class="divider"></li>
+              <li>
+                <form>
+                  <div class="form-group">
+                    <input type="email" class="form-control" id="reviewer-search" placeholder="Find reviewer">
+                  </div>
+                  <button type="submit" class="btn btn-default">Apply</button>
+                </form>
+              </li>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+              ART tags
+              <span class="caret"></span>
+            </a>
+          </li>
+          <li>
+            <form class="navbar-form navbar-left" role="search">
+              <div class="input-group" style="width:20em;">
+                <input type="text" class="form-control" placeholder="Search patches">
+                <a class="input-group-addon btn btn-default">Search</a>
+              </div>
+            </form>
+          </li>
+        </ul>
+        <ul class="nav navbar-nav" id="actions" style="display:none;">
+          <li class="dropdown">
+            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+              Set status
+              <span class="caret"></span>
+            </a>
+            <ul role="menu" class="dropdown-menu" id="status-action">
+              <li>
+                <a href="#">New</a>
+              </li>
+              <li>
+                <a href="#">Under review</a>
+              </li>
+              <li>
+                <a href="#">Reviewed</a>
+              </li>
+              <li>
+                <a href="#">Needs work</a>
+              </li>
+              <li>
+                <a href="#">Merged</a>
+              </li>
+              <li>
+                <a href="#">Rejected</a>
+              </li>
+              <li>
+                <a href="#">Superseded</a>
+              </li>
+            </ul>
+          </li>
+          <!--li>
+            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+              Set reviewer
+              <span class="caret"></span>
+            </a>
+            <ul role="menu" class="dropdown-menu" id="reviewer-action">
+              <li>
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" value="">
+                    Assign to myself for review
+                  </label>
+                </div>
+              </li>
+              <li role="separator" class="divider"></li>
+              <li>
+                <form>
+                  <div class="form-group">
+                    <input type="email" class="form-control" id="reviewer-search" placeholder="Find reviewer">
+                  </div>
+                  <button type="submit" class="btn btn-default">Apply</button>
+                </form>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+              Move to project
+              <span class="caret"></span>
+            </a>
+            <ul role="menu" class="dropdown-menu" id="project-action">
+              <li><a href="#">Project 1</a></li>
+              <li><a href="#">Project 2</a></li>
+              <li><a href="#">Project 3</a></li>
+              <li><a href="#">Project 4</a></li>
+            </ul>
+          </li>
+        </ul-->
+        <button class="btn btn-default navbar-btn" id="archive-action" style="display:none;">Archive</button>
+        <ul class="nav navbar-nav navbar-right" id="show-rows">
+          <li class="dropdown">
+            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+              Show rows: 25
+              <span class="caret"></span>
+            </a>
+            <ul role="menu" class="dropdown-menu">
+              <li><a href="#">25</a></li>
+              <li><a href="#">50</a></li>
+              <li><a href="#">100</a></li>
+              <li><a href="#">150</a></li>
+              <li><a href="#">All patches</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+     </div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="alert alert-info table-info col-xs-9">
+          <span id="showing-series">Showing 245 patches with status new, under review, reviewed, needs work <!--; updated between 2015-10-27 and 2015-10-01; submitted by Belen Barros Pena; reviewed by Damien; containing "drm"-->
+            <a class="show-all" href="#">Show all patches</a>
+          </span>
+          <span id="selected-series" style="display:none;"></span>
+        </div>
+        <ul class="pagination navbar-right">
+          <li class="disabled">
+            <a href="#" aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
+            </a>
+          </li>
+          <li class="active"><a href="#">1</a></li>
+          <li><a href="#">2</a></li>
+          <li class="disabled"><a href="#">...</a></li>
+          <li><a href="#">9</a></li>
+          <li><a href="#">10</a></li>
+          <li>
+            <a href="#" aria-label="Next">
+              <span aria-hidden="true">&raquo;</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <table id="serieslist" class="table table-hover">
+      <thead>
+        <tr>
+          <th>
+            <input type="checkbox" id="select-all">
+          </th>
+          <th>ID</th>
+          <th>Patch</th>
+          <th>Status</th>
+          <th class="acked" title="Acknowledged by"><span >A</span></th>
+          <th class="reviewed-by" title="Reviewed by">R</th>
+          <th class="tested-by" title="Tested by">T</th>
+          <th>
+            <a href="#">Reviewer</a>
+          </th>
+          <th>
+            <a href="#">Submitter</a>
+          </th>
+          <th>
+            <a href="#" class="dropup sorted">
+              Updated on
+              <span class="caret"></span>
+            </a>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><input type="checkbox"> </td>
+          <td>66391</td>
+          <td>
+            <a href="patch1.html">drm/i915/skl: Use alternate aux power domain for port E</a>
+          </td>
+          <td>
+            <span>New</span>
+          </td>
+          <td class="acked"></td>
+          <td class="reviewed-by"></td>
+          <td class="tested-by"></td>
+          <td class="text-muted">None</td>
+          <td><a href="#">Patrik Jakobsson</a></td>
+          <td>2015-11-27</td>
+        </tr>
+        <tr>
+          <td><input type="checkbox"> </td>
+          <td>66389</td>
+          <td>
+            <a href="patch1.html">[3/3] drm/i915: add has_dsi_encoder to crtc state</a>
+          </td>
+          <td>New</td>
+          <td class="acked"></td>
+          <td class="reviewed-by"></td>
+          <td class="tested-by"></td>
+          <td class="text-muted">None</td>
+          <td><a href="#">Jani Nikula</a></td>
+          <td>2015-11-27</td>
+        </tr>
+        <tr>
+          <td><input type="checkbox"> </td>
+          <td>66388</td>
+          <td>
+            <a href="patch1.html">[2/3] drm/i915: remove pre_pll_enable hook from DDI/gen9+ crtc enable</a>
+          </td>
+          <td>
+            <span>New</span>
+          </td>
+          <td class="acked"></td>
+          <td class="reviewed-by"></td>
+          <td class="tested-by"></td>
+          <td class="text-muted">None</td>
+          <td><a href="#">Jani Nikula</a></td>
+          <td>2015-11-27</td>
+        </tr>
+        <tr>
+          <td><input type="checkbox"> </td>
+          <td>66387</td>
+          <td><a href="#">[1/3] drm/i915/dsi: merge pre_pll_enable hook to pre_enable</a></td>
+          <td>Under review</td>
+          <td class="acked">
+            <a href="#" class="badge" title="Acknowledged by" data-content="<ul class='list-unstyled'><li>Ville Syrjäla <br> <a href='mailto:ville.syrjala@linux.intel.com'>ville.syrjala@linux.intel.com</a></li></ul>">1</a>
+          </td>
+          <td class="reviewed-by">
+            <a class="badge" href="#" title="Reviewed by" data-content="<ul class='list-unstyled'><li>Ville Syrjäla <br/> <a href='mailto:ville.syrjala@linux.intel.com'>ville.syrjala@linux.intel.com</a></li><li>Chris Wilson <br/><a href='mailto:chris@chris-wilson.co.uk'>chris@chris-wilson.co.uk</a></li><li>Daniel Stone <br/><a href='mailto:daniels@collabora.com'>daniels@collabora.com</a></li></ul>">3</a>
+          </td>
+          <td class="tested-by">
+            <a class="badge" href="#" title="Tested by" data-content="<ul class='list-unstyled'><li>Ville Syrjäla <br> <a href='mailto:ville.syrjala@linux.intel.com'>ville.syrjala@linux.intel.com</a></li></ul>">1</a>
+          </td>
+          <td class="text-muted">None</td>
+          <td><a href="#">Jani Nikula</a></td>
+          <td>2015-11-27</td>
+        </tr>
+        <tr>
+          <td><input type="checkbox"> </td>
+          <td>66326</td>
+          <td>
+            <a href="/series/198/">drm/i915: Fix possible null dereference in framebuffer_info debugfs function</a>
+          </td>
+          <td>New</td>
+          <td class="acked"></td>
+          <td class="reviewed-by">
+            <a class="badge" href="#">1</a>
+          </td>
+          <td class="tested-by"></td>
+          <td class="text-muted">None</td>
+          <td><a href="#">Namrta Salonie</a></td>
+          <td>2015-11-26</td>
+        </tr>
+        <tr>
+          <td><input type="checkbox"> </td>
+          <td>66258</td>
+          <td>
+            <a href="#">[7/9] drm/i915: Fix random aux transactions failures.</a>
+          </td>
+          <td>New</td>
+          <td class="acked"></td>
+          <td class="reviewed-by"></td>
+          <td class="tested-by">
+            <a class="badge" href="#">1</a>
+          </td>
+          <td class="text-muted">None</td>
+          <td><a href="#">Rodrigo Vivi</a></td>
+          <td>2015-11-26</td>
+        </tr>
+        <tr>
+          <td><input type="checkbox"> </td>
+          <td>66221</td>
+          <td>
+            <a href="#">[5/5] drm: Enable markdown^Wasciidoc for gpu.tmpl</a>
+          </td>
+          <td>New</td>
+          <td class="acked">
+            <a class="badge" href="#">2</a>
+          </td>
+          <td class="reviewed-by"></td>
+          <td class="tested-by"></td>
+          <td class="text-muted">None</td>
+          <td><a href="#">Daniel Vetter</a></td>
+          <td>2015-11-25</td>
+        </tr>
+        <tr>
+          <td><input type="checkbox"> </td>
+          <td>66166</td>
+          <td><a href="#">[1/2] drm/i915: fix the SDE irq dmesg warnings properly</a></td>
+          <td>Reviewed</td>
+          <td class="acked"></td>
+          <td class="reviewed-by">
+            <a class="badge" href="#">3</a>
+          </td>
+          <td class="tested-by"></td>
+          <td class="text-muted">None</td>
+          <td><a href="#">Jani Nikula</a></td>
+          <td>2015-11-25</td>
+        </tr>
+        <tr>
+          <td><input type="checkbox"> </td>
+          <td>66160</td>
+          <td>
+            <a href="#">[1/2] drm/i915: Use intel_pipe_will_have_type() in ironlake_crtc_compute_clock()</a>
+          </td>
+          <td>Needs work</td>
+          <td class="acked"></td>
+          <td class="reviewed-by">
+            <a class="badge" href="#">1</a>
+          </td>
+          <td class="tested-by"></td>
+          <td class="text-muted">None</td>
+          <td><a href="#">ville.syrjala@linux.intel.com</a></td>
+          <td>2015-11-25</td>
+        </tr>
+        <tr>
+          <td><input type="checkbox"> </td>
+          <td>66100</td>
+          <td>
+            <a href="#">[V3,2/2] drm/i915: start adding dp mst audio</a>
+          </td>
+          <td>New</td>
+          <td class="acked"></td>
+          <td class="reviewed-by">
+            <a class="badge" href="#">1</a>
+          </td>
+          <td class="tested-by"></td>
+          <td class="text-muted">None</td>
+          <td><a href="#">libin.yang@linux.intel.com</a></td>
+          <td>2015-11-25</td>
+        </tr>
+
+      </tbody>
+    </table>
+
+    <ul class="pagination navbar-right pagination-bottom">
+      <li class="disabled">
+        <a href="#" aria-label="Previous">
+          <span aria-hidden="true">&laquo;</span>
+        </a>
+      </li>
+      <li class="active"><a href="#">1</a></li>
+      <li><a href="#">2</a></li>
+      <li class="disabled"><a href="#">...</a></li>
+      <li><a href="#">9</a></li>
+      <li><a href="#">10</a></li>
+      <li>
+        <a href="#" aria-label="Next">
+          <span aria-hidden="true">&raquo;</span>
+        </a>
+      </li>
+    </ul>
+
+<div style="clear: both;"/>
+
+
 
   </div>
   <div id="footer">
@@ -117,5 +604,90 @@ $(function () {
     |
    <a href="/help/about/">about patchwork</a>
   </div>
+
+  <script>
+    $(document).ready(function() {
+
+      //initialise badge information popovers
+      $('a.badge').popover( { trigger:"focus", html: 'true', placement: 'top' });
+
+      //initialise ART table headings tooltips
+      $('th.acked, th.reviewed-by, th.tested-by').tooltip( { container: 'body'} );
+
+      //stop propagation in the filters
+  		$('.filter').click(function(e) {
+  			e.stopPropagation();
+  		});
+
+      //initialise jQueryUI datepicker
+      $("#date-from").datepicker( { dateFormat: "yy-mm-dd", maxDate: "0" } );
+      $("#date-to").datepicker( { dateFormat: "yy-mm-dd", maxDate: "0" } );
+
+      //bulk actions mode
+      function show_bulk_actions() {
+        $('#filters, #showing-series, #show-rows').hide();
+        $('#actions, #archive-action').fadeIn();
+        var no_checked = 0;
+        $('td input:checkbox').each(function() {
+          if ( $(this).is(":checked") ) {
+            no_checked ++;
+          }
+        });
+        $('#selected-series').html(no_checked + " patches selected <a class='show-all' href=''>Deselect</a>").fadeIn();
+      }
+
+      function hide_bulk_actions() {
+        $('#actions, #archive-action, #selected-series').hide();
+        $('#filters, #showing-series, #show-rows').fadeIn();
+      }
+
+      //select all series
+      $('#select-all').click( function(){
+        if ( $(this).is(":checked") ){
+          $('td input:checkbox').each(function(){
+            $(this).prop("checked", true);
+            $(this).parent('td').parent('tr').css("background-color","#f5f5f5");
+            show_bulk_actions();
+          });
+        }
+        else {
+          $('td input:checkbox').each(function(){
+            $(this).prop("checked", false);
+            $(this).parent('td').parent('tr').css("background-color","transparent");
+            hide_bulk_actions();
+          });
+        }
+      });
+
+      //select one series
+      $('td input:checkbox').click( function(){
+        if( $(this).is(":checked") ){
+          $(this).parent('td').parent('tr').css("background-color","#f5f5f5");
+          show_bulk_actions();
+        }
+        else {
+          $(this).parent('td').parent('tr').css("background-color","transparent");
+          var no_checked = 0;
+          $('td input:checkbox').each(function() {
+            if ( $(this).is(":checked") ) {
+              no_checked ++;
+            }
+          });
+          if ( no_checked == 0 ) {
+            hide_bulk_actions();
+          }
+        }
+      });
+
+      //use the 'deselect' link
+      $('#selected-series a').on('click', function() {
+        $('table input:checkbox').each(function() {
+          $(this).prop("checked", false);
+        });
+        hide_bulk_actions();
+      });
+
+    });
+  </script>
  </body>
 </html>
