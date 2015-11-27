@@ -23,21 +23,6 @@
   <script type="text/javascript" src="js/selectize.min.js"></script>
   <script type="text/javascript" src="js/jquery.dynatable.js"></script>
   <script type="text/javascript" src="js/patchwork.js"></script>
-  <script type="text/javascript">
-    $(function () {
-        pw.init({
-
-          project: 'intel-gfx'
-
-        });
-    });
-  </script>
-
-<script language="JavaScript" type="text/javascript">
-$(function () {
-    pw.setup_series_list('#serieslist');
-});
-</script>
 
  </head>
  <body>
@@ -120,7 +105,7 @@ $(function () {
       </p>
     </div>
   </div>
-  <nav class="navbar navbar-default" role="navigation">
+  <nav class="navbar navbar-default" role="navigation" id="series-navigation">
    <div class="container-fluid">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse2">
