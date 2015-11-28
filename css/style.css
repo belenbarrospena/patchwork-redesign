@@ -95,6 +95,31 @@ a.badge:focus {
   margin: 8px 0 20px;
 }
 
+.pagination > li > a,
+.pagination > li > span {
+  border: none;
+}
+
+.pagination > .active > a,
+.pagination > .active > span,
+.pagination > .active > a:hover,
+.pagination > .active > span:hover,
+.pagination > .active > a:focus,
+.pagination > .active > span:focus {
+  background-color: #eee;
+  color: #777;
+  border-radius: 4px;
+}
+
+.pagination > li > a:hover,
+.pagination > li > span:hover,
+.pagination > li > a:focus,
+.pagination > li > span:focus {
+    background-color: #d9edf7;
+    border-color: #d9edf7;
+    color: #2a6496;
+}
+
 @media screen and (min-width: 768px) {
   .toolbar > .container-fluid > .navbar-collapse {
     margin-left: -30px;
