@@ -67,7 +67,9 @@ th > a {
 }
 
 a.badge {
-  background-color: #333;
+  background-color: transparent;
+  color: #777;
+  border: 1px solid #777;
 }
 
 a.badge:hover {
@@ -76,6 +78,7 @@ a.badge:hover {
 
 a.badge:focus {
   outline: none;
+  background-color: #777;
 }
 
 .popover li {
