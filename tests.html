@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
  <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-  <title>intel-gfx - Patchwork</title>
+  <title>Patchwork redesign - Series tests</title>
   <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
   <link rel="stylesheet" type="text/css" href="css/selectize.bootstrap3.css"/>
   <link rel="stylesheet" type="text/css" href="css/jquery.dynatable.css"/>
@@ -23,23 +23,8 @@
   <script type="text/javascript" src="js/selectize.min.js"></script>
   <script type="text/javascript" src="js/jquery.dynatable.js"></script>
   <script type="text/javascript" src="js/patchwork.js"></script>
-  <script type="text/javascript">
-    $(function () {
-        pw.init({
-
-          project: 'intel-gfx'
-
-        });
-    });
-  </script>
-
-<script language="JavaScript" type="text/javascript">
-$(function () {
-    pw.setup_series_list('#serieslist');
-});
-</script>
-
  </head>
+
  <body>
   <nav class="navbar navbar-inverse" role="navigation" id="topbar">
    <div class="container-fluid">
@@ -146,9 +131,10 @@ $(function () {
           </ul>
         </li>
         <li><a href="series-r4.html">Cover letter</a></li>
-        <li>
-          <a href="tests.html">
+        <li class="active">
+          <a href="#">
             Tests
+            <!--span class="glyphicon glyphicon-exclamation-sign danger"></span-->
             <span class="label label-danger">fail</span>
           </a>
         </li>
@@ -157,42 +143,111 @@ $(function () {
             Patches (3)
           </a>
         </li>
-        <li class="dropdown active">
+        <li class="dropdown">
           <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-            Patch
-            <strong>2</strong>
+            View patch
             <span class="caret"></span>
           </a>
           <ul class="dropdown-menu">
             <li><a href="patch1.html">Patch 1</a></li>
-            <li class="active"><a href="patch2.html">Patch 2</a></li>
+            <li><a href="patch2.html">Patch 2</a></li>
             <li><a href="#">Patch 3</a></li>
             <li><a href="#">Patch 4</a></li>
           </ul>
         </li>
       </ul>
-      <button class="btn btn-default navbar-btn">Download patch</button>
-      <ul class="nav navbar-nav navbar-right">
-        <li>
-          <a href="#" class="disabled">
-            <span class="glyphicon glyphicon-chevron-left"></span>
-            Previous patch
-          </a>
-        </li>
-        <li>
-          <a href="patch2.html">
-            Next patch
-            <span class="glyphicon glyphicon-chevron-right"></span>
-          </a>
-        </li>
-      </ul>
+      <button class="btn btn-default navbar-btn">Download series</button>
     </div>
    </div>
   </nav>
 
   <div id="content" class="container-fluid">
-        <h2>[Intel-gfx,i-g-t,2/3] Unify handling of slow/combinatorial tests</h2>
+    <h2>Tests</h2>
 
+    <div class="panel panel-default">
+      <div class="panel-heading" role="button" data-toggle="collapse" href="#test-results1" aria-expanded="false" aria-controls="collapseExample">
+        <h3 class="panel-title">
+          <span>Fi.CI.BAT</span>
+          <span class="label label-success">success</span>
+          <span class="navbar-right">
+            <a onclick="(function(e){ e.stopPropagation(); })(event)" href="#">See full logs</a>
+          </span>
+        </h3>
+      </div>
+      <div class="panel-body collapse" id="test-results1">
+        <pre class="content">
+Built on 17874a0bd04949ab460431e6017860ab98e0e4d2 drm-intel-nightly: 2015y-11m-26d-16h-57m-42s UTC integration manifest
+
+  bdw-nuci7        total:131  pass:107  dwarn:19  dfail:0   fail:0   skip:5
+  bsw-nuc-2        total:131  pass:115  dwarn:0   dfail:0   fail:0   skip:16
+  hsw-brixbox      total:131  pass:109  dwarn:3   dfail:16  fail:0   skip:3
+  hsw-gt2          total:131  pass:109  dwarn:9   dfail:10  fail:0   skip:3
+  ilk-hp8440p      total:131  pass:97   dwarn:0   dfail:0   fail:0   skip:34
+  ivb-t430s        total:131  pass:126  dwarn:0   dfail:0   fail:0   skip:5
+  skl-i5k-2        total:131  pass:117  dwarn:10  dfail:0   fail:0   skip:4
+  snb-dellxps      total:131  pass:118  dwarn:1   dfail:0   fail:0   skip:12
+  snb-x220t        total:131  pass:120  dwarn:0   dfail:0   fail:1   skip:10
+        </pre>
+      </div>
+    </div>
+
+    <div class="panel panel-default">
+      <div class="panel-heading" role="button" data-toggle="collapse" href="#test-results2" aria-expanded="false" aria-controls="collapseExample">
+        <h3 class="panel-title">
+          <span>Fi.CI.BAT</span>
+          <span class="label label-warning">warning</span>
+          <span class="navbar-right">
+            <a onclick="(function(e){ e.stopPropagation(); })(event)" href="#">See full logs</a>
+          </span>
+        </h3>
+      </div>
+      <div class="panel-body collapse" id="test-results2">
+        <pre class="content">
+Built on 42028116e93663458ec32a302462f81e539ee64e drm-intel-nightly: 2015y-11m-26d-10h-47m-57s UTC integration manifest
+
+Test igt@drv_module_reload_basic on skl-i5k-2 pass -&gt; dmesg-warn
+Test igt@pm_rpm@basic-rte on byt-nuc pass -&gt; dmesg-warn (UNSTABLE)
+
+bdw-nuci7        total:131  pass:107  dwarn:19  dfail:0   fail:0   skip:5
+byt-nuc          total:131  pass:120  dwarn:2   dfail:0   fail:0   skip:9
+hsw-gt2          total:131  pass:109  dwarn:9   dfail:10  fail:0   skip:3
+ilk-hp8440p      total:131  pass:97   dwarn:0   dfail:0   fail:0   skip:34
+ivb-t430s        total:131  pass:126  dwarn:0   dfail:0   fail:0   skip:5
+skl-i5k-2        total:131  pass:116  dwarn:11  dfail:0   fail:0   skip:4
+snb-dellxps      total:131  pass:118  dwarn:1   dfail:0   fail:0   skip:12
+snb-x220t        total:131  pass:120  dwarn:0   dfail:0   fail:1   skip:10
+        </pre>
+      </div>
+    </div>
+
+    <div class="panel panel-default">
+      <div class="panel-heading" role="button" data-toggle="collapse" href="#test-results3" aria-expanded="false" aria-controls="collapseExample">
+        <h3 class="panel-title">
+          <span>Fi.CI.BAT</span>
+          <span class="label label-danger">fail</span>
+          <span class="navbar-right">
+            <a onclick="(function(e){ e.stopPropagation(); })(event)" href="#">See full logs</a>
+          </span>
+        </h3>
+      </div>
+      <div class="panel-body collapse" id="test-results3">
+        <pre class="content">
+Built on 42028116e93663458ec32a302462f81e539ee64e drm-intel-nightly: 2015y-11m-26d-10h-47m-57s UTC integration manifest
+
+Test igt@drv_module_reload_basic on skl-i5k-2 pass -&gt; dmesg-warn
+Test igt@pm_rpm@basic-rte on byt-nuc pass -&gt; dmesg-warn (UNSTABLE)
+
+bdw-nuci7        total:131  pass:107  dwarn:19  dfail:0   fail:0   skip:5
+byt-nuc          total:131  pass:120  dwarn:2   dfail:0   fail:0   skip:9
+hsw-gt2          total:131  pass:109  dwarn:9   dfail:10  fail:0   skip:3
+ilk-hp8440p      total:131  pass:97   dwarn:0   dfail:0   fail:0   skip:34
+ivb-t430s        total:131  pass:126  dwarn:0   dfail:0   fail:0   skip:5
+skl-i5k-2        total:131  pass:116  dwarn:11  dfail:0   fail:0   skip:4
+snb-dellxps      total:131  pass:118  dwarn:1   dfail:0   fail:0   skip:12
+snb-x220t        total:131  pass:120  dwarn:0   dfail:0   fail:1   skip:10
+        </pre>
+      </div>
+    </div>
 
   </div>
   <div id="footer">

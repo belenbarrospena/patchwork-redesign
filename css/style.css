@@ -202,3 +202,17 @@ tr:last-child > td.reviewed-by,
 tr:last-child > td.tested-by {
   border-bottom: solid 1px #ddd;
 }
+
+.navbar-nav li .label,
+.panel-heading .label {
+  margin-left: 5px;
+}
+
+.panel:first-of-type {
+   margin-top: 20px;
+}
+
+.panel-heading:hover {
+  cursor: pointer;
+  background-color: #ddd;
+}
