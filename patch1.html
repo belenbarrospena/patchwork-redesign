@@ -180,36 +180,363 @@
 
   <div id="content" class="container-fluid">
     <h2>[Intel-gfx,i-g-t,1/3] Copy gem_concurrent_all to gem_concurrent_blit</h2>
-    <div class="core-info">
-        <span>Submitted by <a href="/project/gfx/patches/?submitter=1">David Weinehall</a> on Oct. 28, 2015, 11:29 a.m.</span>
-    </div>
-    <table class="patchmeta">
-     <tbody><tr>
-      <th>Message ID</th>
-      <td>1446031792-22881-2-git-send-email-david.weinehall@linux.intel.com</td>
-     </tr>
-      <tr>
-       <th>State</th>
-       <td>New</td>
-     </tr>
-   </table>
-   <h3>Commit message</h3>
-    <div class="comment">
-      <div class="meta">
-        <span><a href="/project/gfx/patches/?submitter=1">David Weinehall</a></span>
-        <span class="pull-right">Oct. 28, 2015, 11:29 a.m.</span>
+    <p>Submitted by <a href="/project/gfx/patches/?submitter=1">David Weinehall</a> on Oct. 28, 2015, 11:29 a.m.</p>
+    <p>Status: New</p>
+    <ul class="nav nav-pills" role="tablist" style="margin-top:30px;margin-bottom: 30px;">
+      <li role="presentation" class="active"><a href="#patch-diff" role="tab" data-toggle="tab">Patch diff</a></li>
+      <li role="presentation"><a href="#commit-message" role="tab" data-toggle="tab">Commit message</a></li>
+      <li role="presentation"><a href="#patch-metadata" role="tab" data-toggle="tab">Patch metadata</a></li>
+    </ul>
+    <div class="tab-content">
+      <div role="tabpanel" class="tab-pane active" id="patch-diff">
+        <div class="patch" id="patch">
+          <pre class="content">
+<span class="p_header">diff --git a/drivers/gpu/drm/i915/intel_display.c b/drivers/gpu/drm/i915/intel_display.c</span>
+<span class="p_header">index e80387dd6582..29ea4c458ab3 100644</span>
+<span class="p_header">--- a/drivers/gpu/drm/i915/intel_display.c</span>
+<span class="p_header">+++ b/drivers/gpu/drm/i915/intel_display.c</span>
+<span class="p_chunk">@@ -14263,7 +14263,7 @@</span> <span class="p_context"> static bool intel_crt_present(struct drm_device *dev)</span>
+ 	if (HAS_DDI(dev) &amp;&amp; I915_READ(DDI_BUF_CTL(PORT_A)) &amp; DDI_A_4_LANES)
+ 		return false;
+
+<span class="p_del">-	if (IS_VALLEYVIEW(dev) &amp;&amp; !dev_priv-&gt;vbt.int_crt_support)</span>
+<span class="p_add">+	if ((HAS_DDI(dev) || IS_VALLEYVIEW(dev)) &amp;&amp; !dev_priv-&gt;vbt.int_crt_support)</span>
+ 		return false;
+
+ 	return true;
+
+          </pre>
+        </div>
       </div>
-      <pre class="content">
+      <div role="tabpanel" class="tab-pane" id="commit-message">
+        <div class="comment">
+          <div class="meta lead">
+            <span>David Weinehall</span>
+            <span class="pull-right">Oct. 28, 2015, 11:29 a.m.</span>
+          </div>
+          <pre class="content">
 We'll both rename gem_concurrent_all over gem_concurrent_blit
 and change gem_concurrent_blit in this changeset. To make
 this easier to follow we first do the the rename.
 <span class="signed-off-by">
 Signed-off-by: David Weinehall &lt;david.weinehall@linux.intel.com&gt;</span>
----
+  ---
   tests/gem_concurrent_blit.c | 1116 ++++++++++++++++++++++++++++++++++++++++++-
   1 file changed, 1108 insertions(+), 8 deletions(-)
-    </pre>
-   </div>
+        </pre>
+      </div>
+      <div class="comment">
+        <div class="meta lead">
+          <span>Chris Wilson</span>
+          <span class="pull-right">Dec. 1, 2015, 1:41 p.m.</span>
+        </div>
+<pre class="content">On Tue, Dec 01, 2015 at 03:08:34PM +0200, ville.syrjala@linux.intel.com wrote:
+<span class="quote">&gt; From: Ville Syrjälä &lt;ville.syrjala@linux.intel.com&gt;</span>
+<span class="quote">&gt; </span>
+<span class="quote">&gt; Unfortunatey there appear to quite a few HSW/BDW machines (eg.</span>
+<span class="quote">&gt; NUCs, Brix Pro) in the wild with LPT/WPT-H but non-working FDI.</span>
+<span class="quote">&gt; FDI training fails every single time on these machines. Dunno,</span>
+<span class="quote">&gt; maybe they just didn't bother wiring it up or something?</span>
+<span class="quote">&gt; </span>
+<span class="quote">&gt; Unfortunately all the fuse bits and whatnot are telling us that</span>
+<span class="quote">&gt; the CRT connector is present. And so what we get from this is tons</span>
+<span class="quote">&gt; of false positives from the CI systems due to VGA connector forcing.</span>
+<span class="quote">&gt; </span>
+<span class="quote">&gt; I've not found any way to detect this purely from hardware, so we</span>
+<span class="quote">&gt; have to resort to looking at the VBT int_crt_support bit. We used</span>
+<span class="quote">&gt; to check this bit on all platforms, but that broke all the old</span>
+<span class="quote">&gt; machines, so the check was then restricted to VLV only in</span>
+<span class="quote">&gt; commit 84b4e042c470 ("drm/i915: only apply crt_present check on VLV")</span>
+<span class="quote">&gt; </span>
+<span class="quote">&gt; Considering HSW and VLV VBT probably got defined around the same time,</span>
+<span class="quote">&gt; it should be reasonably safe to assume that the bits is sane for</span>
+<span class="quote">&gt; HSW/BDW as well. At least I have one copy of some VBT spec here that</span>
+<span class="quote">&gt; says it's meant for both VLV and HSW, and it knows about the bit</span>
+<span class="quote">&gt; (lists it being valid from version 155 onwards). Also I have two</span>
+<span class="quote">&gt; HSW desktop machines with actual CRT ports and both have</span>
+<span class="quote">&gt; int_crt_support==1 in their VBTs.</span>
+<span class="quote">&gt; </span>
+<span class="quote">&gt; Signed-off-by: Ville Syrjälä &lt;ville.syrjala@linux.intel.com&gt;</span>
+<span class="quote">&gt; ---</span>
+<span class="quote">&gt;  drivers/gpu/drm/i915/intel_display.c | 2 +-</span>
+<span class="quote">&gt;  1 file changed, 1 insertion(+), 1 deletion(-)</span>
+<span class="quote">&gt; </span>
+<span class="quote">&gt; diff --git a/drivers/gpu/drm/i915/intel_display.c b/drivers/gpu/drm/i915/intel_display.c</span>
+<span class="quote">&gt; index e80387dd6582..29ea4c458ab3 100644</span>
+<span class="quote">&gt; --- a/drivers/gpu/drm/i915/intel_display.c</span>
+<span class="quote">&gt; +++ b/drivers/gpu/drm/i915/intel_display.c</span>
+<span class="quote">&gt; @@ -14263,7 +14263,7 @@ static bool intel_crt_present(struct drm_device *dev)</span>
+<span class="quote">&gt;  	if (HAS_DDI(dev) &amp;&amp; I915_READ(DDI_BUF_CTL(PORT_A)) &amp; DDI_A_4_LANES)</span>
+<span class="quote">&gt;  		return false;</span>
+<span class="quote">&gt;  </span>
+<span class="quote">&gt; -	if (IS_VALLEYVIEW(dev) &amp;&amp; !dev_priv-&gt;vbt.int_crt_support)</span>
+<span class="quote">&gt; +	if ((HAS_DDI(dev) || IS_VALLEYVIEW(dev)) &amp;&amp; !dev_priv-&gt;vbt.int_crt_support)</span>
+
+Would it not be better to move this knowledge to vbt if it is version
+dependent?
+
+	vbt.int_crtc_support = (UNKNOWN, NOT_PRESENT, PRESENT)
+
+then
+
+	if (dev_priv-&gt;vbt.int_crt_support == NOT_PRESENT)
+<span class="quote">&gt;  		return false;</span>
+-Chris
+        </pre>
+      </div>
+      <div class="comment">
+        <div class="meta lead">
+         <span>ville.syrjala@linux.intel.com</span>
+         <span class="pull-right">Dec. 1, 2015, 1:57 p.m.</span>
+        </div>
+        <pre class="content">
+On Tue, Dec 01, 2015 at 01:41:49PM +0000, Chris Wilson wrote:
+<span class="quote">&gt; On Tue, Dec 01, 2015 at 03:08:34PM +0200, ville.syrjala@linux.intel.com wrote:</span>
+<span class="quote">&gt; &gt; From: Ville Syrjälä &lt;ville.syrjala@linux.intel.com&gt;</span>
+<span class="quote">&gt; &gt; </span>
+<span class="quote">&gt; &gt; Unfortunatey there appear to quite a few HSW/BDW machines (eg.</span>
+<span class="quote">&gt; &gt; NUCs, Brix Pro) in the wild with LPT/WPT-H but non-working FDI.</span>
+<span class="quote">&gt; &gt; FDI training fails every single time on these machines. Dunno,</span>
+<span class="quote">&gt; &gt; maybe they just didn't bother wiring it up or something?</span>
+<span class="quote">&gt; &gt; </span>
+<span class="quote">&gt; &gt; Unfortunately all the fuse bits and whatnot are telling us that</span>
+<span class="quote">&gt; &gt; the CRT connector is present. And so what we get from this is tons</span>
+<span class="quote">&gt; &gt; of false positives from the CI systems due to VGA connector forcing.</span>
+<span class="quote">&gt; &gt; </span>
+<span class="quote">&gt; &gt; I've not found any way to detect this purely from hardware, so we</span>
+<span class="quote">&gt; &gt; have to resort to looking at the VBT int_crt_support bit. We used</span>
+<span class="quote">&gt; &gt; to check this bit on all platforms, but that broke all the old</span>
+<span class="quote">&gt; &gt; machines, so the check was then restricted to VLV only in</span>
+<span class="quote">&gt; &gt; commit 84b4e042c470 ("drm/i915: only apply crt_present check on VLV")</span>
+<span class="quote">&gt; &gt; </span>
+<span class="quote">&gt; &gt; Considering HSW and VLV VBT probably got defined around the same time,</span>
+<span class="quote">&gt; &gt; it should be reasonably safe to assume that the bits is sane for</span>
+<span class="quote">&gt; &gt; HSW/BDW as well. At least I have one copy of some VBT spec here that</span>
+<span class="quote">&gt; &gt; says it's meant for both VLV and HSW, and it knows about the bit</span>
+<span class="quote">&gt; &gt; (lists it being valid from version 155 onwards). Also I have two</span>
+<span class="quote">&gt; &gt; HSW desktop machines with actual CRT ports and both have</span>
+<span class="quote">&gt; &gt; int_crt_support==1 in their VBTs.</span>
+<span class="quote">&gt; &gt; </span>
+<span class="quote">&gt; &gt; Signed-off-by: Ville Syrjälä &lt;ville.syrjala@linux.intel.com&gt;</span>
+<span class="quote">&gt; &gt; ---</span>
+<span class="quote">&gt; &gt;  drivers/gpu/drm/i915/intel_display.c | 2 +-</span>
+<span class="quote">&gt; &gt;  1 file changed, 1 insertion(+), 1 deletion(-)</span>
+<span class="quote">&gt; &gt; </span>
+<span class="quote">&gt; &gt; diff --git a/drivers/gpu/drm/i915/intel_display.c b/drivers/gpu/drm/i915/intel_display.c</span>
+<span class="quote">&gt; &gt; index e80387dd6582..29ea4c458ab3 100644</span>
+<span class="quote">&gt; &gt; --- a/drivers/gpu/drm/i915/intel_display.c</span>
+<span class="quote">&gt; &gt; +++ b/drivers/gpu/drm/i915/intel_display.c</span>
+<span class="quote">&gt; &gt; @@ -14263,7 +14263,7 @@ static bool intel_crt_present(struct drm_device *dev)</span>
+<span class="quote">&gt; &gt;  	if (HAS_DDI(dev) &amp;&amp; I915_READ(DDI_BUF_CTL(PORT_A)) &amp; DDI_A_4_LANES)</span>
+<span class="quote">&gt; &gt;  		return false;</span>
+<span class="quote">&gt; &gt;  </span>
+<span class="quote">&gt; &gt; -	if (IS_VALLEYVIEW(dev) &amp;&amp; !dev_priv-&gt;vbt.int_crt_support)</span>
+<span class="quote">&gt; &gt; +	if ((HAS_DDI(dev) || IS_VALLEYVIEW(dev)) &amp;&amp; !dev_priv-&gt;vbt.int_crt_support)</span>
+<span class="quote">&gt; </span>
+<span class="quote">&gt; Would it not be better to move this knowledge to vbt if it is version</span>
+<span class="quote">&gt; dependent?</span>
+<span class="quote">&gt; </span>
+<span class="quote">&gt; 	vbt.int_crtc_support = (UNKNOWN, NOT_PRESENT, PRESENT)</span>
+<span class="quote">&gt; </span>
+<span class="quote">&gt; then</span>
+<span class="quote">&gt; </span>
+<span class="quote">&gt; 	if (dev_priv-&gt;vbt.int_crt_support == NOT_PRESENT)</span>
+<span class="quote">&gt; &gt;  		return false;</span>
+
+I'm not sure the UNKNWON value really buys us anything. But I suppose we
+could just do this:
+
+        general = find_section(bdb, BDB_GENERAL_FEATURES);
+        if (general) {
+                dev_priv-&gt;vbt.int_tv_support = general-&gt;int_tv_support;
+-               dev_priv-&gt;vbt.int_crt_support = general-&gt;int_crt_support;
++               if (HAS_DDI(dev_priv) || IS_VALLEYIEW(dev_priv))
++                       dev_priv-&gt;vbt.int_crt_support = general-&gt;int_crt_support;
+
+The other option is to make it check the version. But I'm not sure if
+that's entirely safe. For extra paranoia I guess we could do both,
+just in case there's some early VLV/HSW out there with &lt;155 VBT
+version.
+        </pre>
+      </div>
+      <div class="comment">
+        <div class="meta lead">
+         <span>Chris Wilson</span>
+         <span class="pull-right">Dec. 1, 2015, 2:06 p.m.</span>
+        </div>
+      <pre class="content">
+On Tue, Dec 01, 2015 at 03:57:37PM +0200, Ville Syrjälä wrote:
+<span class="quote">&gt; On Tue, Dec 01, 2015 at 01:41:49PM +0000, Chris Wilson wrote:</span>
+<span class="quote">&gt; &gt; On Tue, Dec 01, 2015 at 03:08:34PM +0200, ville.syrjala@linux.intel.com wrote:</span>
+<span class="quote">&gt; &gt; &gt; From: Ville Syrjälä &lt;ville.syrjala@linux.intel.com&gt;</span>
+<span class="quote">&gt; &gt; &gt; </span>
+<span class="quote">&gt; &gt; &gt; Unfortunatey there appear to quite a few HSW/BDW machines (eg.</span>
+<span class="quote">&gt; &gt; &gt; NUCs, Brix Pro) in the wild with LPT/WPT-H but non-working FDI.</span>
+<span class="quote">&gt; &gt; &gt; FDI training fails every single time on these machines. Dunno,</span>
+<span class="quote">&gt; &gt; &gt; maybe they just didn't bother wiring it up or something?</span>
+<span class="quote">&gt; &gt; &gt; </span>
+<span class="quote">&gt; &gt; &gt; Unfortunately all the fuse bits and whatnot are telling us that</span>
+<span class="quote">&gt; &gt; &gt; the CRT connector is present. And so what we get from this is tons</span>
+<span class="quote">&gt; &gt; &gt; of false positives from the CI systems due to VGA connector forcing.</span>
+<span class="quote">&gt; &gt; &gt; </span>
+<span class="quote">&gt; &gt; &gt; I've not found any way to detect this purely from hardware, so we</span>
+<span class="quote">&gt; &gt; &gt; have to resort to looking at the VBT int_crt_support bit. We used</span>
+<span class="quote">&gt; &gt; &gt; to check this bit on all platforms, but that broke all the old</span>
+<span class="quote">&gt; &gt; &gt; machines, so the check was then restricted to VLV only in</span>
+<span class="quote">&gt; &gt; &gt; commit 84b4e042c470 ("drm/i915: only apply crt_present check on VLV")</span>
+<span class="quote">&gt; &gt; &gt; </span>
+<span class="quote">&gt; &gt; &gt; Considering HSW and VLV VBT probably got defined around the same time,</span>
+<span class="quote">&gt; &gt; &gt; it should be reasonably safe to assume that the bits is sane for</span>
+<span class="quote">&gt; &gt; &gt; HSW/BDW as well. At least I have one copy of some VBT spec here that</span>
+<span class="quote">&gt; &gt; &gt; says it's meant for both VLV and HSW, and it knows about the bit</span>
+<span class="quote">&gt; &gt; &gt; (lists it being valid from version 155 onwards). Also I have two</span>
+<span class="quote">&gt; &gt; &gt; HSW desktop machines with actual CRT ports and both have</span>
+<span class="quote">&gt; &gt; &gt; int_crt_support==1 in their VBTs.</span>
+<span class="quote">&gt; &gt; &gt; </span>
+<span class="quote">&gt; &gt; &gt; Signed-off-by: Ville Syrjälä &lt;ville.syrjala@linux.intel.com&gt;</span>
+<span class="quote">&gt; &gt; &gt; ---</span>
+<span class="quote">&gt; &gt; &gt;  drivers/gpu/drm/i915/intel_display.c | 2 +-</span>
+<span class="quote">&gt; &gt; &gt;  1 file changed, 1 insertion(+), 1 deletion(-)</span>
+<span class="quote">&gt; &gt; &gt; </span>
+<span class="quote">&gt; &gt; &gt; diff --git a/drivers/gpu/drm/i915/intel_display.c b/drivers/gpu/drm/i915/intel_display.c</span>
+<span class="quote">&gt; &gt; &gt; index e80387dd6582..29ea4c458ab3 100644</span>
+<span class="quote">&gt; &gt; &gt; --- a/drivers/gpu/drm/i915/intel_display.c</span>
+<span class="quote">&gt; &gt; &gt; +++ b/drivers/gpu/drm/i915/intel_display.c</span>
+<span class="quote">&gt; &gt; &gt; @@ -14263,7 +14263,7 @@ static bool intel_crt_present(struct drm_device *dev)</span>
+<span class="quote">&gt; &gt; &gt;  	if (HAS_DDI(dev) &amp;&amp; I915_READ(DDI_BUF_CTL(PORT_A)) &amp; DDI_A_4_LANES)</span>
+<span class="quote">&gt; &gt; &gt;  		return false;</span>
+<span class="quote">&gt; &gt; &gt;  </span>
+<span class="quote">&gt; &gt; &gt; -	if (IS_VALLEYVIEW(dev) &amp;&amp; !dev_priv-&gt;vbt.int_crt_support)</span>
+<span class="quote">&gt; &gt; &gt; +	if ((HAS_DDI(dev) || IS_VALLEYVIEW(dev)) &amp;&amp; !dev_priv-&gt;vbt.int_crt_support)</span>
+<span class="quote">&gt; &gt; </span>
+<span class="quote">&gt; &gt; Would it not be better to move this knowledge to vbt if it is version</span>
+<span class="quote">&gt; &gt; dependent?</span>
+<span class="quote">&gt; &gt; </span>
+<span class="quote">&gt; &gt; 	vbt.int_crtc_support = (UNKNOWN, NOT_PRESENT, PRESENT)</span>
+<span class="quote">&gt; &gt; </span>
+<span class="quote">&gt; &gt; then</span>
+<span class="quote">&gt; &gt; </span>
+<span class="quote">&gt; &gt; 	if (dev_priv-&gt;vbt.int_crt_support == NOT_PRESENT)</span>
+<span class="quote">&gt; &gt; &gt;  		return false;</span>
+<span class="quote">&gt; </span>
+<span class="quote">&gt; I'm not sure the UNKNWON value really buys us anything.</span>
+
+Don't you need a flag to say when the .int_crt_support can be trusted?
+<span class="quote">
+&gt; But I suppose we</span>
+<span class="quote">&gt; could just do this:</span>
+<span class="quote">&gt; </span>
+<span class="quote">&gt;         general = find_section(bdb, BDB_GENERAL_FEATURES);</span>
+<span class="quote">&gt;         if (general) {</span>
+<span class="quote">&gt;                 dev_priv-&gt;vbt.int_tv_support = general-&gt;int_tv_support;</span>
+<span class="quote">&gt; -               dev_priv-&gt;vbt.int_crt_support = general-&gt;int_crt_support;</span>
+<span class="quote">&gt; +               if (HAS_DDI(dev_priv) || IS_VALLEYIEW(dev_priv))</span>
+<span class="quote">&gt; +                       dev_priv-&gt;vbt.int_crt_support = general-&gt;int_crt_support;</span>
+<span class="quote">&gt; </span>
+<span class="quote">&gt; The other option is to make it check the version. But I'm not sure if</span>
+<span class="quote">&gt; that's entirely safe. For extra paranoia I guess we could do both,</span>
+<span class="quote">&gt; just in case there's some early VLV/HSW out there with &lt;155 VBT</span>
+<span class="quote">&gt; version.</span>
+
+I would, if only to get better documentation on the changes. I also
+wouldn't put it past someone to build a new VBIOS with an old tool...
+-Chris
+        </pre>
+      </div>
+      <div class="comment">
+        <div class="meta lead">
+         <span>ville.syrjala@linux.intel.com</span>
+         <span class="pull-right">Dec. 1, 2015, 2:19 p.m.</span>
+        </div>
+      <pre class="content">
+On Tue, Dec 01, 2015 at 02:06:26PM +0000, Chris Wilson wrote:
+<span class="quote">&gt; On Tue, Dec 01, 2015 at 03:57:37PM +0200, Ville Syrjälä wrote:</span>
+<span class="quote">&gt; &gt; On Tue, Dec 01, 2015 at 01:41:49PM +0000, Chris Wilson wrote:</span>
+<span class="quote">&gt; &gt; &gt; On Tue, Dec 01, 2015 at 03:08:34PM +0200, ville.syrjala@linux.intel.com wrote:</span>
+<span class="quote">&gt; &gt; &gt; &gt; From: Ville Syrjälä &lt;ville.syrjala@linux.intel.com&gt;</span>
+<span class="quote">&gt; &gt; &gt; &gt; </span>
+<span class="quote">&gt; &gt; &gt; &gt; Unfortunatey there appear to quite a few HSW/BDW machines (eg.</span>
+<span class="quote">&gt; &gt; &gt; &gt; NUCs, Brix Pro) in the wild with LPT/WPT-H but non-working FDI.</span>
+<span class="quote">&gt; &gt; &gt; &gt; FDI training fails every single time on these machines. Dunno,</span>
+<span class="quote">&gt; &gt; &gt; &gt; maybe they just didn't bother wiring it up or something?</span>
+<span class="quote">&gt; &gt; &gt; &gt; </span>
+<span class="quote">&gt; &gt; &gt; &gt; Unfortunately all the fuse bits and whatnot are telling us that</span>
+<span class="quote">&gt; &gt; &gt; &gt; the CRT connector is present. And so what we get from this is tons</span>
+<span class="quote">&gt; &gt; &gt; &gt; of false positives from the CI systems due to VGA connector forcing.</span>
+<span class="quote">&gt; &gt; &gt; &gt; </span>
+<span class="quote">&gt; &gt; &gt; &gt; I've not found any way to detect this purely from hardware, so we</span>
+<span class="quote">&gt; &gt; &gt; &gt; have to resort to looking at the VBT int_crt_support bit. We used</span>
+<span class="quote">&gt; &gt; &gt; &gt; to check this bit on all platforms, but that broke all the old</span>
+<span class="quote">&gt; &gt; &gt; &gt; machines, so the check was then restricted to VLV only in</span>
+<span class="quote">&gt; &gt; &gt; &gt; commit 84b4e042c470 ("drm/i915: only apply crt_present check on VLV")</span>
+<span class="quote">&gt; &gt; &gt; &gt; </span>
+<span class="quote">&gt; &gt; &gt; &gt; Considering HSW and VLV VBT probably got defined around the same time,</span>
+<span class="quote">&gt; &gt; &gt; &gt; it should be reasonably safe to assume that the bits is sane for</span>
+<span class="quote">&gt; &gt; &gt; &gt; HSW/BDW as well. At least I have one copy of some VBT spec here that</span>
+<span class="quote">&gt; &gt; &gt; &gt; says it's meant for both VLV and HSW, and it knows about the bit</span>
+<span class="quote">&gt; &gt; &gt; &gt; (lists it being valid from version 155 onwards). Also I have two</span>
+<span class="quote">&gt; &gt; &gt; &gt; HSW desktop machines with actual CRT ports and both have</span>
+<span class="quote">&gt; &gt; &gt; &gt; int_crt_support==1 in their VBTs.</span>
+<span class="quote">&gt; &gt; &gt; &gt; </span>
+<span class="quote">&gt; &gt; &gt; &gt; Signed-off-by: Ville Syrjälä &lt;ville.syrjala@linux.intel.com&gt;</span>
+<span class="quote">&gt; &gt; &gt; &gt; ---</span>
+<span class="quote">&gt; &gt; &gt; &gt;  drivers/gpu/drm/i915/intel_display.c | 2 +-</span>
+<span class="quote">&gt; &gt; &gt; &gt;  1 file changed, 1 insertion(+), 1 deletion(-)</span>
+<span class="quote">&gt; &gt; &gt; &gt; </span>
+<span class="quote">&gt; &gt; &gt; &gt; diff --git a/drivers/gpu/drm/i915/intel_display.c b/drivers/gpu/drm/i915/intel_display.c</span>
+<span class="quote">&gt; &gt; &gt; &gt; index e80387dd6582..29ea4c458ab3 100644</span>
+<span class="quote">&gt; &gt; &gt; &gt; --- a/drivers/gpu/drm/i915/intel_display.c</span>
+<span class="quote">&gt; &gt; &gt; &gt; +++ b/drivers/gpu/drm/i915/intel_display.c</span>
+<span class="quote">&gt; &gt; &gt; &gt; @@ -14263,7 +14263,7 @@ static bool intel_crt_present(struct drm_device *dev)</span>
+<span class="quote">&gt; &gt; &gt; &gt;  	if (HAS_DDI(dev) &amp;&amp; I915_READ(DDI_BUF_CTL(PORT_A)) &amp; DDI_A_4_LANES)</span>
+<span class="quote">&gt; &gt; &gt; &gt;  		return false;</span>
+<span class="quote">&gt; &gt; &gt; &gt;  </span>
+<span class="quote">&gt; &gt; &gt; &gt; -	if (IS_VALLEYVIEW(dev) &amp;&amp; !dev_priv-&gt;vbt.int_crt_support)</span>
+<span class="quote">&gt; &gt; &gt; &gt; +	if ((HAS_DDI(dev) || IS_VALLEYVIEW(dev)) &amp;&amp; !dev_priv-&gt;vbt.int_crt_support)</span>
+<span class="quote">&gt; &gt; &gt; </span>
+<span class="quote">&gt; &gt; &gt; Would it not be better to move this knowledge to vbt if it is version</span>
+<span class="quote">&gt; &gt; &gt; dependent?</span>
+<span class="quote">&gt; &gt; &gt; </span>
+<span class="quote">&gt; &gt; &gt; 	vbt.int_crtc_support = (UNKNOWN, NOT_PRESENT, PRESENT)</span>
+<span class="quote">&gt; &gt; &gt; </span>
+<span class="quote">&gt; &gt; &gt; then</span>
+<span class="quote">&gt; &gt; &gt; </span>
+<span class="quote">&gt; &gt; &gt; 	if (dev_priv-&gt;vbt.int_crt_support == NOT_PRESENT)</span>
+<span class="quote">&gt; &gt; &gt; &gt;  		return false;</span>
+<span class="quote">&gt; &gt; </span>
+<span class="quote">&gt; &gt; I'm not sure the UNKNWON value really buys us anything.</span>
+<span class="quote">&gt; </span>
+<span class="quote">&gt; Don't you need a flag to say when the .int_crt_support can be trusted?</span>
+
+If we can't trust it we have no choice but to register the connetor
+(assuming the hw based probes said it's present). So in effect UNKNOWN
+would be the same as PRESENT.
+<span class="quote">
+&gt; </span>
+<span class="quote">&gt; &gt; But I suppose we</span>
+<span class="quote">&gt; &gt; could just do this:</span>
+<span class="quote">&gt; &gt; </span>
+<span class="quote">&gt; &gt;         general = find_section(bdb, BDB_GENERAL_FEATURES);</span>
+<span class="quote">&gt; &gt;         if (general) {</span>
+<span class="quote">&gt; &gt;                 dev_priv-&gt;vbt.int_tv_support = general-&gt;int_tv_support;</span>
+<span class="quote">&gt; &gt; -               dev_priv-&gt;vbt.int_crt_support = general-&gt;int_crt_support;</span>
+<span class="quote">&gt; &gt; +               if (HAS_DDI(dev_priv) || IS_VALLEYIEW(dev_priv))</span>
+<span class="quote">&gt; &gt; +                       dev_priv-&gt;vbt.int_crt_support = general-&gt;int_crt_support;</span>
+<span class="quote">&gt; &gt; </span>
+<span class="quote">&gt; &gt; The other option is to make it check the version. But I'm not sure if</span>
+<span class="quote">&gt; &gt; that's entirely safe. For extra paranoia I guess we could do both,</span>
+<span class="quote">&gt; &gt; just in case there's some early VLV/HSW out there with &lt;155 VBT</span>
+<span class="quote">&gt; &gt; version.</span>
+<span class="quote">&gt; </span>
+<span class="quote">&gt; I would, if only to get better documentation on the changes. I also</span>
+<span class="quote">&gt; wouldn't put it past someone to build a new VBIOS with an old tool...</span>
+
+I can respin using this approach.
+        </pre>
+      </div>
+    </div>
+    <div role="tabpanel" class="tab-pane active" id="patch-metadata">
+    </div>
   </div>
   <div id="footer">
    <a href="http://jk.ozlabs.org/projects/patchwork/">patchwork patch tracking system</a>

@@ -216,3 +216,16 @@ tr:last-child > td.tested-by {
   cursor: pointer;
   background-color: #ddd;
 }
+
+span.p_header	{ color: #2e8b57; font-weight: bold; }
+span.p_chunk	{ color: #a52a2a; font-weight: bold; }
+span.p_context	{ color: #a020f0; }
+span.p_add	{ color: #008b8b; }
+span.p_del	{ color: #6a5acd; }
+span.p_mod	{ color: #0000ff; }
+span.quote { color: #007f00; }
+
+.comment .meta {
+	background: #f0f0f0;
+	padding: 0.5em 0.5em;
+}
