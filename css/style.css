@@ -11,7 +11,10 @@
   padding-left: 0;
 }
 
-#navbar-collapse2 .navbar-btn:first-child, .navbar-btn:only-of-type {
+#navbar-collapse2 .navbar-btn:first-child,
+.navbar-btn:only-of-type,
+.nav-pills .btn-default,
+.nav-pills .previous {
   margin-left: 20px;
 }
 
@@ -93,6 +96,20 @@ a.badge:focus {
 
 .pagination {
   margin: 8px 0 20px;
+}
+
+.patch-pagination {
+  margin-top: 6px;
+  margin-bottom: 0;
+}
+
+.patch-actions {
+  margin-top: 5px;
+  margin-left: 20px;
+}
+
+.tab-content {
+  margin-top: 30px;
 }
 
 .pagination > li > a,
@@ -228,4 +245,17 @@ span.quote { color: #007f00; }
 .comment .meta {
 	background: #f0f0f0;
 	padding: 0.5em 0.5em;
+}
+
+.tab-pane dl {
+  margin-left: 15px;
+}
+
+dd {
+  margin-left: 10px;
+}
+
+pre {
+  background-color: transparent;
+  border: none;
 }
