@@ -20,24 +20,6 @@
     <script src="http://cdnjs.cloudflare.com/ajax/libs/es5-shim/2.0.8/es5-shim.min.js"></script>
   <![endif]-->
   <script type="text/javascript" src="js/bootstrap.min.js"></script>
-  <script type="text/javascript" src="js/selectize.min.js"></script>
-  <script type="text/javascript" src="js/jquery.dynatable.js"></script>
-  <script type="text/javascript" src="js/patchwork.js"></script>
-  <script type="text/javascript">
-    $(function () {
-        pw.init({
-
-          project: 'intel-gfx'
-
-        });
-    });
-  </script>
-
-<script language="JavaScript" type="text/javascript">
-$(function () {
-    pw.setup_series_list('#serieslist');
-});
-</script>
 
  </head>
  <body>
@@ -108,17 +90,19 @@ $(function () {
    </div>
   </nav>
   <div class="container-fluid">
-    <h1>Unify slow/combinatorial test handling</h1>
-    <div class="core-info">
-      <span>Submitted by <a href="/project/gfx/patches/?submitter=1">David Weinehall</a> on Oct. 23, 2015, 11:42 a.m.</span>
-      <p>
-        Reviewer:
-        <strong>
-          Nobody
-          <span class="glyphicon glyphicon-pencil"></span>
-        </strong>
-      </p>
-    </div>
+    <h1>
+      Unify slow/combinatorial test handling
+      <span class="glyphicon glyphicon-pencil"></span>
+    </h1>
+    <p class="core-info">
+      <span>Submitter: <a href="#">David Weinehall</a></span>
+      <span>|</span>
+      <span>Reviewer: <strong>None</strong></span>
+      <span>|</span>
+      <span>Updated on Oct. 23, 2015, 11:42 a.m.</span>
+      <span>|</span>
+      <span>Series ID: <strong>1140</strong></span>
+    </p>
   </div>
   <nav class="navbar navbar-default" role="navigation" id="series-navigation">
    <div class="container-fluid">
@@ -146,15 +130,15 @@ $(function () {
           </ul>
         </li>
         <li><a href="series-r4.html">Cover letter</a></li>
+        <li class="active">
+          <a href="patches.html">
+            Patches (3)
+          </a>
+        </li>
         <li>
           <a href="tests.html">
             Tests
             <span class="label label-danger">fail</span>
-          </a>
-        </li>
-        <li class="active">
-          <a href="patches.html">
-            Patches (3)
           </a>
         </li>
         <!--li class="dropdown">
@@ -170,9 +154,75 @@ $(function () {
           </ul>
         </li-->
       </ul>
-      <div class="btn-group navbar-btn">
-        <button class="btn btn-default">Download series</button>
-        <button class="btn btn-default">Download series</button>
+      <div class="btn-group navbar-btn navbar-right">
+        <div class="btn-group">
+          <button data-toggle="dropdown" class="dropdown-toggle btn btn-default">
+            Set series status
+            <span class="caret"></span>
+          </button>
+          <ul role="menu" class="dropdown-menu" id="status-action">
+            <li>
+              <a href="#">New</a>
+            </li>
+            <li>
+              <a href="#">Under review</a>
+            </li>
+            <li>
+              <a href="#">Reviewed</a>
+            </li>
+            <li>
+              <a href="#">Needs work</a>
+            </li>
+            <li>
+              <a href="#">Merged</a>
+            </li>
+            <li>
+              <a href="#">Rejected</a>
+            </li>
+            <li>
+              <a href="#">Superseded</a>
+            </li>
+          </ul>
+        </div>
+        <div class="btn-group">
+          <button data-toggle="dropdown" class="dropdown-toggle btn btn-default">
+            Set reviewer
+            <span class="caret"></span>
+          </button>
+          <ul role="menu" class="dropdown-menu" id="reviewer-action">
+            <li>
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" value="">
+                  Assign to myself for review
+                </label>
+              </div>
+            </li>
+            <li role="separator" class="divider"></li>
+            <li>
+              <form>
+                <div class="form-group">
+                  <input type="email" class="form-control" id="reviewer-search" placeholder="Find reviewer">
+                </div>
+                <button type="submit" class="btn btn-default">Apply</button>
+              </form>
+            </li>
+          </ul>
+        </div>
+        <div class="btn-group">
+          <button data-toggle="dropdown" class="dropdown-toggle btn btn-default">
+            Move to project
+            <span class="caret"></span>
+          </button>
+          <ul role="menu" class="dropdown-menu" id="project-action">
+            <li><a href="#">Project 1</a></li>
+            <li><a href="#">Project 2</a></li>
+            <li><a href="#">Project 3</a></li>
+            <li><a href="#">Project 4</a></li>
+          </ul>
+        </div>
+        <button class="btn btn-default">Download</button>
+        <button class="btn btn-default">Archive</button>
       </div>
     </div>
    </div>
@@ -184,25 +234,59 @@ $(function () {
       <thead>
         <tr>
           <th>#</th>
-          <th>Name</th>
-          <th>State</th>
+          <th>ID</th>
+          <th>Patch</th>
+          <th>Status</th>
+          <th class="acked" title="Acknowledged by"><span >A</span></th>
+          <th class="reviewed-by" title="Reviewed by">R</th>
+          <th class="tested-by" title="Tested by">T</th>
         </tr>
       </thead>
       <tbody>
         <tr>
           <td>1</td>
+          <td>66386</td>
           <td><a href="patch1.html">[Intel-gfx,i-g-t] Copy gem_concurrent_all to gem_concurrent_blit</a></td>
           <td>New</td>
+          <td class="acked">
+            <a href="#" class="badge" title="Acknowledged by" data-content="<ul class='list-unstyled'><li>Ville Syrjäla <br> <a href='mailto:ville.syrjala@linux.intel.com'>ville.syrjala@linux.intel.com</a></li></ul>">1</a>
+          </td>
+          <td class="reviewed-by">
+            <a class="badge" href="#" title="Reviewed by" data-content="<ul class='list-unstyled'><li>Ville Syrjäla <br/> <a href='mailto:ville.syrjala@linux.intel.com'>ville.syrjala@linux.intel.com</a></li><li>Chris Wilson <br/><a href='mailto:chris@chris-wilson.co.uk'>chris@chris-wilson.co.uk</a></li><li>Daniel Stone <br/><a href='mailto:daniels@collabora.com'>daniels@collabora.com</a></li></ul>">3</a>
+          </td>
+          <td class="tested-by">
+            <a class="badge" href="#" title="Tested by" data-content="<ul class='list-unstyled'><li>Ville Syrjäla <br> <a href='mailto:ville.syrjala@linux.intel.com'>ville.syrjala@linux.intel.com</a></li></ul>">1</a>
+          </td>
         </tr>
         <tr>
           <td>2</td>
+          <td>66387</td>
           <td><a href="patch2.html">[Intel-gfx,i-g-t] Unify handling of slow/combinatorial tests</a></td>
           <td>New</td>
+          <td class="acked">
+            <a href="#" class="badge" title="Acknowledged by" data-content="<ul class='list-unstyled'><li>Ville Syrjäla <br> <a href='mailto:ville.syrjala@linux.intel.com'>ville.syrjala@linux.intel.com</a></li></ul>">1</a>
+          </td>
+          <td class="reviewed-by">
+            <a class="badge" href="#" title="Reviewed by" data-content="<ul class='list-unstyled'><li>Ville Syrjäla <br/> <a href='mailto:ville.syrjala@linux.intel.com'>ville.syrjala@linux.intel.com</a></li><li>Chris Wilson <br/><a href='mailto:chris@chris-wilson.co.uk'>chris@chris-wilson.co.uk</a></li><li>Daniel Stone <br/><a href='mailto:daniels@collabora.com'>daniels@collabora.com</a></li></ul>">3</a>
+          </td>
+          <td class="tested-by">
+            <a class="badge" href="#" title="Tested by" data-content="<ul class='list-unstyled'><li>Ville Syrjäla <br> <a href='mailto:ville.syrjala@linux.intel.com'>ville.syrjala@linux.intel.com</a></li></ul>">1</a>
+          </td>
         </tr>
         <tr>
           <td>3</td>
+          <td>66388</td>
           <td><a href="#">[Intel-gfx,i-g-t] Remove superfluous gem_concurrent_all.c</a></td>
           <td>New</td>
+          <td class="acked">
+            <a href="#" class="badge" title="Acknowledged by" data-content="<ul class='list-unstyled'><li>Ville Syrjäla <br> <a href='mailto:ville.syrjala@linux.intel.com'>ville.syrjala@linux.intel.com</a></li></ul>">1</a>
+          </td>
+          <td class="reviewed-by">
+            <a class="badge" href="#" title="Reviewed by" data-content="<ul class='list-unstyled'><li>Ville Syrjäla <br/> <a href='mailto:ville.syrjala@linux.intel.com'>ville.syrjala@linux.intel.com</a></li><li>Chris Wilson <br/><a href='mailto:chris@chris-wilson.co.uk'>chris@chris-wilson.co.uk</a></li><li>Daniel Stone <br/><a href='mailto:daniels@collabora.com'>daniels@collabora.com</a></li></ul>">3</a>
+          </td>
+          <td class="tested-by">
+            <a class="badge" href="#" title="Tested by" data-content="<ul class='list-unstyled'><li>Ville Syrjäla <br> <a href='mailto:ville.syrjala@linux.intel.com'>ville.syrjala@linux.intel.com</a></li></ul>">1</a>
+          </td>
         </tr>
       </tbody>
     </table>
@@ -213,5 +297,18 @@ $(function () {
     |
    <a href="/help/about/">about patchwork</a>
   </div>
+  <script>
+    $(document).ready(function() {
+      //initialise badge information popovers
+      $('a.badge').popover( { trigger:"focus", html: 'true', placement: 'top' });
+
+      //initialise ART table headings tooltips
+      $('th.acked, th.reviewed-by, th.tested-by').tooltip( { container: 'body'} );
+
+      //initialise the edit series title tooltip
+      $('h1 .glyphicon-pencil').tooltip( { title:"Edit series title"});
+
+    });
+  </script>
  </body>
 </html>

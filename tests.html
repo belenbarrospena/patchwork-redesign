@@ -93,17 +93,19 @@
    </div>
   </nav>
   <div class="container-fluid">
-    <h1>Unify slow/combinatorial test handling</h1>
-    <div class="core-info">
-      <span>Submitted by <a href="/project/gfx/patches/?submitter=1">David Weinehall</a> on Oct. 23, 2015, 11:42 a.m.</span>
-      <p>
-        Reviewer:
-        <strong>
-          Nobody
-          <span class="glyphicon glyphicon-pencil"></span>
-        </strong>
-      </p>
-    </div>
+    <h1>
+      Unify slow/combinatorial test handling
+      <span class="glyphicon glyphicon-pencil"></span>
+    </h1>
+    <p class="core-info">
+      <span>Submitter: <a href="#">David Weinehall</a></span>
+      <span>|</span>
+      <span>Reviewer: <strong>None</strong></span>
+      <span>|</span>
+      <span>Updated on Oct. 23, 2015, 11:42 a.m.</span>
+      <span>|</span>
+      <span>Series ID: <strong>1140</strong></span>
+    </p>
   </div>
   <nav class="navbar navbar-default" role="navigation" id="series-navigation">
    <div class="container-fluid">
@@ -131,16 +133,16 @@
           </ul>
         </li>
         <li><a href="series-r4.html">Cover letter</a></li>
+        <li>
+          <a href="patches.html">
+            Patches (3)
+          </a>
+        </li>
         <li class="active">
           <a href="#">
             Tests
             <!--span class="glyphicon glyphicon-exclamation-sign danger"></span-->
             <span class="label label-danger">fail</span>
-          </a>
-        </li>
-        <li>
-          <a href="patches.html">
-            Patches (3)
           </a>
         </li>
         <!--li class="dropdown">
@@ -156,7 +158,76 @@
           </ul>
         </li-->
       </ul>
-      <button class="btn btn-default navbar-btn">Download series</button>
+      <div class="btn-group navbar-btn navbar-right">
+        <div class="btn-group">
+          <button data-toggle="dropdown" class="dropdown-toggle btn btn-default">
+            Set series status
+            <span class="caret"></span>
+          </button>
+          <ul role="menu" class="dropdown-menu" id="status-action">
+            <li>
+              <a href="#">New</a>
+            </li>
+            <li>
+              <a href="#">Under review</a>
+            </li>
+            <li>
+              <a href="#">Reviewed</a>
+            </li>
+            <li>
+              <a href="#">Needs work</a>
+            </li>
+            <li>
+              <a href="#">Merged</a>
+            </li>
+            <li>
+              <a href="#">Rejected</a>
+            </li>
+            <li>
+              <a href="#">Superseded</a>
+            </li>
+          </ul>
+        </div>
+        <div class="btn-group">
+          <button data-toggle="dropdown" class="dropdown-toggle btn btn-default">
+            Set reviewer
+            <span class="caret"></span>
+          </button>
+          <ul role="menu" class="dropdown-menu" id="reviewer-action">
+            <li>
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" value="">
+                  Assign to myself for review
+                </label>
+              </div>
+            </li>
+            <li role="separator" class="divider"></li>
+            <li>
+              <form>
+                <div class="form-group">
+                  <input type="email" class="form-control" id="reviewer-search" placeholder="Find reviewer">
+                </div>
+                <button type="submit" class="btn btn-default">Apply</button>
+              </form>
+            </li>
+          </ul>
+        </div>
+        <div class="btn-group">
+          <button data-toggle="dropdown" class="dropdown-toggle btn btn-default">
+            Move to project
+            <span class="caret"></span>
+          </button>
+          <ul role="menu" class="dropdown-menu" id="project-action">
+            <li><a href="#">Project 1</a></li>
+            <li><a href="#">Project 2</a></li>
+            <li><a href="#">Project 3</a></li>
+            <li><a href="#">Project 4</a></li>
+          </ul>
+        </div>
+        <button class="btn btn-default">Download</button>
+        <button class="btn btn-default">Archive</button>
+      </div>
     </div>
    </div>
   </nav>
@@ -255,5 +326,13 @@ snb-x220t        total:131  pass:120  dwarn:0   dfail:0   fail:1   skip:10
     |
    <a href="/help/about/">about patchwork</a>
   </div>
+
+  <script>
+    $(document).ready(function() {
+      //initialise the edit series title tooltip
+      $('h1 .glyphicon-pencil').tooltip( { title:"Edit series title"});
+    });
+  </script>
+
  </body>
 </html>

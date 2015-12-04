@@ -265,12 +265,12 @@
             </form>
           </li>
         </ul>
-        <ul class="nav navbar-nav" id="actions" style="display:none;">
-          <li class="dropdown">
-            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+        <div class="btn-group navbar-btn" id="actions" style="display:none;">
+          <div class="btn-group">
+            <button data-toggle="dropdown" class="dropdown-toggle btn btn-default">
               Set status
               <span class="caret"></span>
-            </a>
+            </button>
             <ul role="menu" class="dropdown-menu" id="status-action">
               <li>
                 <a href="#">New</a>
@@ -294,12 +294,12 @@
                 <a href="#">Superseded</a>
               </li>
             </ul>
-          </li>
-          <li>
-            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+          </div>
+          <div class="btn-group">
+            <button data-toggle="dropdown" class="dropdown-toggle btn btn-default">
               Set reviewer
               <span class="caret"></span>
-            </a>
+            </button>
             <ul role="menu" class="dropdown-menu" id="reviewer-action">
               <li>
                 <div class="checkbox">
@@ -319,21 +319,22 @@
                 </form>
               </li>
             </ul>
-          </li>
-          <li>
-            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+          </div>
+          <div class="btn-group">
+            <button data-toggle="dropdown" class="dropdown-toggle btn btn-default">
               Move to project
               <span class="caret"></span>
-            </a>
+            </button>
             <ul role="menu" class="dropdown-menu" id="project-action">
               <li><a href="#">Project 1</a></li>
               <li><a href="#">Project 2</a></li>
               <li><a href="#">Project 3</a></li>
               <li><a href="#">Project 4</a></li>
             </ul>
-          </li>
-        </ul>
-        <button class="btn btn-default navbar-btn" id="archive-action" style="display:none;">Archive</button>
+          </div>
+          <button class="btn btn-default">Download</button>
+          <button class="btn btn-default">Archive</button>
+        </div>
         <ul class="nav navbar-nav navbar-right" id="show-rows">
           <li class="dropdown">
             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
