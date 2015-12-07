@@ -278,3 +278,7 @@ h1 .glyphicon-pencil:hover {
   cursor: pointer;
   color: #2a6496;
 }
+
+.panel-heading .date {
+  font-weight: normal;
+}
