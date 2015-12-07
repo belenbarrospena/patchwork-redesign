@@ -115,11 +115,10 @@
         <ul class="nav navbar-nav" id="filters">
           <li class="dropdown">
             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-              Status
+              Patch status
               <span class="caret"></span>
             </a>
             <ul role="menu" class="dropdown-menu" id="status-filter">
-              <li class="dropdown-header">Series in progress</li>
               <li>
                 <div class="checkbox">
                   <label>
@@ -128,6 +127,7 @@
                   </label>
                 </div>
               </li>
+              <li class="dropdown-header">In progress</li>
               <li>
                 <div class="checkbox">
                   <label>
@@ -152,8 +152,7 @@
                   </label>
                 </div>
               </li>
-              <li role="separator" class="divider"></li>
-              <li class="dropdown-header">Series done</li>
+              <li class="dropdown-header">Done</li>
               <li>
                 <div class="checkbox">
                   <label>
@@ -274,7 +273,7 @@
         <div class="btn-group navbar-btn" id="actions" style="display:none;">
           <div class="btn-group">
             <button data-toggle="dropdown" class="dropdown-toggle btn btn-default">
-              Set status
+              Set patch status
               <span class="caret"></span>
             </button>
             <ul role="menu" class="dropdown-menu" id="status-action">
@@ -302,7 +301,7 @@
             </ul>
           </div>
           <button class="btn btn-default">Add URL</button>
-          <button class="btn btn-default">Download</button>          
+          <button class="btn btn-default">Download</button>
           <button class="btn btn-default">Archive</button>
         </div>
         <ul class="nav navbar-nav navbar-right" id="show-rows">
@@ -360,7 +359,7 @@
           </th>
           <th>ID</th>
           <th>Patch</th>
-          <th>Status</th>
+          <th>Patch status</th>
           <th class="acked" title="Acknowledged by"><span >A</span></th>
           <th class="reviewed-by" title="Reviewed by">R</th>
           <th class="tested-by" title="Tested by">T</th>
