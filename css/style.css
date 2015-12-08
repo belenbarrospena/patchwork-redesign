@@ -282,3 +282,7 @@ h1 .glyphicon-pencil:hover {
 .panel-heading .date {
   font-weight: normal;
 }
+
+label > form {
+  margin-top: 10px;
+}

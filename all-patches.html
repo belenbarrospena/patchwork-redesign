@@ -216,22 +216,29 @@
               <span class="caret"></span>
             </a>
             <ul role="menu" class="dropdown-menu" id="submitter-filter">
+              <li>Show patches:</li>
               <li>
-                <div class="checkbox">
+                <div class="radio">
                   <label>
-                    <input type="checkbox" value="">
+                    <input type="radio" value="" name="submitter-options">
                     Submitted by me (35)
                   </label>
                 </div>
-              </li>
-              <li role="separator" class="divider"></li>
-              <li>
+                <div class="radio">
+                  <label>
+                    <input type="radio" value="" name="submitter-options" checked>
+                    Submitted by
+                  </label>
+                </div>
                 <form>
                   <div class="form-group">
                     <input type="email" class="form-control" id="submitter-search" placeholder="Find submitter">
                   </div>
-                  <button type="submit" class="btn btn-default">Apply</button>
                 </form>
+              </li>
+              <li role="separator" class="divider"></li>
+              <li>
+                <button type="submit" class="btn btn-default">Apply</button>
               </li>
             </ul>
           </li>
@@ -241,22 +248,35 @@
               <span class="caret"></span>
             </a>
             <ul role="menu" class="dropdown-menu" id="reviewer-filter">
+              <li>Show patches:</li>
               <li>
-                <div class="checkbox">
+                <div class="radio">
                   <label>
-                    <input type="checkbox" value="">
+                    <input type="radio" value="" name="reviewer-options">
+                    Without a reviewer (3)
+                  </label>
+                </div>
+                <div class="radio">
+                  <label>
+                    <input type="radio" value="" name="reviewer-options">
                     Assigned to me for review (35)
                   </label>
                 </div>
-              </li>
-              <li role="separator" class="divider"></li>
-              <li>
+                <div class="radio">
+                  <label>
+                    <input type="radio" value="" name="reviewer-options" checked>
+                    Assigned to
+                  </label>
+                </div>
                 <form>
                   <div class="form-group">
                     <input type="email" class="form-control" id="reviewer-search" placeholder="Find reviewer">
                   </div>
-                  <button type="submit" class="btn btn-default">Apply</button>
                 </form>
+              </li>
+              <li role="separator" class="divider"></li>
+              <li>
+                <button type="submit" class="btn btn-default">Apply</button>
               </li>
             </ul>
           </li>
