@@ -233,7 +233,7 @@ tr:last-child > td.tested-by {
    margin-top: 20px;
 }
 
-.panel-heading:hover {
+.panel-heading.test:hover {
   cursor: pointer;
   background-color: #ddd;
 }
@@ -289,4 +289,8 @@ h1 .glyphicon-pencil:hover {
 
 label > form {
   margin-top: 10px;
+}
+
+.thumbnail {
+  min-height: 225px;
 }
