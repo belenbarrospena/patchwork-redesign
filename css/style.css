@@ -251,8 +251,12 @@ span.quote { color: #007f00; }
 	padding: 0.5em 0.5em;
 }
 
-.tab-pane dl {
+dl {
   margin-left: 15px;
+}
+
+#content dl {
+  margin-top: 20px;
 }
 
 dd {
