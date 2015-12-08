@@ -20,25 +20,6 @@
     <script src="http://cdnjs.cloudflare.com/ajax/libs/es5-shim/2.0.8/es5-shim.min.js"></script>
   <![endif]-->
   <script type="text/javascript" src="js/bootstrap.min.js"></script>
-  <script type="text/javascript" src="js/selectize.min.js"></script>
-  <script type="text/javascript" src="js/jquery.dynatable.js"></script>
-  <script type="text/javascript" src="js/patchwork.js"></script>
-  <script type="text/javascript">
-    $(function () {
-        pw.init({
-
-          project: 'intel-gfx'
-
-        });
-    });
-  </script>
-
-<script language="JavaScript" type="text/javascript">
-$(function () {
-    pw.setup_series_list('#serieslist');
-});
-</script>
-
  </head>
  <body>
   <nav class="navbar navbar-inverse" role="navigation" id="topbar">
@@ -71,7 +52,7 @@ $(function () {
             <span class="glyphicon glyphicon-gift"></span>
             Bundles
           </a>
-        </li>        
+        </li>
         <li>
           <a href="about-this-project.html">
             <span class="glyphicon glyphicon-info-sign"></span>
@@ -116,8 +97,194 @@ $(function () {
 
   <div id="content" class="container-fluid">
     <h1>All projects</h1>
+    <div class="row" style="margin-top:20px;">
+      <div class="col-sm-6 col-md-4">
+        <div class="thumbnail">
+          <div class="caption">
+            <h3>Beignet</h3>
+            <p class="core-info">
+              <span><a href="all-series.html">View series</a></span>
+              <span>|</span>
+              <span><a href="all-patches.html">View patches</a></span>
+            </p>
+            <p>Open source implementation of the OpenCL specification for Intel GPUs</p>
+            <p><a href="#">http://www.freedesktop.org/wiki/Software/Beignet/</a></p>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-4">
+        <div class="thumbnail">
+          <div class="caption">
+            <h3>Cairo</h3>
+            <p class="core-info">
+              <span><a href="all-series.html">View series</a></span>
+              <span>|</span>
+              <span><a href="all-patches.html">View patches</a></span>
+            </p>
+            <p>2D graphics library with support for multiple output devices</p>
+            <p><a href="#">http://www.cairographics.org/</a></p>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-4">
+        <div class="thumbnail">
+          <div class="caption">
+            <h3>Intel Graphics for Linux</h3>
+            <p class="core-info">
+              <span><a href="all-series.html">View series</a></span>
+              <span>|</span>
+              <span><a href="all-patches.html">View patches</a></span>
+            </p>
+            <p>OpenGL ES specification compliant 3D Graphics driver binary and source code</p>
+            <p><a href="#">https://01.org/linuxgraphics/</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6 col-md-4">
+        <div class="thumbnail">
+          <div class="caption">
+            <h3>Intel GPU tools</h3>
+            <p class="core-info">
+              <span><a href="all-series.html">View series</a></span>
+              <span>|</span>
+              <span><a href="all-patches.html">View patches</a></span>
+            </p>
+          </div>
+        </div>
+        <div class="thumbnail">
+          <div class="caption">
+            <h3>libdrm - Intel</h3>
+            <p class="core-info">
+              <span><a href="all-series.html">View series</a></span>
+              <span>|</span>
+              <span><a href="all-patches.html">View patches</a></span>
+            </p>
+            <p>Middleware which allows user-space to communicate with DRM kernel
+modules (Intel GPUs)</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-4">
+        <div class="thumbnail">
+          <div class="caption">
+            <h3>Mesa</h3>
+            <p class="core-info">
+              <span><a href="all-series.html">View series</a></span>
+              <span>|</span>
+              <span><a href="all-patches.html">View patches</a></span>
+            </p>
+            <p>OpenGL ES specification compliant 3D Graphics driver binary and source code</p>
+            <p><a href="#">http://www.mesa3d.org/</a></p>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-4">
+        <div class="thumbnail">
+          <div class="caption">
+            <h3>Piglit</h3>
+            <p class="core-info">
+              <span><a href="all-series.html">View series</a></span>
+              <span>|</span>
+              <span><a href="all-patches.html">View patches</a></span>
+            </p>
+            <p>Open source test suite for OpenGL and OpenCL implementations</p>
+            <p><a href="#">http://piglit.freedesktop.org/</a></p>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-4">
+        <div class="thumbnail">
+          <div class="caption">
+            <h3>Pixman</h3>
+            <p class="core-info">
+              <span><a href="all-series.html">View series</a></span>
+              <span>|</span>
+              <span><a href="all-patches.html">View patches</a></span>
+            </p>
+            <p>Low-level software library for pixel manipulation</p>
+            <p><a href="#">http://www.pixman.org/</a></p>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-4">
+        <div class="thumbnail">
+          <div class="caption">
+            <h3>PulseAudio</h3>
+            <p class="core-info">
+              <span><a href="all-series.html">View series</a></span>
+              <span>|</span>
+              <span><a href="all-patches.html">View patches</a></span>
+            </p>
+            <p>Sound system for POSIX OSes, acting as a proxy for your sound applications</p>
+            <p><a href="#">http://www.freedesktop.org/wiki/Software/PulseAudio/</a></p>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-4">
+        <div class="thumbnail">
+          <div class="caption">
+            <h3>Spice</h3>
+            <p class="core-info">
+              <span><a href="all-series.html">View series</a></span>
+              <span>|</span>
+              <span><a href="all-patches.html">View patches</a></span>
+            </p>
+            <p>Spice virtual desktop interaction</p>
+            <p><a href="#">http://www.spice-space.org/ </a></p>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-4">
+        <div class="thumbnail">
+          <div class="caption">
+            <h3>Wayland</h3>
+            <p class="core-info">
+              <span><a href="all-series.html">View series</a></span>
+              <span>|</span>
+              <span><a href="all-patches.html">View patches</a></span>
+            </p>
+            <p>A simpler replacement for X, easier to develop and maintain. Includes Weston, a reference implementation of a Wayland compositor.</p>
+            <p><a href="#">http://wayland.freedesktop.org/</a></p>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-4">
+        <div class="thumbnail">
+          <div class="caption">
+            <h3>xcb</h3>
+            <p class="core-info">
+              <span><a href="all-series.html">View series</a></span>
+              <span>|</span>
+              <span><a href="all-patches.html">View patches</a></span>
+            </p>
+            <p>X protocol C-language Binding (XCB) - replacement for Xlib.</p>
+            <p><a href="#">http://xcb.freedesktop.org/</a></p>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-4">
+        <div class="thumbnail">
+          <div class="caption">
+            <h3>Xorg</h3>
+            <p class="core-info">
+              <span><a href="all-series.html">View series</a></span>
+              <span>|</span>
+              <span><a href="all-patches.html">View patches</a></span>
+            </p>
+            <p>The X.org sample implementation.</p>
+            <p><a href="#">http://www.x.org/</a></p>
+          </div>
+        </div>
+      </div>
+
+
+
+    </div>
 
   </div>
+
   <div id="footer">
    <a href="http://jk.ozlabs.org/projects/patchwork/">patchwork patch tracking system</a>
     |
