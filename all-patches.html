@@ -244,6 +244,38 @@
           </li>
           <li class="dropdown">
             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+              Delegated to
+              <span class="caret"></span>
+            </a>
+            <ul role="menu" class="dropdown-menu" id="delegate-filter">
+              <li>Show patches:</li>
+              <li>
+                <div class="radio">
+                  <label>
+                    <input type="radio" value="" name="delegate-options">
+                    Delegated to me (35)
+                  </label>
+                </div>
+                <div class="radio">
+                  <label>
+                    <input type="radio" value="" name="delegate-options" checked>
+                    Delegated to
+                  </label>
+                </div>
+                <form>
+                  <div class="form-group">
+                    <input type="email" class="form-control" placeholder="Find reviewer">
+                  </div>
+                </form>
+              </li>
+              <li role="separator" class="divider"></li>
+              <li>
+                <button type="submit" class="btn btn-default">Apply</button>
+              </li>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
               Tags
               <span class="caret"></span>
             </a>
@@ -287,6 +319,25 @@
               </li>
               <li>
                 <a href="#">Superseded</a>
+              </li>
+            </ul>
+          </div>
+          <div class="btn-group">
+            <button data-toggle="dropdown" class="dropdown-toggle btn btn-default">
+              Delegate to
+              <span class="caret"></span>
+            </button>
+            <ul role="menu" class="dropdown-menu" id="delegate-action">
+              <li>
+                <form>
+                  <div class="form-group">
+                    <input type="email" class="form-control" placeholder="Find reviewer">
+                  </div>
+                </form>
+              </li>
+              <li role="separator" class="divider"></li>
+              <li>
+                <button type="submit" class="btn btn-default">Delegate</button>
               </li>
             </ul>
           </div>

@@ -13,7 +13,7 @@
 
 #navbar-collapse2 .navbar-btn:first-child,
 .navbar-btn:only-of-type,
-.nav-pills .btn-default,
+.nav-pills .patch-actions,
 .nav-pills .previous {
   margin-left: 20px;
 }
@@ -164,7 +164,9 @@ a.badge:focus {
 #date-filter,
 #submitter-filter,
 #reviewer-filter,
-#reviewer-action {
+#reviewer-action,
+#delegate-action,
+#delegate-filter {
   padding: 15px;
 }
 
@@ -174,7 +176,9 @@ a.badge:focus {
 
 #submitter-filter,
 #reviewer-filter,
-#reviewer-action {
+#reviewer-action,
+#delegate-action,
+#delegate-filter {
   min-width: 300px;
 }
 
