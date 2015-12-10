@@ -341,7 +341,59 @@
               </li>
             </ul>
           </div>
-          <button class="btn btn-default">Add URL</button>
+          <div class="btn-group">
+            <button data-toggle="dropdown" class="dropdown-toggle btn btn-default">
+              Create bundle
+              <span class="caret"></span>
+            </button>
+            <ul role="menu" class="dropdown-menu" id="bundle-action">
+              <li>
+                <form>
+                  <div class="form-group">
+                    <input type="email" class="form-control" placeholder="Give your new bundle a name">
+                  </div>
+                </form>
+              <li role="separator" class="divider"></li>
+              <li>
+                <button type="submit" class="btn btn-default">Create bundle</button>
+              </li>
+            </ul>
+          </div>
+          <div class="btn-group">
+            <button data-toggle="dropdown" class="dropdown-toggle btn btn-default">
+              Add to bundle
+              <span class="caret"></span>
+            </button>
+            <ul role="menu" class="dropdown-menu" id="addto-bundle-action">
+              <li>
+                <form>
+                  <div class="form-group">
+                    <input type="email" class="form-control" placeholder="Find a bundle">
+                  </div>
+                </form>
+                <div class="scrolling">
+                  <ul class="list-unstyled">
+                    <li><a href="#">Bundle one</a></li>
+                    <li><a href="#">Bundle two</a></li>
+                    <li><a href="#">Bundle three</a></li>
+                    <li><a href="#">Bundle four</a></li>
+                    <li><a href="#">Bundle five</a></li>
+                    <li><a href="#">Bundle six</a></li>
+                    <li><a href="#">Bundle seven</a></li>
+                    <li><a href="#">Bundle eight</a></li>
+                    <li><a href="#">Bundle nine</a></li>
+                    <li><a href="#">Bundle ten</a></li>
+                    <li><a href="#">Bundle eleven</a></li>
+                    <li><a href="#">Bundle twelve</a></li>
+                  </ul>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <button class="btn btn-default">
+            Add URL
+            <span class="caret"></span>
+          </button>
           <button class="btn btn-default">Download</button>
         </div>
         <ul class="nav navbar-nav navbar-right" id="show-rows">

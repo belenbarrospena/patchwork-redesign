@@ -172,7 +172,9 @@ a.badge:focus {
 #reviewer-filter,
 #reviewer-action,
 #delegate-action,
-#delegate-filter {
+#delegate-filter,
+#bundle-action,
+#addto-bundle-action {
   padding: 15px;
 }
 
@@ -184,8 +186,31 @@ a.badge:focus {
 #reviewer-filter,
 #reviewer-action,
 #delegate-action,
-#delegate-filter {
+#delegate-filter,
+#bundle-action,
+#addto-bundle-action  {
   min-width: 300px;
+}
+
+.scrolling {
+  overflow: auto;
+  height: 146px;
+}
+
+.scrolling li > a {
+  clear: both;
+  color: #333;
+  display: block;
+  font-weight: 400;
+  line-height: 1.42857;
+  padding: 3px 20px;
+  white-space: nowrap;
+}
+
+.scrolling li > a:hover {
+  background-color: #f5f5f5;
+  color: #262626;
+  text-decoration: none;
 }
 
 .table-info{
