@@ -42,8 +42,14 @@ pre.content {
   margin-left: 5px;
 }
 
-.danger {
+.danger,
+.glyphicon-trash {
   color: #a94442;
+}
+
+.glyphicon-trash:hover {
+  color: #d9534f;
+  cursor: pointer;
 }
 
 th > a {
@@ -255,6 +261,26 @@ dl {
   margin-left: 15px;
 }
 
+#email-info {
+  margin-left: 0;
+}
+
+#email-info .checkbox {
+  margin-top: 0;
+}
+
+#email-info .glyphicon-trash {
+  padding-left: 3px;
+}
+
+#email-info dt {
+  margin-bottom: 5px;
+}
+
+#email-info li {
+  margin-bottom: 20px;
+}
+
 #content dl {
   margin-top: 20px;
 }
@@ -297,4 +323,11 @@ label > form {
 
 .thumbnail {
   min-height: 225px;
+}
+
+.help-inline {
+  color: #737373;
+  margin: 0;
+  font-weight: normal;
+  display: inline;
 }

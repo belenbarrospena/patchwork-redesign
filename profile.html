@@ -20,26 +20,8 @@
     <script src="http://cdnjs.cloudflare.com/ajax/libs/es5-shim/2.0.8/es5-shim.min.js"></script>
   <![endif]-->
   <script type="text/javascript" src="js/bootstrap.min.js"></script>
-  <script type="text/javascript" src="js/selectize.min.js"></script>
-  <script type="text/javascript" src="js/jquery.dynatable.js"></script>
-  <script type="text/javascript" src="js/patchwork.js"></script>
-  <script type="text/javascript">
-    $(function () {
-        pw.init({
-
-          project: 'intel-gfx'
-
-        });
-    });
-  </script>
-
-<script language="JavaScript" type="text/javascript">
-$(function () {
-    pw.setup_series_list('#serieslist');
-});
-</script>
-
  </head>
+
  <body>
   <nav class="navbar navbar-inverse" role="navigation" id="topbar">
    <div class="container-fluid">
@@ -115,7 +97,117 @@ $(function () {
   </nav>
 
   <div id="content" class="container-fluid">
-    <h1>Your profile</h1>
+    <h1>belenbarrospena's profile</h1>
+
+    <div class="row" style="margin-top:20px;">
+      <div class="col-md-12">
+        <div class="alert alert-info">
+          You have <a href="#">25 series pending</a> review
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-5">
+        <fieldset>
+          <legend>Settings</legend>
+          <div class="row">
+            <form class="col-md-4">
+              <div class="form-group">
+                <label>Primary project</label>
+                <select class="form-control">
+                  <option>Project 1</option>
+                  <option>Project 2</option>
+                  <option>Project 3</option>
+                  <option>Project 4</option>
+                  <option>Project 5</option>
+                </select>
+              </div>
+            </form>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <dl id="email-info">
+                <dt>Email addresses</dt>
+                <dd>
+                  <ul class="list-unstyled">
+                    <li>
+                      <span class="lead">belen.barros.pena@intel.com</span>
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox" checked> Receive Patchwork notification emails
+                        </label>
+                      </div>
+                    </li>
+                    <li>
+                      <span class="lead">belen@something.com</span>
+                      <span class="glyphicon glyphicon-trash"></span>
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox"> Receive Patchwork notification emails
+                        </label>
+                      </div>
+                    </li>
+                    <li>
+                      <span class="lead">verylongemailaddress@verylongdomain.com</span>
+                      <span class="glyphicon glyphicon-trash"></span>
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox"> Receive Patchwork notification emails
+                        </label>
+                      </div>
+                    </li>
+                  </ul>
+                </dd>
+              </dl>
+            </div>
+          </div>
+          <div class="row">
+            <form class="col-md-9" style="margin-top:10px;">
+              <div class="form-group">
+                <label class="sr-only">Add an email address</label>
+                <div class="input-group">
+                  <input type="email" class="form-control" placeholder="Add an email address">
+                  <a class="btn btn-default input-group-addon disabled">Add email</a>
+                </div>
+              </div>
+            </form>
+          </div>
+        </fieldset>
+      </div>
+
+      <div class="col-md-5 col-md-offset-1">
+        <fieldset>
+          <legend>Change password</legend>
+          <div class="row">
+            <form class="col-md-8">
+              <div class="form-group">
+                <label>New password</label>
+                <input type="text" class="form-control" style="width:70%;">
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" checked> Show what I type
+                  </label>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="row">
+            <form class="col-md-8">
+              <div class="form-group">
+                <label>
+                  Type the old password
+                  <span class="help-inline">(for good measure)</span>
+                </label>
+                <input type="text" class="form-control" style="width:70%;">
+              </div>
+              <button class="btn btn-default" disabled>Change password</button>
+            </form>
+          </div>
+        </fieldset>
+      </div>
+
+    </div>
+
 
   </div>
   <div id="footer">
@@ -123,5 +215,15 @@ $(function () {
     |
    <a href="/help/about/">about patchwork</a>
   </div>
+
+  <script>
+    $(document).ready(function() {
+
+      //initialise delete email tooltips
+      $('.glyphicon-trash').tooltip( { container: 'body', title: 'Delete email'} );
+
+    });
+  </script>
+
  </body>
 </html>
