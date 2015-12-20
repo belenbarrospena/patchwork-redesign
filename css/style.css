@@ -104,9 +104,42 @@ a.badge:focus {
   margin: 8px 0 20px;
 }
 
+#patch-nav {
+  /*background-color: #e7e7e7;*/
+  padding-top:10px;
+  padding-bottom:10px;
+  border-top: solid 1px #e7e7e7;
+  /*margin-right:-45px;
+  margin-left:-20px;*/
+}
+
 .patch-pagination {
-  margin-top: 6px;
-  margin-bottom: 0;
+  /*margin-top: 6px;
+  margin-bottom: 0;*/
+  margin:0;
+}
+
+.patch-pagination > .active > a,
+.patch-pagination > .active > span,
+.patch-pagination > .active > a:hover,
+.patch-pagination > .active > span:hover,
+.patch-pagination > .active > a:focus,
+.patch-pagination > .active > span:focus {
+  background-color: transparent !important;
+}
+
+.patch-pagination > .disabled > span,
+.patch-pagination > .disabled > span:hover,
+.patch-pagination > .disabled > span:focus,
+.patch-pagination > .disabled > a,
+.patch-pagination > .disabled > a:hover,
+.patch-pagination > .disabled > a:focus {
+  background-color: transparent;
+}
+
+.patch-pagination > li > a,
+.patch-pagination > li > span {
+  background-color: transparent;
 }
 
 .patch-actions {
@@ -138,7 +171,7 @@ a.badge:focus {
 .pagination > li > span:hover,
 .pagination > li > a:focus,
 .pagination > li > span:focus {
-    background-color: #d9edf7;
+    /*background-color: #d9edf7;*/
     border-color: #d9edf7;
     color: #2a6496;
 }
@@ -333,9 +366,15 @@ h1 .glyphicon-pencil {
   color: #428bca;
 }
 
-h1 .glyphicon-pencil:hover {
+h1 .glyphicon-pencil:hover,
+.glyphicon-download-alt:hover {
   cursor: pointer;
   color: #2a6496;
+}
+
+.glyphicon-download-alt {
+  color: #428bca;
+  padding-left: 8px;
 }
 
 .panel-heading .date {
