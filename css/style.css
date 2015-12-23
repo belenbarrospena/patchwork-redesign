@@ -207,11 +207,13 @@ a.badge:focus {
 #delegate-action,
 #delegate-filter,
 #bundle-action,
-#addto-bundle-action {
+#addto-bundle-action,
+#tests-filter {
   padding: 15px;
 }
 
-#status-filter {
+#status-filter,
+#tests-filter {
   min-width: 200px;
 }
 
@@ -395,3 +397,24 @@ label > form {
   font-weight: normal;
   display: inline;
 }
+
+/*td .label-success,
+td .label-warning,
+td .label-danger {
+  background-color: transparent;
+}
+
+td .label-success {
+  border: solid 1px #5cb85c;
+  color: #3c763d;
+}
+
+td .label-warning {
+  border: solid 1px #f0ad4e;
+  color: #ec971f;
+}
+
+td .label-danger {
+  border: solid 1px #d9534f;
+  color: #a94442;
+}*/

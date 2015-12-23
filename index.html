@@ -8,10 +8,7 @@
   <link rel="stylesheet" type="text/css" href="css/jquery-ui.min.css">
   <link rel="stylesheet" type="text/css" href="css/jquery-ui.structure.min.css">
   <link rel="stylesheet" type="text/css" href="css/jquery-ui.theme.min.css">
-  <link rel="stylesheet" type="text/css" href="css/selectize.bootstrap3.css"/>
-  <link rel="stylesheet" type="text/css" href="css/jquery.dynatable.css"/>
   <link rel="stylesheet" type="text/css" href="css/style.css"/>
-  <script type="text/javascript" src="js/common.js"></script>
   <script type="text/javascript" src="js/jquery-1.10.1.min.js"></script>
   <!--script type="text/javascript" src="js/jquery.stickytableheaders.min.js"></script-->
   <!-- IE8 support of HTML5 elements and media queries -->
@@ -246,6 +243,42 @@
               </li>
             </ul>
           </li>
+          <li class="dropdown">
+            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+              Tests
+              <span class="caret"></span>
+            </a>
+            <ul role="menu" class="dropdown-menu" id="tests-filter">
+              <li>
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" value="">
+                    Pass (24)
+                  </label>
+                </div>
+              </li>
+              <li>
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" value="">
+                    Warning (5)
+                  </label>
+                </div>
+              </li>
+              <li>
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" value="">
+                    Fail (16)
+                  </label>
+                </div>
+              </li>
+              <li role="separator" class="divider"></li>
+              <li>
+                <button type="submit" class="btn btn-default">Apply</button>
+              </li>
+            </ul>
+          </li>
           <li>
             <form class="navbar-form navbar-left" role="search">
               <div class="input-group" style="width:20em;">
@@ -388,6 +421,7 @@
           </th>
           <th>ID</th>
           <th>Series</th>
+          <th>Tests</th>
           <th>Patch status</th>
           <th>Patches</th>
           <th>
@@ -412,6 +446,9 @@
             <a href="series-r4.html">Series starting with: [Intel-gfx,i-g-t] Copy gem_concurrent_all to gem_concurrent_blit</a>
           </td>
           <td>
+            <a class="label label-success" href="tests.html">pass</a>
+          </td>
+          <td>
             <!--span class="glyphicon glyphicon-thumbs-up accepted"></span>
             <span class="glyphicon glyphicon-thumbs-down danger"></span-->
             <span class="text-success">Merged</span>
@@ -427,6 +464,7 @@
           <td>
             <a href="#">Series starting with: drm/i915: Disable primary plane if we fail to reconstruct BIOS fb</a>
           </td>
+          <td><a class="label label-warning" href="tests.html">warning</a></td>
           <td>
             <a tabindex="0" role="button" class="glyphicon glyphicon-info-sign status-info" title="Patch status" data-content="<ul class='list-unstyled'><li>5 patches <span class='text-success'>merged</span></li><li>2 patches need work</li></ul><a href='patches.html'>View patches</a>"></a>
           </td>
@@ -441,6 +479,7 @@
           <td>
             <a href="one-patch-series.html">drm/i915/bxt: Update Uninit sequence for DDI PHYs</a>
           </td>
+          <td><a class="label label-danger" href="tests.html">fail</a></td>
           <td>
             <span class="text-danger">Rejected</span>
           </td>
@@ -453,6 +492,7 @@
           <td><input type="checkbox"> </td>
           <td>1126</td>
           <td><a href="/series/199/">drm/i915/bxt: Added identifier for MIPI transcoder</a></td>
+          <td><a class="label label-success" href="tests.html">pass</a></td>
           <td>Under review</td>
           <td><a href="#">1</a></td>
           <td class="text-muted">None</td>
@@ -465,6 +505,7 @@
           <td>
             <a href="/series/198/">drm/i915/bxt: Allow/disallow DC5 based on DC9 entry/exit</a>
           </td>
+          <td></td>
           <td>New</td>
           <td><a href="#">1</a></td>
           <td class="text-muted">None</td>
@@ -477,6 +518,7 @@
           <td>
             <a href="/series/193/">drm/i915: Skip fence installation for objects with rotated views (v2)</a>
           </td>
+          <td></td>
           <td>New</td>
           <td><a href="#">1</a></td>
           <td class="text-muted">None</td>
@@ -489,6 +531,7 @@
           <td>
             <a href="/series/184/">drm/i915: Ensure associated VMAs are inactive when contexts are destroyed</a>
           </td>
+          <td><a class="label label-success" href="tests.html">pass</a></td>
           <td>
             <a tabindex="0" role="button" class="glyphicon glyphicon-info-sign status-info" title="Patch status" data-content="<ul class='list-unstyled'><li>1 patch <span class='text-success'>merged</span></li><li>1 patch <span class='text-danger'>rejected</span></li></ul><a href='patches.html'>View patches</a>"></a>
           </td>
@@ -501,6 +544,7 @@
           <td><input type="checkbox"> </td>
           <td>1084</td>
           <td><a href="/series/183/">drm/i915: make A0 wa's applied to A1</a></td>
+          <td><a class="label label-success" href="tests.html">pass</a></td>
           <td>Reviewed</td>
           <td><a href="#">1</a></td>
           <td class="text-muted">None</td>
@@ -513,6 +557,7 @@
           <td>
             <a href="/series/142/">drm/i915/skl: Correct other-pipe watermark update condition check (v2)</a>
           </td>
+          <td><a class="label label-warning" href="tests.html">warning</a></td>
           <td>Needs work</td>
           <td><a href="#">1</a></td>
           <td class="text-muted">None</td>
@@ -525,6 +570,7 @@
           <td>
             <a href="/series/139/">drm/i915: Add extra plane information in debugfs.</a>
           </td>
+          <td><a class="label label-success" href="tests.html">pass</a></td>
           <td>
             <span class="text-success">Merged</span>
           </td>
@@ -539,6 +585,7 @@
           <td>
             <a href="/series/136/">drm/i915: Fix maxfifo watermark calc on vlv cursor planes</a>
           </td>
+          <td><a class="label label-success" href="tests.html">pass</a></td>
           <td>
             <span class="text-success">Merged</span>
           </td>
