@@ -100,6 +100,10 @@
    </div>
   </nav>
 
+  <div class="alert alert-info alert-dismissible" id="change-notification" style="display:none;">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  </div>
+
   <div id="content" class="container-fluid">
 
     <h1>Series</h1>
@@ -118,10 +122,16 @@
         <ul class="nav navbar-nav" id="filters">
           <li class="dropdown">
             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-              Series progress
+              <button id="clear-status-filter" class="btn btn-default btn-xs" title="Show all statuses">
+                <span class="glyphicon glyphicon-remove"></span>
+              </button>
+              Series status
               <span class="caret"></span>
             </a>
             <ul role="menu" class="dropdown-menu" id="status-filter">
+              <li style="display:none;">
+                <div class="alert alert-warning">You must select at least one status</div>
+              </li>
               <li>
                 <div class="checkbox">
                   <label>
@@ -148,12 +158,16 @@
               </li>
               <li role="separator" class="divider"></li>
               <li>
-                <button type="submit" class="btn btn-default">Apply</button>
+                <button type="submit" class="btn btn-default apply-filter">Apply</button>
+                <button class="btn btn-link">Show all statuses</button>
               </li>
             </ul>
           </li>
           <li class="dropdown">
             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+              <button id="clear-date-filter" class="btn btn-default btn-xs" title="Clear date filter">
+                <span class="glyphicon glyphicon-remove"></span>
+              </button>
               Date
               <span class="caret"></span>
             </a>
@@ -175,6 +189,9 @@
           </li>
           <li class="dropdown">
             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+              <button id="clear-submitter-filter" class="btn btn-default btn-xs" title="Clear submitter filter">
+                <span class="glyphicon glyphicon-remove"></span>
+              </button>
               Submitter
               <span class="caret"></span>
             </a>
@@ -207,6 +224,9 @@
           </li>
           <li class="dropdown">
             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+              <!--button id="clear-reviewer-filter" class="btn btn-default btn-xs" title="Clear filter">
+                <span class="glyphicon glyphicon-remove"></span>
+              </button-->
               Reviewer
               <span class="caret"></span>
             </a>
@@ -245,6 +265,9 @@
           </li>
           <li class="dropdown">
             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+              <!--button id="clear-tests-filter" class="btn btn-default btn-xs" title="Clear filter">
+                <span class="glyphicon glyphicon-remove"></span>
+              </button-->
               Tests
               <span class="caret"></span>
             </a>
@@ -252,7 +275,7 @@
               <li>
                 <div class="checkbox">
                   <label>
-                    <input type="checkbox" value="">
+                    <input type="checkbox" value="" checked=checked>
                     Pass (24)
                   </label>
                 </div>
@@ -260,7 +283,7 @@
               <li>
                 <div class="checkbox">
                   <label>
-                    <input type="checkbox" value="">
+                    <input type="checkbox" value="" checked=checked>
                     Warning (5)
                   </label>
                 </div>
@@ -268,7 +291,7 @@
               <li>
                 <div class="checkbox">
                   <label>
-                    <input type="checkbox" value="">
+                    <input type="checkbox" value="" checked=checked>
                     Fail (16)
                   </label>
                 </div>
@@ -388,7 +411,8 @@
     <div class="container-fluid">
       <div class="row">
         <div class="alert alert-info table-info col-xs-9">
-          <span id="showing-series">Showing 66 series with status new, under review, reviewed, needs work <!--; updated between 2015-10-27 and 2015-10-01; submitted by Belen Barros Pena; reviewed by Damien; containing "drm"-->
+          <span id="showing-series">
+              <span>Showing 66 series with status 'new', 'in progress'; updated between 2015-10-27 and 2015-10-01; submitted by Belen Barros Pena; assigned for review to Damien; with test result 'fail'  </span> <!--; updated between 2015-10-27 and 2015-10-01; submitted by Belen Barros Pena; reviewed by Damien; containing "drm"-->
             <a class="show-all" href="#">Show all series</a>
           </span>
           <span id="selected-series" style="display:none;"></span>
@@ -703,6 +727,77 @@
           $(this).prop("checked", false);
         });
         hide_bulk_actions();
+      });
+
+      //initialise clear filter tooltips
+      $('#clear-status-filter, #clear-date-filter, #clear-submitter-filter, #clear-reviewer-filter, #clear-tests-filter').tooltip();
+
+      //stop the filters from closing on click
+      $('#filters .dropdown-menu .checkbox').click(function(e) {
+        e.stopPropagation();
+      });
+
+      //notify users of the outcome of their actions
+      /*$('#change-notification').append("Showing 23 series with status: 'in progress'").fadeIn();*/
+
+      //series status filter interaction
+      $('.apply-filter').click(function(){
+        var no_checked = 0;
+        $('#status-filter input:checkbox').each(function(){
+          if ( $(this).is(':checked') ){
+            no_checked++;
+          }
+          if ( no_checked == 3 ) {
+            $('#clear-status-filter').fadeOut();
+            $('#status-filter .btn-link').hide();
+          }
+          else {
+            $('#clear-status-filter').fadeIn();
+            $('#status-filter .btn-link').show();
+          }
+        });
+        $('#showing-series').parent().hide();
+        $('#serieslist').hide();
+        /*$('#showing-series').html("Showing all series");*/
+        $('#showing-series > span').text("Showing 23 series with status: 'in progress'")
+        $('#showing-series').parent().fadeIn(1500)
+        $('#serieslist').fadeIn(1500);
+      });
+
+      $('#status-filter input:checkbox').change(function(){
+        var no_checked = 0;
+        $('#status-filter input:checkbox').each(function(){
+          if ( $(this).is(':checked') ){
+            no_checked++;
+          }
+          if ( no_checked == 0 ) {
+            $('.alert-warning').parent().fadeIn();
+            $('#status-filter .btn-link').fadeIn();
+            $('#status-filter .apply-filter').attr('disabled','disabled');
+          }
+          else if ( no_checked == 3 ) {
+            $('#status-filter .btn-link').fadeOut();
+          }
+          else {
+            $('.alert-warning').parent().fadeOut();
+            $('#status-filter .apply-filter').removeAttr('disabled');
+            $('#status-filter .btn-link').fadeIn();
+          }
+        });
+      });
+
+      $('#clear-status-filter').click(function(e){
+        e.stopPropagation();
+        $(this).fadeOut();
+        $('#showing-series').parent().hide();
+        $('#serieslist').hide();
+        $('#showing-series').html("Showing all series");
+        $('#showing-series').parent().fadeIn(1500)
+        $('#serieslist').fadeIn(1500);
+        $('#status-filter input:checkbox').each(function(){
+          $(this).attr('checked','checked');
+          $('#status-filter .btn-link').hide();
+        });
       });
 
     });
