@@ -217,6 +217,10 @@ a.badge:focus {
   min-width: 250px;
 }
 
+#date-filter {
+  min-width: 200px;
+}
+
 #submitter-filter,
 #reviewer-filter,
 #reviewer-action,

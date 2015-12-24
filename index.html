@@ -165,13 +165,14 @@
           </li>
           <li class="dropdown">
             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-              <button id="clear-date-filter" class="btn btn-default btn-xs" title="Clear date filter">
+              <button id="clear-date-filter" class="btn btn-default btn-xs" title="Clear dates" style="display:none;">
                 <span class="glyphicon glyphicon-remove"></span>
               </button>
               Date
               <span class="caret"></span>
             </a>
             <ul role="menu" class="dropdown-menu" id="date-filter">
+              <li><p>Show series:</p></li>
               <li>
                 <form>
                   <div class="form-group">
@@ -182,8 +183,11 @@
                     <label for="date-to">To</label>
                     <input type="date" class="form-control" id="date-to">
                   </div>
-                  <button type="submit" class="btn btn-default">Apply</button>
                 </form>
+              </li>
+              <li>
+                <button type="submit" class="btn btn-default apply-filter" disabled>Apply</button>
+                <button class="btn btn-link" style="display:none;">Clear dates</button>
               </li>
             </ul>
           </li>
@@ -656,11 +660,6 @@
       //initialise series status information popovers
       $('.status-info').popover( { trigger:"focus", html: 'true' });
 
-      //stop propagation in the filters
-  		$('.filter').click(function(e) {
-  			e.stopPropagation();
-  		});
-
       //initialise jQueryUI datepicker
       $("#date-from").datepicker( { dateFormat: "yy-mm-dd", maxDate: "0" } );
       $("#date-to").datepicker( { dateFormat: "yy-mm-dd", maxDate: "0" } );
@@ -732,7 +731,8 @@
       //initialise clear filter tooltips
       $('#clear-status-filter, #clear-date-filter, #clear-submitter-filter, #clear-reviewer-filter, #clear-tests-filter').tooltip();
 
-      //stop the filters from closing on click
+      //stop the status and tests filters from closing on clicking their
+      //checkboxes
       $('#filters .dropdown-menu .checkbox').click(function(e) {
         e.stopPropagation();
       });
@@ -798,6 +798,33 @@
           $(this).attr('checked','checked');
           $('#status-filter .btn-link').hide();
         });
+      });
+
+      //date filter interaction
+      $("#date-from, #date-to").change(function(){
+        if ( $('#date-from').val().length && $('#date-to').val().length ) {
+          $('#date-filter .apply-filter').removeAttr('disabled');
+          $('#date-filter .btn-link').fadeIn();
+        }
+        else {
+          $('#date-filter .apply-filter').attr('disabled','disabled');
+          $('#date-filter .btn-link').fadeOut();
+        }
+      });
+      $('#date-filter .apply-filter').click(function(){
+        $('#clear-date-filter').fadeIn();
+      });
+
+      $('#clear-date-filter').click(function(e){
+        e.stopPropagation();
+        $(this).fadeOut();
+        $('#showing-series').parent().hide();
+        $('#serieslist').hide();
+        $('#showing-series').html("Showing all series");
+        $('#showing-series').parent().fadeIn(1500)
+        $('#serieslist').fadeIn(1500);
+        $('#date-from, #date-to').val('');
+        $('#date-filter .btn-link').hide();
       });
 
     });
