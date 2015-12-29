@@ -851,13 +851,15 @@
 
       $('#submitter-filter').prev().click(function(){
         $('#submitter-filter input:radio').each(function(){
-          var selected = $(this).val();
-          if ( selected == "me" || selected == "by" && $('#submitter-search').val().length > 0 ) {
-            $('#submitter-filter .btn-link').show();
-          }
-          else {
-            $('#submitter-filter .btn-link').hide();
-          }
+            if ( $(this).is(':checked') ){
+              var selected = $(this).val();
+              if ( selected == "me" || selected == "by" && $('#submitter-search').val().length > 0 ) {
+                $('#submitter-filter .btn-link').show();
+              }
+              else {
+                $('#submitter-filter .btn-link').hide();
+              }
+            }
         });
       });
 
