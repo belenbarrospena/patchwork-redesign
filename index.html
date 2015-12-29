@@ -22,6 +22,7 @@
   <script type="text/javascript" src="js/bootstrap.min.js"></script>
   <script type="text/javascript" src="js/jquery-ui.min.js"></script>
   <script type="text/javascript" src="js/selectize.min.js"></script>
+  <script type="text/javascript" src="js/typeahead.jquery.js"></script>
   <!--script type="text/javascript" src="js/jquery.dynatable.js"></script-->
   <!--script type="text/javascript" src="js/patchwork.js"></script-->
 
@@ -193,7 +194,7 @@
           </li>
           <li class="dropdown">
             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-              <button id="clear-submitter-filter" class="btn btn-default btn-xs" title="Clear submitter filter">
+              <button id="clear-submitter-filter" class="btn btn-default btn-xs" title="Clear submitter" style="display:none;">
                 <span class="glyphicon glyphicon-remove"></span>
               </button>
               Submitter
@@ -204,25 +205,26 @@
               <li>
                 <div class="radio">
                   <label>
-                    <input type="radio" value="" name="submitter-options">
+                    <input type="radio" value="me" name="submitter-options">
                     Submitted by me (35)
                   </label>
                 </div>
                 <div class="radio">
                   <label>
-                    <input type="radio" value="" name="submitter-options" checked>
+                    <input type="radio" value="by" name="submitter-options" checked>
                     Submitted by
                   </label>
                 </div>
                 <form>
                   <div class="form-group">
-                    <input type="email" class="form-control" id="submitter-search" placeholder="Find submitter">
+                    <input type="email" class="form-control typeahead" id="submitter-search" placeholder="Find submitter" autofocus>
                   </div>
                 </form>
               </li>
               <li role="separator" class="divider"></li>
               <li>
-                <button type="submit" class="btn btn-default">Apply</button>
+                <button type="submit" class="btn btn-default apply-filter" disabled>Apply</button>
+                <button class="btn btn-link" style="display:none;">Clear submitter</button>
               </li>
             </ul>
           </li>
@@ -737,6 +739,13 @@
         e.stopPropagation();
       });
 
+      //stop the submitter and reviewer filters from closing on clicking their
+      //radio buttons
+
+      $('#filters .dropdown-menu .radio').click(function(e) {
+        e.stopPropagation();
+      });
+
       //notify users of the outcome of their actions
       /*$('#change-notification').append("Showing 23 series with status: 'in progress'").fadeIn();*/
 
@@ -825,6 +834,93 @@
         $('#serieslist').fadeIn(1500);
         $('#date-from, #date-to').val('');
         $('#date-filter .btn-link').hide();
+      });
+
+      //submitter filter interaction
+      $('#submitter-filter input:radio').change(function(){
+        var selected = $(this).val();
+        if ( selected == "me" ) {
+          $('#submitter-filter .apply-filter').removeAttr('disabled');
+          $('#submitter-search').attr('disabled','disabled').val('');
+        }
+        else {
+          $('#submitter-filter .apply-filter').attr('disabled','disabled');
+          $('#submitter-search').removeAttr('disabled').focus();
+        }
+      });
+
+      $('#submitter-filter').prev().click(function(){
+        $('#submitter-filter input:radio').each(function(){
+          var selected = $(this).val();
+          if ( selected == "me" || selected == "by" && $('#submitter-search').val().length > 0 ) {
+            $('#submitter-filter .btn-link').show();
+          }
+          else {
+            $('#submitter-filter .btn-link').hide();
+          }
+        });
+      });
+
+      //typeahead
+      var substringMatcher = function(strs) {
+        return function findMatches(q, cb) {
+          var matches, substringRegex;
+
+          // an array that will be populated with substring matches
+          matches = [];
+
+          // regex used to determine if a string contains the substring `q`
+          substrRegex = new RegExp(q, 'i');
+
+          // iterate through the pool of strings and for any string that
+          // contains the substring `q`, add it to the `matches` array
+          $.each(strs, function(i, str) {
+            if (substrRegex.test(str)) {
+              matches.push(str);
+            }
+          });
+
+          cb(matches);
+        };
+      };
+
+      var submitters = ['Damien Churchill <damoxc@gmail.com>', 'Damien Leone <dleone@nvidia.com>', 'Damien Lespiau <damien.lespiau@gmail.com>', 'Damien Lespiau <damien.lespiau@intel.com>','Lisandro Damián Nicanor Pérez Meyer <perezmeyer@gmail.com>','D one <damien.lespiau@intel.com>','D two <perezmeyer@gmail.com>','D three <perezmeyer@gmail.com>', 'D four <perezmeyer@gmail.com>', 'D five <perezmeyer@gmail.com>','D six <perezmeyer@gmail.com>', 'D seven <perezmeyer@gmail.com>','D eight <perezmeyer@gmail.com>', 'D nine <perezmeyer@gmail.com>', 'D ten <perezmeyer@gmail.com>'
+      ];
+
+      $('#submitter-filter .typeahead').typeahead({
+        hint: true,
+        highlight: true,
+        minLength: 1,
+        limit: 10
+      },
+      {
+        name: 'submitters',
+        source: substringMatcher(submitters)
+      }).on("typeahead:selected typeahead:autocompleted", function() {
+        $("#submitter-filter .apply-filter").prop("disabled", false);
+      });
+
+      $('#submitter-search').keyup(function(){
+        if ( $(this).val().length == 0 )
+        {
+          $('#submitter-filter .apply-filter').prop("disabled", true);
+        }
+      });
+
+      $('#submitter-filter .apply-filter').click(function(){
+        $('#clear-submitter-filter').fadeIn();
+      });
+
+      $('#clear-submitter-filter').click(function(e){
+        e.stopPropagation();
+        $(this).fadeOut();
+        $('#showing-series').parent().hide();
+        $('#serieslist').hide();
+        $('#showing-series').html("Showing all series");
+        $('#showing-series').parent().fadeIn(1500)
+        $('#serieslist').fadeIn(1500);
+        $('#submitter-search').val('');
+        $('#submitter-filter .btn-link').hide();
       });
 
     });
