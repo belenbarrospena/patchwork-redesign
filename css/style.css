@@ -450,12 +450,21 @@ td .label-danger {
 .typeahead {
   width: 20em;
 }
+
+.typeahed[disabled] {
+  background-color: #eee;
+  cursor: not-allowed;
+  opacity: 1;
+}
+
 .tt-query {
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
 }
+
 .tt-hint {
     color: #999;
 }
+
 .tt-menu {
     background-color: #fff;
     border: 1px solid rgba(0, 0, 0, 0.2);
@@ -463,24 +472,27 @@ td .label-danger {
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
     margin: 12px 0;
     padding: 8px 0;
-    /*width: 20em;*/
     max-height: 150px;
     overflow-y: auto;
 }
+
 .tt-suggestion {
     font-size: 14px;
     line-height: 20px;
     padding: 3px 20px;
 }
+
 .tt-suggestion:hover {
     background-color: #0097cf;
     color: #fff;
     cursor: pointer;
 }
+
 .tt-suggestion.tt-cursor {
     background-color: #0097cf;
     color: #fff;
 }
+
 .tt-suggestion p {
     margin: 0;
 }
