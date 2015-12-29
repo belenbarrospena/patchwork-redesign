@@ -860,6 +860,9 @@
                 $('#submitter-filter .btn-link').hide();
               }
             }
+            if ( selected == "by" && $('#submitter-search').val().length == 0 ){
+              $('#submitter-search').focus();
+            }
         });
       });
 
