@@ -230,7 +230,7 @@
           </li>
           <li class="dropdown">
             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-              <!--button id="clear-reviewer-filter" class="btn btn-default btn-xs" title="Clear filter">
+              <!--button id="clear-reviewer-filter" class="btn btn-default btn-xs" title="Clear reviewer">
                 <span class="glyphicon glyphicon-remove"></span>
               </button-->
               Reviewer
@@ -259,13 +259,14 @@
                 </div>
                 <form>
                   <div class="form-group">
-                    <input type="email" class="form-control" id="reviewer-search" placeholder="Find reviewer">
+                    <input type="email" class="form-control typeahead" id="reviewer-search" placeholder="Find reviewer">
                   </div>
                 </form>
               </li>
               <li role="separator" class="divider"></li>
               <li>
                 <button type="submit" class="btn btn-default">Apply</button>
+                <!--button class="btn btn-link">Clear reviewer</button-->
               </li>
             </ul>
           </li>
@@ -892,7 +893,7 @@
       var submitters = ['Damien Churchill <damoxc@gmail.com>', 'Damien Leone <dleone@nvidia.com>', 'Damien Lespiau <damien.lespiau@gmail.com>', 'Damien Lespiau <damien.lespiau@intel.com>','Lisandro Damián Nicanor Pérez Meyer <perezmeyer@gmail.com>','D one <damien.lespiau@intel.com>','D two <perezmeyer@gmail.com>','D three <perezmeyer@gmail.com>', 'D four <perezmeyer@gmail.com>', 'D five <perezmeyer@gmail.com>','D six <perezmeyer@gmail.com>', 'D seven <perezmeyer@gmail.com>','D eight <perezmeyer@gmail.com>', 'D nine <perezmeyer@gmail.com>', 'D ten <perezmeyer@gmail.com>'
       ];
 
-      $('#submitter-filter .typeahead').typeahead({
+      $('.typeahead').typeahead({
         hint: true,
         highlight: true,
         minLength: 1,
