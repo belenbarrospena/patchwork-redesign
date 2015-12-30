@@ -123,10 +123,10 @@
         <ul class="nav navbar-nav" id="filters">
           <li class="dropdown filter-applied">
             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-              <button id="clear-status-filter" class="btn btn-default btn-xs" title="Show all statuses">
+              <!--button id="clear-status-filter" class="btn btn-default btn-xs" title="Show all statuses">
                 <span class="glyphicon glyphicon-remove"></span>
-              </button>
-              Series status
+              </button-->
+              Status
               <span class="caret"></span>
             </a>
             <ul role="menu" class="dropdown-menu" id="status-filter">
@@ -164,6 +164,7 @@
               </li>
             </ul>
           </li>
+          <li><p class="navbar-text">Filter by:</p></li>
           <li class="dropdown">
             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
               <button id="clear-date-filter" class="btn btn-default btn-xs" title="Clear date filter" style="display:none;">
@@ -752,6 +753,16 @@
       //notify users of the outcome of their actions
       /*$('#change-notification').append("Showing 23 series with status: 'in progress'").fadeIn();*/
 
+      //apply filter filter interaction
+      $('.apply-filter').click(function(){
+        $('#showing-series').parent().hide();
+        $('#serieslist').hide();
+        /*$('#showing-series').html("Showing all series");*/
+        $('#showing-series > span').text("Showing 23 series with status: 'in progress'")
+        $('#showing-series').parent().fadeIn(1500)
+        $('#serieslist').fadeIn(1500);
+      });
+
       //series status filter interaction
       $('#status-filter .apply-filter').click(function(){
         var no_checked = 0;
@@ -760,22 +771,12 @@
             no_checked++;
           }
           if ( no_checked == 3 ) {
-            $('#clear-status-filter').fadeOut();
             $('#status-filter .btn-link').hide();
-            $('#status-filter').parent().removeClass('filter-applied');
           }
           else {
-            $('#clear-status-filter').fadeIn();
             $('#status-filter .btn-link').show();
-            $('#status-filter').parent().addClass('filter-applied');
           }
         });
-        $('#showing-series').parent().hide();
-        $('#serieslist').hide();
-        /*$('#showing-series').html("Showing all series");*/
-        $('#showing-series > span').text("Showing 23 series with status: 'in progress'")
-        $('#showing-series').parent().fadeIn(1500)
-        $('#serieslist').fadeIn(1500);
       });
 
       $('#status-filter input:checkbox').change(function(){
@@ -789,21 +790,15 @@
             $('#status-filter .btn-link').fadeIn();
             $('#status-filter .apply-filter').attr('disabled','disabled');
           }
-          else if ( no_checked == 3 ) {
-            $('#status-filter .btn-link').fadeOut();
-          }
           else {
             $('.alert-warning').parent().fadeOut();
             $('#status-filter .apply-filter').removeAttr('disabled');
-            //$('#status-filter .btn-link').fadeIn();
           }
         });
       });
 
-      $('#clear-status-filter, #status-filter .btn-link').click(function(e){
-        e.stopPropagation();
+      $('#status-filter .btn-link').click(function(){
         $("#clear-status-filter, #status-filter .btn-link").fadeOut();
-        $('#status-filter').parent().removeClass("filter-applied");
         $('#showing-series').parent().hide();
         $('#serieslist').hide();
         $('#showing-series').html("Showing all series");
