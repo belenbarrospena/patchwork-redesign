@@ -753,7 +753,7 @@
       //notify users of the outcome of their actions
       /*$('#change-notification').append("Showing 23 series with status: 'in progress'").fadeIn();*/
 
-      //apply filter filter interaction
+      //apply filter interaction
       $('.apply-filter').click(function(){
         $('#showing-series').parent().hide();
         $('#serieslist').hide();
@@ -805,7 +805,7 @@
         $('#showing-series').parent().fadeIn(1500)
         $('#serieslist').fadeIn(1500);
         $('#status-filter input:checkbox').each(function(){
-          $(this).attr('checked','checked');
+          $(this).prop('checked',true);
         });
       });
 
