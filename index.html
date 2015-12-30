@@ -121,7 +121,7 @@
       </div>
       <div class="collapse navbar-collapse" id="series-toolbar">
         <ul class="nav navbar-nav" id="filters">
-          <li class="dropdown">
+          <li class="dropdown filter-applied">
             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
               <button id="clear-status-filter" class="btn btn-default btn-xs" title="Show all statuses">
                 <span class="glyphicon glyphicon-remove"></span>
@@ -306,6 +306,7 @@
               <li role="separator" class="divider"></li>
               <li>
                 <button type="submit" class="btn btn-default">Apply</button>
+                <!--button class="btn btn-link">Clear filter</button-->
               </li>
             </ul>
           </li>
@@ -760,10 +761,12 @@
           if ( no_checked == 3 ) {
             $('#clear-status-filter').fadeOut();
             $('#status-filter .btn-link').hide();
+            $('#status-filter').parent().removeClass('filter-applied');
           }
           else {
             $('#clear-status-filter').fadeIn();
             $('#status-filter .btn-link').show();
+            $('#status-filter').parent().addClass('filter-applied');
           }
         });
         $('#showing-series').parent().hide();
@@ -799,6 +802,7 @@
       $('#clear-status-filter').click(function(e){
         e.stopPropagation();
         $(this).fadeOut();
+        $('#status-filter').parent().removeClass("filter-applied");
         $('#showing-series').parent().hide();
         $('#serieslist').hide();
         $('#showing-series').html("Showing all series");
@@ -823,11 +827,13 @@
       });
       $('#date-filter .apply-filter').click(function(){
         $('#clear-date-filter').fadeIn();
+        $('#date-filter').parent().addClass('filter-applied');
       });
 
       $('#clear-date-filter').click(function(e){
         e.stopPropagation();
         $(this).fadeOut();
+        $('#date-filter').parent().removeClass('filter-applied');
         $('#showing-series').parent().hide();
         $('#serieslist').hide();
         $('#showing-series').html("Showing all series");
@@ -867,6 +873,31 @@
         });
       });
 
+      $('#submitter-search').keyup(function(){
+        if ( $(this).val().length == 0 )
+        {
+          $('#submitter-filter .apply-filter').prop("disabled", true);
+        }
+      });
+
+      $('#submitter-filter .apply-filter').click(function(){
+        $('#clear-submitter-filter').fadeIn();
+        $('#submitter-filter').parent().addClass("filter-applied");
+      });
+
+      $('#clear-submitter-filter').click(function(e){
+        e.stopPropagation();
+        $(this).fadeOut();
+        $('#submitter-filter').parent().removeClass("filter-applied");
+        $('#showing-series').parent().hide();
+        $('#serieslist').hide();
+        $('#showing-series').html("Showing all series");
+        $('#showing-series').parent().fadeIn(1500)
+        $('#serieslist').fadeIn(1500);
+        $('#submitter-search').val('');
+        $('#submitter-filter .btn-link').hide();
+      });
+
       //typeahead
       var substringMatcher = function(strs) {
         return function findMatches(q, cb) {
@@ -904,29 +935,6 @@
         source: substringMatcher(submitters)
       }).on("typeahead:selected typeahead:autocompleted", function() {
         $("#submitter-filter .apply-filter").prop("disabled", false);
-      });
-
-      $('#submitter-search').keyup(function(){
-        if ( $(this).val().length == 0 )
-        {
-          $('#submitter-filter .apply-filter').prop("disabled", true);
-        }
-      });
-
-      $('#submitter-filter .apply-filter').click(function(){
-        $('#clear-submitter-filter').fadeIn();
-      });
-
-      $('#clear-submitter-filter').click(function(e){
-        e.stopPropagation();
-        $(this).fadeOut();
-        $('#showing-series').parent().hide();
-        $('#serieslist').hide();
-        $('#showing-series').html("Showing all series");
-        $('#showing-series').parent().fadeIn(1500)
-        $('#serieslist').fadeIn(1500);
-        $('#submitter-search').val('');
-        $('#submitter-filter .btn-link').hide();
       });
 
     });

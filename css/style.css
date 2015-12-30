@@ -231,6 +231,10 @@ a.badge:focus {
   min-width: 300px;
 }
 
+.filter-applied {
+  background-color: #eee;
+}
+
 .scrolling {
   overflow: auto;
   height: 146px;
