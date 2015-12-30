@@ -272,9 +272,9 @@
           </li>
           <li class="dropdown">
             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-              <!--button id="clear-tests-filter" class="btn btn-default btn-xs" title="Clear filter">
+              <button id="clear-tests-filter" class="btn btn-default btn-xs" title="Clear tests filter" style="display:none;">
                 <span class="glyphicon glyphicon-remove"></span>
-              </button-->
+              </button>
               Tests
               <span class="caret"></span>
             </a>
@@ -282,7 +282,7 @@
               <li>
                 <div class="checkbox">
                   <label>
-                    <input type="checkbox" value="" checked=checked>
+                    <input type="checkbox" value="">
                     Pass (24)
                   </label>
                 </div>
@@ -290,7 +290,7 @@
               <li>
                 <div class="checkbox">
                   <label>
-                    <input type="checkbox" value="" checked=checked>
+                    <input type="checkbox" value="">
                     Warning (5)
                   </label>
                 </div>
@@ -298,15 +298,15 @@
               <li>
                 <div class="checkbox">
                   <label>
-                    <input type="checkbox" value="" checked=checked>
+                    <input type="checkbox" value="">
                     Fail (16)
                   </label>
                 </div>
               </li>
               <li role="separator" class="divider"></li>
               <li>
-                <button type="submit" class="btn btn-default">Apply</button>
-                <!--button class="btn btn-link">Clear filter</button-->
+                <button type="submit" class="btn btn-default apply-filter" disabled>Apply</button>
+                <button class="btn btn-link" style="display:none;">Clear tests filter</button>
               </li>
             </ul>
           </li>
@@ -935,6 +935,41 @@
         source: substringMatcher(submitters)
       }).on("typeahead:selected typeahead:autocompleted", function() {
         $("#submitter-filter .apply-filter").prop("disabled", false);
+      });
+
+      //tests filter interaction
+      $('#tests-filter input:checkbox').change(function(){
+        var no_checked = 0;
+        $('#tests-filter input:checkbox').each(function(){
+          if ( $(this).is(':checked') ){
+            no_checked++;
+          }
+          if ( no_checked == 0 ) {
+            $('#tests-filter .apply-filter').attr('disabled','disabled');
+          }
+          else {
+            $('#tests-filter .apply-filter').removeAttr('disabled');
+          }
+        });
+      });
+
+      $('#tests-filter .apply-filter').click(function(){
+        $('#clear-tests-filter, #tests-filter .btn-link').fadeIn();
+        $('#tests-filter').parent().addClass("filter-applied");
+      });
+
+      $('#clear-tests-filter, #tests-filter .btn-link').click(function(e){
+        e.stopPropagation();
+        $('#clear-tests-filter, #tests-filter .btn-link').fadeOut();
+        $('#tests-filter').parent().removeClass("filter-applied");
+        $('#showing-series').parent().hide();
+        $('#serieslist').hide();
+        $('#showing-series').html("Showing all series");
+        $('#showing-series').parent().fadeIn(1500)
+        $('#serieslist').fadeIn(1500);
+        $('#tests-filter input:checkbox').removeAttr('checked');
+        $('#tests-filter .apply-filter').attr('disabled','disabled');
+
       });
 
     });
