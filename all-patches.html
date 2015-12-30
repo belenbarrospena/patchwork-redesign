@@ -195,18 +195,22 @@
               <span class="caret"></span>
             </a>
             <ul role="menu" class="dropdown-menu" id="date-filter">
+              <li><p>Show patches:</p></li>
               <li>
                 <form>
                   <div class="form-group">
                     <label for="date-from">Updated from</label>
-                    <input type="date" class="form-control" id="date-from">
+                    <input type="date" class="form-control" id="date-from" placeholder="YYYY-MM-DD">
                   </div>
                   <div class="form-group">
                     <label for="date-to">To</label>
-                    <input type="date" class="form-control" id="date-to">
+                    <input type="date" class="form-control" id="date-to" placeholder="YYYY-MM-DD">
                   </div>
-                  <button type="submit" class="btn btn-default">Apply</button>
                 </form>
+              </li>
+              <li role="separator" class="divider"></li>
+              <li>
+                <button type="submit" class="btn btn-default" disabled>Apply</button>
               </li>
             </ul>
           </li>
