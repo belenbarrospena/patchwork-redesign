@@ -166,7 +166,7 @@
           </li>
           <li class="dropdown">
             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-              <button id="clear-date-filter" class="btn btn-default btn-xs" title="Clear dates" style="display:none;">
+              <button id="clear-date-filter" class="btn btn-default btn-xs" title="Clear date filter" style="display:none;">
                 <span class="glyphicon glyphicon-remove"></span>
               </button>
               Date
@@ -186,15 +186,16 @@
                   </div>
                 </form>
               </li>
+              <li role="separator" class="divider"></li>
               <li>
                 <button type="submit" class="btn btn-default apply-filter" disabled>Apply</button>
-                <button class="btn btn-link" style="display:none;">Clear dates</button>
+                <button class="btn btn-link" style="display:none;">Clear date filter</button>
               </li>
             </ul>
           </li>
           <li class="dropdown">
             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-              <button id="clear-submitter-filter" class="btn btn-default btn-xs" title="Clear submitter" style="display:none;">
+              <button id="clear-submitter-filter" class="btn btn-default btn-xs" title="Clear submitter filter" style="display:none;">
                 <span class="glyphicon glyphicon-remove"></span>
               </button>
               Submitter
@@ -205,13 +206,13 @@
               <li>
                 <div class="radio">
                   <label>
-                    <input type="radio" value="me" name="submitter-options">
+                    <input type="radio" value="me" id="me" name="submitter-options">
                     Submitted by me (35)
                   </label>
                 </div>
                 <div class="radio">
                   <label>
-                    <input type="radio" value="by" name="submitter-options" checked>
+                    <input type="radio" value="by" id="by" name="submitter-options" checked>
                     Submitted by
                   </label>
                 </div>
@@ -224,13 +225,13 @@
               <li role="separator" class="divider"></li>
               <li>
                 <button type="submit" class="btn btn-default apply-filter" disabled>Apply</button>
-                <button class="btn btn-link" style="display:none;">Clear submitter</button>
+                <button class="btn btn-link" style="display:none;">Clear submitter filter</button>
               </li>
             </ul>
           </li>
           <li class="dropdown">
             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-              <!--button id="clear-reviewer-filter" class="btn btn-default btn-xs" title="Clear reviewer">
+              <!--button id="clear-reviewer-filter" class="btn btn-default btn-xs" title="Clear reviewer filter">
                 <span class="glyphicon glyphicon-remove"></span>
               </button-->
               Reviewer
@@ -266,7 +267,7 @@
               <li role="separator" class="divider"></li>
               <li>
                 <button type="submit" class="btn btn-default">Apply</button>
-                <!--button class="btn btn-link">Clear reviewer</button-->
+                <!--button class="btn btn-link">Clear reviewer filter</button-->
               </li>
             </ul>
           </li>
@@ -306,7 +307,7 @@
               <li role="separator" class="divider"></li>
               <li>
                 <button type="submit" class="btn btn-default apply-filter" disabled>Apply</button>
-                <button class="btn btn-link" style="display:none;">Clear tests filter</button>
+                <button class="btn btn-link" type="submit" style="display:none;">Clear tests filter</button>
               </li>
             </ul>
           </li>
@@ -752,7 +753,7 @@
       /*$('#change-notification').append("Showing 23 series with status: 'in progress'").fadeIn();*/
 
       //series status filter interaction
-      $('.apply-filter').click(function(){
+      $('#status-filter .apply-filter').click(function(){
         var no_checked = 0;
         $('#status-filter input:checkbox').each(function(){
           if ( $(this).is(':checked') ){
@@ -794,14 +795,14 @@
           else {
             $('.alert-warning').parent().fadeOut();
             $('#status-filter .apply-filter').removeAttr('disabled');
-            $('#status-filter .btn-link').fadeIn();
+            //$('#status-filter .btn-link').fadeIn();
           }
         });
       });
 
-      $('#clear-status-filter').click(function(e){
+      $('#clear-status-filter, #status-filter .btn-link').click(function(e){
         e.stopPropagation();
-        $(this).fadeOut();
+        $("#clear-status-filter, #status-filter .btn-link").fadeOut();
         $('#status-filter').parent().removeClass("filter-applied");
         $('#showing-series').parent().hide();
         $('#serieslist').hide();
@@ -810,7 +811,6 @@
         $('#serieslist').fadeIn(1500);
         $('#status-filter input:checkbox').each(function(){
           $(this).attr('checked','checked');
-          $('#status-filter .btn-link').hide();
         });
       });
 
@@ -818,21 +818,27 @@
       $("#date-from, #date-to").change(function(){
         if ( $('#date-from').val().length && $('#date-to').val().length ) {
           $('#date-filter .apply-filter').removeAttr('disabled');
-          $('#date-filter .btn-link').fadeIn();
         }
         else {
           $('#date-filter .apply-filter').attr('disabled','disabled');
-          $('#date-filter .btn-link').fadeOut();
         }
       });
       $('#date-filter .apply-filter').click(function(){
-        $('#clear-date-filter').fadeIn();
+        $('#clear-date-filter, #date-filter .btn-link').fadeIn();
         $('#date-filter').parent().addClass('filter-applied');
       });
 
       $('#clear-date-filter').click(function(e){
         e.stopPropagation();
-        $(this).fadeOut();
+        clearDateFilter();
+      });
+
+      $('#date-filter .btn-link').click(function(){
+        clearDateFilter();
+      });
+
+      function clearDateFilter() {
+        $('#clear-date-filter, #date-filter .btn-link').fadeOut();
         $('#date-filter').parent().removeClass('filter-applied');
         $('#showing-series').parent().hide();
         $('#serieslist').hide();
@@ -840,8 +846,8 @@
         $('#showing-series').parent().fadeIn(1500)
         $('#serieslist').fadeIn(1500);
         $('#date-from, #date-to').val('');
-        $('#date-filter .btn-link').hide();
-      });
+        $('#date-filter .apply-filter').attr('disabled','disabled');
+      }
 
       //submitter filter interaction
       $('#submitter-filter input:radio').change(function(){
@@ -887,16 +893,25 @@
 
       $('#clear-submitter-filter').click(function(e){
         e.stopPropagation();
-        $(this).fadeOut();
+        clearSubmitterFilter();
+      });
+
+      $('#submitter-filter .btn-link').click(function(){
+        clearSubmitterFilter();
+      });
+
+      function clearSubmitterFilter() {
+        $('#clear-submitter-filter, #submitter-filter .btn-link').fadeOut();
         $('#submitter-filter').parent().removeClass("filter-applied");
         $('#showing-series').parent().hide();
         $('#serieslist').hide();
         $('#showing-series').html("Showing all series");
         $('#showing-series').parent().fadeIn(1500)
         $('#serieslist').fadeIn(1500);
-        $('#submitter-search').val('');
-        $('#submitter-filter .btn-link').hide();
-      });
+        $('#submitter-search').val('').removeAttr('disabled').focus();
+        $('#by').prop('checked',true);
+        $('#me').prop('checked',false);
+      }
 
       //typeahead
       var substringMatcher = function(strs) {
@@ -958,8 +973,16 @@
         $('#tests-filter').parent().addClass("filter-applied");
       });
 
-      $('#clear-tests-filter, #tests-filter .btn-link').click(function(e){
+      $('#clear-tests-filter').click(function(e){
         e.stopPropagation();
+        clearTestsFilter();
+      });
+
+      $('#tests-filter .btn-link').click(function(){
+        clearTestsFilter();
+      });
+
+      function clearTestsFilter() {
         $('#clear-tests-filter, #tests-filter .btn-link').fadeOut();
         $('#tests-filter').parent().removeClass("filter-applied");
         $('#showing-series').parent().hide();
@@ -969,8 +992,7 @@
         $('#serieslist').fadeIn(1500);
         $('#tests-filter input:checkbox').removeAttr('checked');
         $('#tests-filter .apply-filter').attr('disabled','disabled');
-
-      });
+      }
 
     });
   </script>

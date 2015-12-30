@@ -218,7 +218,12 @@ a.badge:focus {
 }
 
 #date-filter {
-  min-width: 200px;
+  min-width: 250px;
+}
+
+#date-from,
+#date-to {
+  width: 60%;
 }
 
 #submitter-filter,
