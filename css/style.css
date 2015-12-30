@@ -420,6 +420,10 @@ button[id^='clear-']{
   padding: 0 3px;
 }
 
+.status-filter {
+  border-right: solid 1px #e7e7e7;
+}
+
 #change-notification {
     box-shadow: 0 0 10px #3a87ad;
     left: 30%;
