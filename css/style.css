@@ -514,3 +514,12 @@ td .label-danger {
 .tt-suggestion p {
     margin: 0;
 }
+
+.panel-title a {
+  color: #428bca;
+}
+
+.panel-title a:hover {
+  color: #2a6496;
+  text-decoration: underline;
+}

@@ -1,0 +1,202 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+ <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <title>Patchwork redesign - Bundle tests</title>
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
+  <link rel="stylesheet" type="text/css" href="css/selectize.bootstrap3.css"/>
+  <link rel="stylesheet" type="text/css" href="css/jquery.dynatable.css"/>
+  <link rel="stylesheet" type="text/css" href="css/style.css"/>
+  <script type="text/javascript" src="js/common.js"></script>
+  <script type="text/javascript" src="js/jquery-1.10.1.min.js"></script>
+  <script type="text/javascript" src="js/jquery.stickytableheaders.min.js"></script>
+  <!-- IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js">
+    </script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/es5-shim/2.0.8/es5-shim.min.js"></script>
+  <![endif]-->
+  <script type="text/javascript" src="js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="js/selectize.min.js"></script>
+  <script type="text/javascript" src="js/jquery.dynatable.js"></script>
+  <script type="text/javascript" src="js/patchwork.js"></script>
+ </head>
+
+ <body>
+  <nav class="navbar navbar-inverse" role="navigation" id="topbar">
+   <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">Patchwork project_name</a>
+    </div>
+    <div class="collapse navbar-collapse" id="navbar-collapse1">
+      <ul class="nav navbar-nav">
+        <li>
+          <a href="index.html">
+            <span class="glyphicon glyphicon-list"></span>
+            Series
+          </a>
+        </li>
+        <li>
+          <a href="all-patches.html">
+            <span class="glyphicon glyphicon-file"></span>
+            Patches
+          </a>
+        </li>
+        <li>
+          <a href="bundles.html">
+            <span class="glyphicon glyphicon-gift"></span>
+            Bundles
+          </a>
+        </li>
+        <li>
+          <a href="about-this-project.html">
+            <span class="glyphicon glyphicon-info-sign"></span>
+            About this project
+          </a>
+        </li>
+        <li>
+          <a href="all-projects.html">
+            <span class="glyphicon glyphicon-home"></span>
+            All projects
+          </a>
+        </li>
+      </ul>
+      <!--ul class="nav navbar-nav navbar-right">
+        <li><a href="/user/login/">Login</a></li>
+        <li><a href="/register/">Register</a></li>
+        <li><a href="/mail/">Mail settings</a></li>
+      </ul-->
+      <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+          <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+            <span class="badge">25</span>
+            <strong id="username">belenbarrospena</strong>&nbsp;<span class="caret"></span>
+          </a>
+          <ul role="menu" class="dropdown-menu">
+            <li>
+              <a href="#">
+                Reviews pending
+                <span class="badge">25</span>
+              </a>
+            </li>
+            <li><a href="#">Administration</a></li>
+            <li><a href="profile.html">Your profile</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="/user/logout/">Logout</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+   </div>
+  </nav>
+  <div class="container-fluid">
+    <h1>
+      jama / meta-gumstix
+      <span class="glyphicon glyphicon-pencil"></span>
+    </h1>
+    <p class="core-info">
+      <span>Updated on Oct. 23, 2015, 11:42 a.m.</span>
+      <span>|</span>
+      <span>Public link: <a href="#">http://patches.openembedded.org/bundle/jama/meta-gumstix/?archive=both</a></span>
+    </p>
+  </div>
+  <nav class="navbar navbar-default" role="navigation" id="series-navigation">
+   <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse2">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <div class="collapse navbar-collapse" id="navbar-collapse2">
+      <ul class="nav navbar-nav">
+        <li>
+          <a href="bundle.html">
+            Patches (3)
+          </a>
+        </li>
+        <li  class="active">
+          <a href="bundle-tests.html">
+            Tests
+            <span class="label label-danger">fail</span>
+          </a>
+        </li>
+      </ul>
+      <div class="btn-group navbar-btn navbar-right">
+        <button class="btn btn-default">Download bundle</button>
+        <button class="btn btn-default">Test bundle</button>
+        <button class="btn btn-default">Unpublish bundle</button>
+        <button class="btn btn-default">Delete bundle</button>
+      </div>
+    </div>
+   </div>
+  </nav>
+
+  <div id="content" class="container-fluid">
+    <h2>Tests</h2>
+
+    <div class="panel panel-default">
+      <div class="panel-heading test" role="button" data-toggle="collapse" href="#test-results1" aria-expanded="false" aria-controls="collapseExample">
+            <h3 class="panel-title">
+              <span>Build: <a href="https://autobuilder.yoctoproject.org/main/builders/nightly-ppc-lsb/builds/587" onclick="(function(e){ e.stopPropagation(); })(event)">#587</a> | Builder: <a href="https://autobuilder.yoctoproject.org/main/builders/nightly-ppc-lsb" onclick="(function(e){ e.stopPropagation(); })(event)">nightly-ppc-lsb</a></span>
+              <span class="label label-danger">fail</span>
+              <span class="navbar-right date">
+                Dec. 4, 2015, 8:17 a.m.
+              </span>
+            </h3>
+      </div>
+      <div class="panel-body collapse in" id="test-results1">
+        <h3>Failed build steps: 3</h3>
+        <ul class="list-unstyled" style="margin-top:20px;">
+          <li>
+            <h4>
+              <a href="https://autobuilder.yoctoproject.org/main/builders/nightly-ppc-lsb/builds/587/steps/BuildImages">16. BuildImages</a>
+              <small style="padding-left:10px;"><a href="https://autobuilder.yoctoproject.org/main/builders/nightly-ppc-lsb/builds/587/steps/BuildImages/logs/stdio">view log</a></small>
+            </h4>
+            <p>Building core-image-lsb core-image-lsb-dev core-image-lsb-sdk core-image-lsb-qt3 failed</p>
+          </li>
+          <li>
+            <h4>
+              <a href="#">17. Running Sanity Tests</a>
+              <small style="padding-left:10px;"><a href="#">view log</a></small>
+            </h4>
+            <p>Running Sanity Tests failed</p>
+          </li>
+          <li>
+            <h4>
+              <a href="#">19. BuildImages_1</a>
+              <small style="padding-left:10px;"><a href="#">view log</a></small>
+            </h4>
+            <p>Building core-image-lsb core-image-lsb-sdk failed</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+  <div id="footer">
+   <a href="http://jk.ozlabs.org/projects/patchwork/">patchwork patch tracking system</a>
+    |
+   <a href="/help/about/">about patchwork</a>
+  </div>
+
+  <script>
+    $(document).ready(function() {
+      //initialise the edit series title tooltip
+      $('h1 .glyphicon-pencil').tooltip( { title:"Edit series title"});
+    });
+  </script>
+
+ </body>
+</html>
