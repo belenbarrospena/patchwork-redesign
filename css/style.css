@@ -247,7 +247,7 @@ a.badge:focus {
 
 .scrolling {
   overflow: auto;
-  height: 146px;
+  max-height: 146px;
 }
 
 .scrolling li > a {

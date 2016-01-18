@@ -102,6 +102,7 @@
   </nav>
 
   <div class="alert alert-info alert-dismissible" id="change-notification" style="display:none;">
+    <span id="change-msg"></span>
     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
   </div>
 
@@ -394,12 +395,12 @@
               <li>
                 <form>
                   <div class="form-group">
-                    <input type="email" class="form-control" placeholder="Give your new bundle a name">
+                    <input type="email" id="bundle-name" class="form-control" placeholder="Give your new bundle a name">
                   </div>
                 </form>
               <li role="separator" class="divider"></li>
               <li>
-                <button type="submit" class="btn btn-default">Create bundle</button>
+                <button type="submit" class="btn btn-default" disabled>Create bundle</button>
               </li>
             </ul>
           </div>
@@ -415,10 +416,11 @@
               <li>
                 <form>
                   <div class="form-group">
-                    <input type="email" class="form-control" placeholder="Find a bundle">
+                    <input type="text" class="form-control" placeholder="Find a bundle">
                   </div>
                 </form>
                 <div class="scrolling">
+                  <div class="alert alert-warning" style="display:none;">No bundles found</div>
                   <ul class="list-unstyled">
                     <li>
                       <div class="checkbox">
@@ -513,7 +515,7 @@
               </li>
               <li class="divider" role="separator"></li>
               <li>
-                <button class="btn btn-default">Add to bundle(s)</button>
+                <button class="btn btn-default" disabled>Add to bundle(s)</button>
               </li>
             </ul>
           </div>
@@ -869,9 +871,9 @@
       //initialise clear filter tooltips
       $('#clear-status-filter, #clear-date-filter, #clear-submitter-filter, #clear-reviewer-filter, #clear-tests-filter').tooltip();
 
-      //stop the status and tests filters from closing on clicking their
-      //checkboxes
-      $('#filters .dropdown-menu .checkbox').click(function(e) {
+      //stop the status and tests filters and the add to bundle action from
+      //closing on clicking their checkboxes
+      $('#filters .dropdown-menu .checkbox, #addto-bundle-action .checkbox').click(function(e) {
         e.stopPropagation();
       });
 
@@ -1120,6 +1122,85 @@
         $('#tests-filter input:checkbox').removeAttr('checked');
         $('#tests-filter .apply-filter').attr('disabled','disabled');
       }
+
+      // create new bundle
+      $('#bundle-name').keyup(function(){
+        if ( $(this).val().length == 0 ) {
+          $('#bundle-action .btn').attr('disabled','disabled');
+        }
+        else {
+          $('#bundle-action .btn').removeAttr('disabled');
+        }
+      });
+
+      $('#bundle-action .btn').click(function(){
+        var bundleName = $('#bundle-name').val();
+        $('table input:checkbox').each(function() {
+          $(this).prop("checked", false);
+          $(this).parent('td').parent('tr').css("background-color","transparent");
+        });
+        hide_bulk_actions();
+        $('#change-msg').html('Your bundle <a href="bundle.html">' + bundleName + '</a> has been created.');
+        $('#change-notification').show();
+      });
+
+      //add to existing bundle
+      $('#addto-bundle-action input:checkbox').click( function(){
+        var no_checked = 0;
+        $('#addto-bundle-action input:checkbox').each(function() {
+          if ( $(this).is(":checked") ) {
+            no_checked ++;
+          }
+        });
+        if ( no_checked == 0 ) {
+          $('#addto-bundle-action .btn').attr('disabled','disabled');
+        }
+        else {
+          $('#addto-bundle-action .btn').removeAttr('disabled');
+        }
+      });
+
+      $('#addto-bundle-action input:text').keyup(function(){
+       	var valThis = $(this).val().toLowerCase();
+        var no_matches = 0;
+				$('.scrolling label').each(function(){
+					var text = $(this).text().toLowerCase();
+					var match = text.indexOf(valThis);
+					if (match >= 0) {
+						$(this).parent().show();
+            no_matches++;
+					}
+					else {
+						$(this).parent().hide();
+					}
+				});
+        if ( no_matches == 0) {
+          $('.scrolling .alert').show();
+        }
+        else {
+          $('.scrolling .alert').hide();
+        }
+    	});
+
+      $('#addto-bundle-action .btn').click(function(){
+        var no_series = 0;
+        var bundleName;
+        $('.scrolling input:checkbox').each(function(){
+          if ( $(this).is(":checked") ) {
+            bundleName = $(this).parent('label').text();
+          }
+        });
+        $('tbody input:checkbox').each(function() {
+          if ( $(this).is(":checked") ) {
+            no_series ++;
+          }
+          $(this).prop("checked", false);
+          $(this).parent('td').parent('tr').css("background-color","transparent");
+        });
+        hide_bulk_actions();
+        $('#change-msg').html(no_series + ' series added to bundle <a href="bundle.html">' + bundleName + '</a>');
+        $('#change-notification').show();
+      });
 
     });
   </script>
