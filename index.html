@@ -396,6 +396,13 @@
                 <form>
                   <div class="form-group">
                     <input type="email" id="bundle-name" class="form-control" placeholder="Give your new bundle a name">
+                    <div class="checkbox">
+                      <label>
+                        <input type="checkbox" checked="checked">
+                        Public bundle
+                        <span class="glyphicon glyphicon-question-sign help-info" title="Public bundles can be seen and edited by other project maintainers. They also have a public URL"></span>
+                      </label>
+                    </div>
                   </div>
                 </form>
               <li role="separator" class="divider"></li>
@@ -799,6 +806,9 @@
 
       //initialise series status information popovers
       $('.status-info').popover( { trigger:"focus", html: 'true' });
+
+      //initialise help content tooltips
+      $('.help-info').tooltip( {html: 'true'});
 
       //initialise jQueryUI datepicker
       $("#date-from").datepicker( { dateFormat: "yy-mm-dd", maxDate: "0" } );

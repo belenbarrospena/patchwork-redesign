@@ -65,11 +65,13 @@ th > a {
   font-weight: bold;
 }
 
-.status-info{
+.status-info,
+.help-info {
   color: #333;
 }
 
-.status-info:hover {
+.status-info:hover,
+.help-info:hover {
   text-decoration: none;
   cursor: pointer;
   color: #777;

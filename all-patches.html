@@ -354,7 +354,14 @@
               <li>
                 <form>
                   <div class="form-group">
-                    <input type="email" class="form-control" placeholder="Give your new bundle a name">
+                    <input type="text" class="form-control" placeholder="Give your new bundle a name">
+                  </div>
+                  <div class="checkbox">
+                    <label>
+                      <input type="checkbox" checked="checked">
+                      Public bundle
+                      <span class="glyphicon glyphicon-question-sign help-info" title="Public bundles can be seen and edited by other project maintainers. They also have a public URL"></span>
+                    </label>
                   </div>
                 </form>
               <li role="separator" class="divider"></li>
@@ -740,6 +747,9 @@
 
       //initialise badge information popovers
       $('a.badge').popover( { trigger:"focus", html: 'true', placement: 'top' });
+
+      //initialise help content tooltips
+      $('.help-info').tooltip( {html: 'true'});      
 
       //initialise ART table headings tooltips
       $('th.acked, th.reviewed-by, th.tested-by').tooltip( { container: 'body'} );
