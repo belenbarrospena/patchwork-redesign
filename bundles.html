@@ -95,18 +95,126 @@
 
   <div id="content" class="container-fluid">
     <h1>Bundles</h1>
-    <nav class="navbar navbar-default toolbar" role="navigation" id="actions" style="display:none;">
+    <nav class="navbar navbar-default toolbar" role="navigation">
      <div class="container-fluid">
       <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#series-toolbar">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#actions-filters">
           <span class="sr-only">Toggle navigation</span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
       </div>
-      <div class="collapse navbar-collapse" id="series-toolbar">
-        <div class="btn-group navbar-btn">
+      <div class="collapse navbar-collapse" id="actions-filters">
+        <ul class="nav navbar-nav" id="filters">
+          <li><p class="navbar-text">Filter by:</p></li>
+          <li class="dropdown">
+            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+              <button id="clear-date-filter" class="btn btn-default btn-xs" title="Clear date filter" style="display:none;">
+                <span class="glyphicon glyphicon-remove"></span>
+              </button>
+              Date
+              <span class="caret"></span>
+            </a>
+            <ul role="menu" class="dropdown-menu" id="date-filter">
+              <li><p>Show series:</p></li>
+              <li>
+                <form>
+                  <div class="form-group">
+                    <label for="date-from">Updated from</label>
+                    <input type="date" class="form-control" id="date-from" placeholder="YYYY-MM-DD">
+                  </div>
+                  <div class="form-group">
+                    <label for="date-to">To</label>
+                    <input type="date" class="form-control" id="date-to" placeholder="YYYY-MM-DD">
+                  </div>
+                </form>
+              </li>
+              <li role="separator" class="divider"></li>
+              <li>
+                <button type="submit" class="btn btn-default apply-filter" disabled>Apply</button>
+                <button class="btn btn-link" style="display:none;">Clear date filter</button>
+              </li>
+            </ul>
+          </li>          
+          <li class="dropdown">
+            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+              <button id="clear-submitter-filter" class="btn btn-default btn-xs" title="Clear submitter filter" style="display:none;">
+                <span class="glyphicon glyphicon-remove"></span>
+              </button>
+              Author
+              <span class="caret"></span>
+            </a>
+            <ul role="menu" class="dropdown-menu" id="submitter-filter">
+              <li>Show bundles:</li>
+              <li>
+                <div class="radio">
+                  <label>
+                    <input type="radio" value="me" id="me" name="submitter-options">
+                    Created by me (2)
+                  </label>
+                </div>
+                <div class="radio">
+                  <label>
+                    <input type="radio" value="by" id="by" name="submitter-options" checked>
+                    Created by
+                  </label>
+                </div>
+                <form>
+                  <div class="form-group">
+                    <input type="email" class="form-control typeahead" id="submitter-search" placeholder="Find bundle author" autofocus>
+                  </div>
+                </form>
+              </li>
+              <li role="separator" class="divider"></li>
+              <li>
+                <button type="submit" class="btn btn-default apply-filter" disabled>Apply</button>
+                <button class="btn btn-link" style="display:none;">Clear author filter</button>
+              </li>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+              <button id="clear-tests-filter" class="btn btn-default btn-xs" title="Clear tests filter" style="display:none;">
+                <span class="glyphicon glyphicon-remove"></span>
+              </button>
+              Tests
+              <span class="caret"></span>
+            </a>
+            <ul role="menu" class="dropdown-menu" id="tests-filter">
+              <li>
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" value="">
+                    Pass (24)
+                  </label>
+                </div>
+              </li>
+              <li>
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" value="">
+                    Warning (5)
+                  </label>
+                </div>
+              </li>
+              <li>
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" value="">
+                    Fail (16)
+                  </label>
+                </div>
+              </li>
+              <li role="separator" class="divider"></li>
+              <li>
+                <button type="submit" class="btn btn-default apply-filter" disabled>Apply</button>
+                <button class="btn btn-link" type="submit" style="display:none;">Clear tests filter</button>
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <div class="btn-group navbar-btn" id="actions" style="display:none;">
           <button class="btn btn-default">Download</button>
           <button class="btn btn-default">Test</button>
           <button class="btn btn-default">Publish</button>
@@ -122,7 +230,13 @@
           <th>Bundle</th>
           <th>Patches</th>
           <th>Tests</th>
-          <th>Public link</th>
+          <th>
+            <a href="#">Author</a></th>
+          <th>
+            <a class="dropup sorted" href="#">
+              Updated on
+              <span class="caret"></span>
+            </a>
         </tr>
       </thead>
       <tbody>
@@ -135,7 +249,8 @@
           <td>
             <a href="bundle-tests.html" class="label label-danger">fail</a>
           </td>
-          <td><a href="#">http://patches.openembedded.org/bundle/heads/master-next/?archive=both</a></td>
+          <td><a href="#">pauleggleton</a></td>
+          <td>2016-01-21</td>
         </tr>
         <tr>
           <td><input type="checkbox"></td>
@@ -146,7 +261,8 @@
           <td>
             <a href="#" class="label label-success">pass</a>
           </td>
-          <td><a href="#">http://patches.openembedded.org/bundle/jama/oe-classic-lic/?archive=both</a></td>
+          <td><a href="#">pauleggleton</a></td>
+          <td>2016-01-19</td>
         </tr>
         <tr>
           <td><input type="checkbox"></td>
@@ -157,7 +273,8 @@
           <td>
             <a href="#" class="label label-danger">fail</a>
           </td>
-          <td><a href="#">http://patches.openembedded.org/bundle/jama/2011.03-maintenance/?archive=both</a></td>
+          <td><a href="#">pauleggleton</a></td>
+          <td>2016-01-18</td>
         </tr>
         <tr>
           <td><input type="checkbox"></td>
@@ -168,7 +285,8 @@
           <td>
             <a href="#" class="label label-warning">warning</a>
           </td>
-          <td><a href="#">http://patches.openembedded.org/bundle/jama/oe-classic/?archive=both</a></td>
+          <td><a href="#">pauleggleton</a></td>
+          <td>2016-01-14</td>
         </tr>
         <tr>
           <td><input type="checkbox"></td>
@@ -179,13 +297,11 @@
           <td>
             <a href="#" class="label label-danger">fail</a>
           </td>
-          <td></td>
+          <td><a href="#">pauleggleton</a></td>
+          <td>2016-01-06</td>
         </tr>
       </tbody>
     </table>
-
-
-
 
   </div>
   <div id="footer">
@@ -208,6 +324,7 @@
 
       //bulk actions mode
       function show_bulk_actions() {
+        $('#filters').hide();
         $('#actions').fadeIn();
         var no_checked = 0;
         $('td input:checkbox').each(function() {
@@ -219,7 +336,8 @@
       }
 
       function hide_bulk_actions() {
-        $('#actions, #archive-action, #selected-series').fadeOut();
+        $('#actions, #archive-action, #selected-series').hide();
+        $('#filters').fadeIn();
       }
 
       //select all series
