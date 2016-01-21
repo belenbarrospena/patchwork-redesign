@@ -232,6 +232,30 @@
       </div>
     </div>
   </nav>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="alert alert-info table-info col-xs-9">
+        <span id="selected-series">Showing all bundles</span>
+      </div>
+      <ul class="pagination navbar-right">
+        <li class="disabled">
+          <a href="#" aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+          </a>
+        </li>
+        <li class="active"><a href="#">1</a></li>
+        <li><a href="#">2</a></li>
+        <li class="disabled"><a href="#">...</a></li>
+        <li><a href="#">9</a></li>
+        <li><a href="#">10</a></li>
+        <li>
+          <a href="#" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
     <table id="serieslist" class="table table-hover" style="margin-top: 20px;">
       <thead>
         <tr>
@@ -341,7 +365,7 @@
             no_checked ++;
           }
         });
-        $('#selected-series').html(no_checked + " patches selected <a class='show-all' href=''>Deselect</a>").fadeIn();
+        $('#selected-series').html(no_checked + " bundles selected <a class='show-all' href=''>Deselect</a>").fadeIn();
       }
 
       function hide_bulk_actions() {
