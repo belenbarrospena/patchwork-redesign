@@ -383,6 +383,10 @@ pre {
   margin-right: 8px;
 }
 
+.core-info .checkbox {
+  display: inline;
+}
+
 h1 .glyphicon-pencil {
   font-size: 20px;
   color: #428bca;
