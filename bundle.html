@@ -105,15 +105,16 @@
       <span>|</span>
       <span class="checkbox">
         <label>
-          <input type="checkbox" checked="checked">
+          <input type="checkbox" checked="checked" id="public-bundle">
           Public bundle
           <span title="" class="glyphicon glyphicon-question-sign help-info" data-original-title="Public bundles can be seen and edited by other project maintainers. They also have a public URL"></span>
         </label>
       </span>
       <span>|</span>
-      <span>
-        Public link:
+      <span id="public-link">
+        Public URL:
         <a href="#">http://patches.openembedded.org/bundle/heads/master-next/?archive=both</a>
+        <span class="text-muted" style="display:none;">This bundle is not public</span>
       </span>
     </p>
   </div>
@@ -163,6 +164,166 @@
           </button>
         </div>
         <div class="collapse navbar-collapse" id="series-toolbar">
+          <!--ul id="filters" class="nav navbar-nav">
+            <li class="dropdown status-filter">
+              <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                Patch status
+                <span class="caret"></span>
+              </a>
+              <ul role="menu" class="dropdown-menu" id="status-filter">
+                <li>
+                  <div class="checkbox">
+                    <label>
+                      <input type="checkbox" value="" checked="checked">
+                      New (234)
+                    </label>
+                  </div>
+                </li>
+                <li class="dropdown-header">In progress</li>
+                <li>
+                  <div class="checkbox">
+                    <label>
+                      <input type="checkbox" value="" checked="checked">
+                      Under review (34)
+                    </label>
+                  </div>
+                </li>
+                <li>
+                  <div class="checkbox">
+                    <label>
+                      <input type="checkbox" value="" checked="checked">
+                      Reviewed (20)
+                    </label>
+                  </div>
+                </li>
+                <li>
+                  <div class="checkbox">
+                    <label>
+                      <input type="checkbox" value="" checked="checked">
+                      Needs work (5)
+                    </label>
+                  </div>
+                </li>
+                <li class="dropdown-header">Done</li>
+                <li>
+                  <div class="checkbox">
+                    <label>
+                      <input type="checkbox" value="" checked="checked">
+                      Merged
+                    </label>
+                  </div>
+                </li>
+                <li>
+                  <div class="checkbox">
+                    <label>
+                      <input type="checkbox" value="" checked="checked">
+                      Rejected
+                    </label>
+                  </div>
+                </li>
+                <li>
+                  <div class="checkbox">
+                    <label>
+                      <input type="checkbox" value="" checked="checked">
+                      Abandoned
+                    </label>
+                  </div>
+                </li>
+                <li role="separator" class="divider"></li>
+                <li>
+                  <button type="submit" class="btn btn-default">Apply</button>
+                </li>
+              </ul>
+            </li>
+            <li><p class="navbar-text">Filter by:</p></li>
+            <li class="dropdown">
+              <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                Submitter
+                <span class="caret"></span>
+              </a>
+              <ul role="menu" class="dropdown-menu" id="submitter-filter">
+                <li>Show patches:</li>
+                <li>
+                  <div class="radio">
+                    <label>
+                      <input type="radio" value="" name="submitter-options">
+                      Submitted by me (35)
+                    </label>
+                  </div>
+                  <div class="radio">
+                    <label>
+                      <input type="radio" value="" name="submitter-options" checked>
+                      Submitted by
+                    </label>
+                  </div>
+                  <form>
+                    <div class="form-group">
+                      <input type="email" class="form-control" id="submitter-search" placeholder="Find submitter">
+                    </div>
+                  </form>
+                </li>
+                <li role="separator" class="divider"></li>
+                <li>
+                  <button type="submit" class="btn btn-default">Apply</button>
+                </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                <button id="clear-tests-filter" class="btn btn-default btn-xs" title="Clear tests filter" style="display:none;">
+                  <span class="glyphicon glyphicon-remove"></span>
+                </button>
+                Series tests
+                <span class="caret"></span>
+              </a>
+              <ul role="menu" class="dropdown-menu" id="tests-filter">
+                <li><p>Show series with test results:</p></li>
+                <li>
+                  <div class="checkbox">
+                    <label>
+                      <input type="checkbox" value="">
+                      Pass (24)
+                    </label>
+                  </div>
+                </li>
+                <li>
+                  <div class="checkbox">
+                    <label>
+                      <input type="checkbox" value="">
+                      Warning (5)
+                    </label>
+                  </div>
+                </li>
+                <li>
+                  <div class="checkbox">
+                    <label>
+                      <input type="checkbox" value="">
+                      Fail (16)
+                    </label>
+                  </div>
+                </li>
+                <li role="separator" class="divider"></li>
+                <li>
+                  <button type="submit" class="btn btn-default apply-filter" disabled>Apply</button>
+                  <button class="btn btn-link" type="submit" style="display:none;">Clear tests filter</button>
+                </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                Tags
+                <span class="caret"></span>
+              </a>
+            </li>
+            <li class="status-filter">
+              <form class="navbar-form navbar-left" role="search">
+                <div class="input-group" style="width:20em;">
+                  <input type="text" class="form-control" placeholder="Search patch titles">
+                  <a class="input-group-addon btn btn-default">Search</a>
+                </div>
+              </form>
+            </li>
+          </ul-->
           <button class="navbar-btn btn btn-default" id="lonely-reorder">Reorder patches</button>
           <div class="btn-group navbar-btn" id="actions" style="display:none;">
             <button class="btn btn-default">Download</button>
@@ -171,12 +332,19 @@
         </div>
       </div>
     </nav>
+    <div class="container-fluid" style="display:none;">
+      <div class="row">
+        <div class="alert alert-info table-info col-xs-9">
+          <span id="selected-series"></span>
+        </div>
+      </div>
+    </div>
     <table id="series-patchlist" class="table table-hover pw-list">
       <thead>
         <tr>
           <th><input type="checkbox" id="select-all"></th>
           <th>ID</th>
-          <th>Patch</th>
+          <th>Patch title</th>
           <th>Series tests</th>
           <th>Patch status</th>
           <th class="acked" title="Acknowledged by"><span >A</span></th>
@@ -268,7 +436,7 @@
 
       //bulk actions mode
       function show_bulk_actions() {
-        $('#lonely-reorder').hide();
+        $('#lonely-reorder, #filters').hide();
         $('#actions').fadeIn();
         var no_checked = 0;
         $('td input:checkbox').each(function() {
@@ -276,12 +444,13 @@
             no_checked ++;
           }
         });
-        $('#selected-series').html(no_checked + " patches selected <a class='show-all' href=''>Deselect</a>").fadeIn();
+        $('#selected-series').html(no_checked + " bundles selected <a class='show-all' href=''>Deselect</a>").parent().parent().parent().fadeIn();
       }
 
       function hide_bulk_actions() {
         $('#actions').hide();
-        $('#lonely-reorder').fadeIn();
+        $('#selected-series').parent().parent().parent().fadeOut();
+        $('#lonely-reorder, #filters').fadeIn();
       }
 
       //select all series
@@ -319,6 +488,18 @@
           if ( no_checked == 0 ) {
             hide_bulk_actions();
           }
+        }
+      });
+
+      //public bundle option interaction
+      $('#public-bundle').change(function(){
+        if ( $(this).is(":checked") ) {
+          $('#public-link span').hide();
+          $('#public-link a').fadeIn();
+        }
+        else {
+          $('#public-link a').hide();
+          $('#public-link span').fadeIn();
         }
       });
 
