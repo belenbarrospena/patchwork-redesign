@@ -1151,7 +1151,7 @@
           $(this).parent('td').parent('tr').css("background-color","transparent");
         });
         hide_bulk_actions();
-        $('#change-msg').html('Your bundle <a href="bundle.html">' + bundleName + '</a> has been created.');
+        $('#change-msg').html('Your bundle <a href="bundle.html">' + bundleName + '</a> has been created. <a href="#" style="font-weight:bold;text-decoration:underline;padding-left:8px;">Undo</a>');
         $('#change-notification').show();
       });
 
@@ -1209,7 +1209,7 @@
           $(this).parent('td').parent('tr').css("background-color","transparent");
         });
         hide_bulk_actions();
-        $('#change-msg').html(no_series + ' series added to bundle <a href="bundle.html">' + bundleName + '</a>');
+        $('#change-msg').html('You have added ' + no_series + ' series to bundle <a href="bundle.html"> ' + bundleName + '</a> <a href="#" style="font-weight:bold;text-decoration:underline;padding-left:8px;">Undo</a>');
         $('#change-notification').show();
       });
 
