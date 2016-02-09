@@ -534,3 +534,9 @@ td .label-danger {
   color: #2a6496;
   text-decoration: underline;
 }
+
+.alert-default {
+  background-color: transparent;
+  border-color: #ddd;
+  color: #333;
+}
