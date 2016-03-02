@@ -292,7 +292,23 @@ David Weinehall (3):
   6 files changed, 1238 insertions(+), 1158 deletions(-)
   delete mode 100644 tests/gem_concurrent_all.c
       </pre>
-
+      <div class="comment" id="comment1">
+        <div class="meta lead">
+          <span>David Weinehall</span>
+          <span class="pull-right">Oct. 28, 2015, 11:29 a.m.</span>
+        </div>
+        <pre class="content">
+We'll both rename gem_concurrent_all over gem_concurrent_blit
+and change gem_concurrent_blit in this changeset. To make
+this easier to follow we first do the the rename.
+<span class="signed-off-by">
+Signed-off-by: David Weinehall &lt;david.weinehall@linux.intel.com&gt;
+</span>
+---
+tests/gem_concurrent_blit.c | 1116 ++++++++++++++++++++++++++++++++++++++++++-
+1 file changed, 1108 insertions(+), 8 deletions(-)
+        </pre>
+      </div>
   </div>
   <div id="footer">
    <a href="http://jk.ozlabs.org/projects/patchwork/">patchwork patch tracking system</a>
