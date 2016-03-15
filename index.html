@@ -570,7 +570,7 @@
       <div class="row">
         <div class="alert alert-info table-info col-xs-9">
           <span id="showing-series">
-              <span>Showing 66 series with status 'new', 'in progress'; updated between 2015-10-27 and 2015-10-01; submitted by Belen Barros Pena; assigned for review to Damien; with test result 'fail'  </span> <!--; updated between 2015-10-27 and 2015-10-01; submitted by Belen Barros Pena; reviewed by Damien; containing "drm"-->
+              <span>Showing 66 series with status 'new' and 'in progress'</span> <!--; updated between 2015-10-27 and 2015-10-01; submitted by Belen Barros Pena; reviewed by Damien; containing "drm"-->
             <a class="show-all" href="#">Show all series</a>
           </span>
           <span id="selected-series" style="display:none;"></span>
@@ -648,7 +648,9 @@
           </td>
           <td><a class="label label-warning" href="tests.html">warning</a></td>
           <td>
-            <a tabindex="0" role="button" class="glyphicon glyphicon-info-sign status-info" title="Patch status" data-content="<ul class='list-unstyled'><li>5 patches <span class='text-success'>merged</span></li><li>2 patches need work</li></ul><a href='patches.html'>View patches</a>"></a>
+            <!--a tabindex="0" role="button" class="glyphicon glyphicon-info-sign status-info" title="Patch status" data-content="<ul class='list-unstyled'><li>5 patches <span class='text-success'>merged</span></li><li>2 patches need work</li></ul><a href='patches.html'>View patches</a>"></a-->
+            <span class="glyphicon glyphicon-warning-sign text-warning" title="<strong>This series is missing patches</strong>" data-content="Either Patchwork is still receiving patches for a new revision submitted recently, or something has gone wrong with this series."></span>
+            <!--span class="text-warning" title="Either Patchwork is still receiving patches for a new revision submitted recently, or something has gone wrong with this series">Missing patches</span-->
           </td>
           <td><a href="#">7</a></td>
           <td class="text-muted">None</td>
@@ -814,9 +816,9 @@
     $(document).ready(function() {
 
       //initialise series status information popovers
-      $('.status-info').popover( { trigger:"focus", html: 'true' });
+      $('.status-info, .glyphicon-warning-sign').popover( { html: 'true' });
 
-      //initialise help content tooltips
+      //initialise help content and missing patches tooltips
       $('.help-info').tooltip( {html: 'true'});
 
       //initialise jQueryUI datepicker

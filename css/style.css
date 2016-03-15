@@ -57,6 +57,11 @@ pre.content {
   cursor: pointer;
 }
 
+.glyphicon-warning-sign:hover {
+  color: #66512c;
+  cursor: pointer;
+}
+
 th > a {
   font-weight: normal;
 }
